@@ -1,6 +1,7 @@
 package com.example.qweather.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -38,6 +39,14 @@ class DashBoardFragment : Fragment() {
         binding.locationSelector.setOnClickListener {
             cityBottomSheetFragment = CityBottomSheetFragment()
             cityBottomSheetFragment.show(childFragmentManager, "CityBottomSheetFragment")
+        }
+
+
+        childFragmentManager.setFragmentResultListener("citySelectionKey", viewLifecycleOwner) { requestKey, bundle ->
+            val selectedCity = bundle.getString("selectedCity")
+            if (selectedCity != null) {
+                binding.locationSelector.text = selectedCity
+            }
         }
 
         drawerLayout = binding.drawerLayout
@@ -109,6 +118,5 @@ class DashBoardFragment : Fragment() {
             true
         } else super.onOptionsItemSelected(item)
     }
-
 
 }

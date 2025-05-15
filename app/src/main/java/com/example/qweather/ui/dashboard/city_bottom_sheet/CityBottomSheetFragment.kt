@@ -2,11 +2,10 @@ package com.example.qweather.ui.dashboard.city_bottom_sheet
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.qweather.R
 import com.example.qweather.databinding.FragmentCityBottomSheetBinding
 import com.example.qweather.ui.dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarAdapter
 import com.example.qweather.ui.dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
@@ -73,11 +72,14 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         qatarAdapter.onItemClickListener = { item ->
+            sendResult(item.cityName)
+            Log.d("CitySelection", "Selected city: ${item.cityName}")
             dismiss()
+
         }
         worldAdapter.onItemClickListener = { item ->
-            binding.currentLocationLabel.text = item.cityName
-
+            sendResult(item.cityName)
+            Log.d("CitySelection", "Selected city: ${item.cityName}")
             dismiss()
         }
 
@@ -105,9 +107,10 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
     private fun sendResult(city: String) {
-        val bundle = Bundle().apply {
-            putString("city", city)
-        }
+        parentFragmentManager.setFragmentResult("citySelectionKey", Bundle().apply {
+            Log.d("CitySelection", "Sending city: $city")
+            putString("selectedCity", city)
+        })
 
     }
 
