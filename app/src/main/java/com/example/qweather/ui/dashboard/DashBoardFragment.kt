@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentDashBoardBinding
+import com.example.qweather.ui.dashboard.city_bottom_sheet.CityBottomSheetFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -20,6 +21,7 @@ class DashBoardFragment : Fragment() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     lateinit var navigationView: NavigationView
+    lateinit var cityBottomSheetFragment: CityBottomSheetFragment
 
 
 
@@ -33,6 +35,11 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.locationSelector.setOnClickListener {
+            cityBottomSheetFragment = CityBottomSheetFragment()
+            cityBottomSheetFragment.show(childFragmentManager, "CityBottomSheetFragment")
+        }
+
         drawerLayout = binding.drawerLayout
         actionBarDrawerToggle = ActionBarDrawerToggle(requireActivity(),drawerLayout,R.string.nav_open,R.string.nav_close)
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
@@ -86,7 +93,6 @@ class DashBoardFragment : Fragment() {
                 R.id.disclaimer -> {
                     true
                 }
-
 
                 else -> {
 

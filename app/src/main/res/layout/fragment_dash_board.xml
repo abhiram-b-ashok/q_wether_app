@@ -32,11 +32,12 @@
             android:drawablePadding="10dp"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:id="@+id/location_selector"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Doha, Qatar" />
+            android:text="@string/select_location" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
