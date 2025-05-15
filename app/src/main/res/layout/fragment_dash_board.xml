@@ -40,6 +40,18 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.fragment.app.FragmentContainerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dash_box_fragment_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="match_parent"
@@ -48,6 +60,7 @@
         android:background="@drawable/gradient_bg"
         android:fitsSystemWindows="true"
         app:itemTextColor="@color/white"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer_menu" />
 
 

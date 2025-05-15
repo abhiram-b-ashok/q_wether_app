@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/close_icon"
-        android:icon="@drawable/baseline_close_24"
-        android:title=""
-        />
-    <item
         android:id="@+id/weather_news"
-        android:title="Weather News" />
+        android:title="Weather News"
+        />
     <item
         android:id="@+id/rain_radar"
         android:title="Rain Radar" />

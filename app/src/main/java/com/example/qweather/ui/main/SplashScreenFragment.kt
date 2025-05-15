@@ -27,7 +27,7 @@ class SplashScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             delay(2000)
-            findNavController().navigate(R.id.action_splashScreenFragment_to_dashBoardFragment)
+            findNavController().navigate(R.id.action_splashScreenFragment_to_onBoarding1Fragment)
         }
     }
 
