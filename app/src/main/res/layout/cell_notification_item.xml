@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_info"
+        android:layout_margin="22dp"
+        android:id="@+id/info_icon"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/info_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text = "Weather"
+        android:layout_marginTop="20dp"
+        android:textSize="17sp"
+        android:id="@+id/notification_title"
+        android:layout_marginStart="10dp"
+        android:textColor="#8A1538"
+        android:fontFamily="@font/poppins_medium"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#2B2758"
+        android:maxLines="2"
+        android:textSize="15sp"
+        android:id="@+id/notification_description"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/poppins_regular"
+        tools:text = "Morning cloud, then increasing fine spells. Odd afternoon shower. "
+        app:layout_constraintStart_toStartOf="@+id/notification_title"
+        app:layout_constraintTop_toBottomOf="@+id/info_icon"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/notification_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text ="Monday, May 23, 2022, 12:30 am "
+        app:layout_constraintTop_toBottomOf="@+id/notification_description"
+        android:textColor="#535353"
+        android:textSize="12sp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:id="@+id/notification_date"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notification_date"
+        android:background="#EBEBEB"/>
+
+
+
+        
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
