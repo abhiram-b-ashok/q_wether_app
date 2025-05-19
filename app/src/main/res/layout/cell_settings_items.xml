@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/toggler"/>
+        android:src="@drawable/to_select_ic"/>
 
 
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/defaultDashboardFragment">
+
+    <fragment
+        android:id="@+id/defaultDashboardFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment"
+        android:label="fragment_default_dashboard"
+        tools:layout="@layout/fragment_default_dashboard" />
+    <fragment
+        android:id="@+id/weatherNewsFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.weather_news.WeatherNewsFragment"
+        android:label="fragment_weather_news"
+        tools:layout="@layout/fragment_weather_news" />
+    <fragment
+        android:id="@+id/rainRadarFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.rain_radar.RainRadarFragment"
+        android:label="fragment_weather_map"
+        tools:layout="@layout/fragment_weather_map" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.about_us.AboutUsFragment"
+        android:label="AboutUsFragment"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.contact_us.ContactUsFragment"
+        android:label="ContactUsFragment"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/monthlyReportFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.monthly_reports.MonthlyReportFragment"
+        android:label="MonthlyReportFragment"
+        tools:layout="@layout/fragment_monthly_report" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.notifications_center.NotificationsFragment"
+        android:label="NotificationsFragment"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/worldWideCitiesFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.worldwide_cities.WorldWideCitiesFragment"
+        android:label="WorldWideCitiesFragment"
+        tools:layout="@layout/fragment_world_wide_cities" />
+    <fragment
+        android:id="@+id/weatherMapFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.weather_map.WeatherMapFragment"
+        android:label="WeatherMapFragment"
+        tools:layout="@layout/fragment_weather_map" />
+    <fragment
+        android:id="@+id/activitiesFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.activities.ActivitiesFragment"
+        android:label="fragment_activities"
+        tools:layout="@layout/fragment_activities" />
+    <fragment
+        android:id="@+id/disclaimerFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.disclaimer.DisclaimerFragment"
+        android:label="fragment_disclaimer"
+        tools:layout="@layout/fragment_disclaimer" />
+
+</navigation>

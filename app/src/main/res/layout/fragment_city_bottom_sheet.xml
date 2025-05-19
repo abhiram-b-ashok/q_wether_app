@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/location_bottom_sheet_shape"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.dashboard.city_bottom_sheet.CityBottomSheetFragment">
+    tools:context=".ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment">
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/weather_news"
-        android:title="Weather News"
-        />
-    <item
-        android:id="@+id/rain_radar"
-        android:title="Rain Radar" />
-    <item
-        android:id="@+id/activities"
-        android:title="Activities" />
-    <item
-        android:id="@+id/weather_maps"
-        android:title="Weather Maps" />
-    <item
-        android:id="@+id/notifications_center"
-        android:title="Notifications Center" />
-    <item
-        android:id="@+id/monthly_report"
-        android:title="Monthly Report" />
-    <item
-        android:id="@+id/worldwide_cities"
-        android:title="Worldwide Cities" />
-    <item
-        android:id="@+id/about_us"
-        android:title="About Us" />
-    <item
-        android:id="@+id/settings"
-        android:title="Settings" />
-    <item
-        android:id="@+id/contact_us"
-        android:title="Contact Us" />
-    <item
-        android:id="@+id/disclaimer"
-        android:title="Disclaimer" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single" >
+
+        <item
+            android:id="@+id/defaultDashboardFragment"
+            android:title="Dashboard"
+            />
+        <item
+            android:id="@+id/weatherNewsFragment"
+            android:title="Weather News"
+            />
+        <item
+            android:id="@+id/rainRadarFragment"
+            android:title="Rain Radar" />
+        <item
+            android:id="@+id/activitiesFragment"
+            android:title="Activities" />
+        <item
+            android:id="@+id/weatherMapFragment"
+            android:title="Weather Maps" />
+        <item
+            android:id="@+id/notificationsFragment"
+            android:title="Notifications Center" />
+        <item
+            android:id="@+id/monthlyReportFragment"
+            android:title="Monthly Report" />
+        <item
+            android:id="@+id/worldWideCitiesFragment"
+            android:title="Worldwide Cities" />
+        <item
+            android:id="@+id/aboutUsFragment"
+            android:title="About Us" />
+        <item
+            android:id="@+id/settingsFragment"
+            android:title="Settings" />
+        <item
+            android:id="@+id/contactUsFragment"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/disclaimerFragment"
+            android:title="Disclaimer" />
+    </group>
+    <group
+        android:id="@+id/nav_footer">
+        <item
+            android:title=""
+            android:id="@+id/nav_log_version"
+            app:actionLayout="@layout/footer_navigation_menu_xml" />
+    </group>
+
 
 
 </menu>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.side_nav_fragments.disclaimer.DisclaimerFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/header_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingBottom="10dp"
+                android:text="Contact us"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/weather_news_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/location_bottom_sheet_shape"
+                android:paddingHorizontal="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_label">
+
+                <TextView
+                    android:id="@+id/tv_heading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Meteorology Department \nCivil Aviation Authority"
+                    android:textColor="#3BA5F8"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/contact_us_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_heading">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/telephone_label"
+                        app:layout_constraintBottom_toBottomOf="@+id/telephone_number"
+                        android:id="@+id/phone_ic"
+                        android:src="@drawable/ic_phone"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/phone_ic"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="Telephone"
+                        android:textColor="#8D1B3D"
+                        android:id="@+id/telephone_label"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/phone_ic"
+                        app:layout_constraintTop_toBottomOf="@+id/telephone_label"
+                        android:id="@+id/telephone_number"
+                        android:layout_marginStart="10dp"
+                        android:text="+974 44557333  , +974 44557077"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/fax_label"
+                        app:layout_constraintBottom_toBottomOf="@+id/fax_number"
+                        android:id="@+id/fax_ic"
+                        android:src="@drawable/ic_fax"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/fax_ic"
+                        app:layout_constraintTop_toBottomOf="@+id/telephone_number"
+                        android:text="Fax"
+                        android:textColor="#8D1B3D"
+                        android:id="@+id/fax_label"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/fax_ic"
+                        app:layout_constraintTop_toBottomOf="@+id/fax_label"
+                        android:id="@+id/fax_number"
+                        android:layout_marginStart="10dp"
+                        android:text="+974 44557103  , +974 44480491"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/web_label"
+                        app:layout_constraintBottom_toBottomOf="@+id/web_link"
+                        android:id="@+id/web_ic"
+                        android:src="@drawable/ic_www"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/web_ic"
+                        app:layout_constraintTop_toBottomOf="@+id/fax_number"
+                        android:text="Website"
+                        android:textColor="#8D1B3D"
+                        android:id="@+id/web_label"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/web_ic"
+                        app:layout_constraintTop_toBottomOf="@+id/web_label"
+                        android:id="@+id/web_link"
+                        android:layout_marginStart="10dp"
+                        android:text="www.caa.gov.qa"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/web_ic"
+                        app:layout_constraintTop_toBottomOf="@+id/web_link"
+                        android:text="Social media"
+                        android:textColor="#8D1B3D"
+                        android:id="@+id/social_media_label"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/social_media_label"
+                        app:layout_constraintTop_toBottomOf="@+id/social_media_label"
+                        android:src="@drawable/ic_twitter"
+                        android:id="@+id/ic_twitter"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/ic_twitter"
+                        app:layout_constraintTop_toBottomOf="@+id/social_media_label"
+                        android:src="@drawable/ic_facebook"
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/ic_facebook"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/ic_facebook"
+                        app:layout_constraintTop_toBottomOf="@+id/social_media_label"
+                        android:src="@drawable/ic_linkedin"
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/ic_linkedin"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textColor="#3BA5F8"
+                        android:textSize="20sp"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/contact_label"
+                        app:layout_constraintTop_toBottomOf="@+id/ic_linkedin"
+                        android:text="Contact"
+                        android:fontFamily="@font/poppins_medium"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If you would like to contact us simply fill out the form below"
+                        android:textColor="#2B2758"
+                        android:textSize="16sp"
+                        android:id="@+id/contact_description"
+                        android:fontFamily="@font/poppins_regular"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/contact_label"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="#2B2758"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/contact_description"
+                        android:id="@+id/mail_label"
+                        android:layout_marginTop="10dp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/contact_et_background"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        android:id="@+id/mail_et"
+                        app:layout_constraintTop_toBottomOf="@+id/mail_label"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subject"
+                        android:textColor="#2B2758"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mail_et"
+                        android:id="@+id/subject_label"
+                        android:layout_marginTop="10dp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/contact_et_background"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        android:id="@+id/subject_et"
+                        app:layout_constraintTop_toBottomOf="@+id/subject_label"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Message"
+                        android:textColor="#2B2758"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/subject_et"
+                        android:id="@+id/message_label"
+                        android:layout_marginTop="10dp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@drawable/contact_et_background"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:padding="10dp"
+                        android:id="@+id/message_et"
+                        android:textColor="@color/black"
+                        android:maxLines="3"
+                        android:ellipsize="end"
+                        android:gravity="top"
+                        app:layout_constraintTop_toBottomOf="@+id/message_label"/>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/contact_submit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/add_button_shape"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="3dp"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/contact_us_layout" />
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

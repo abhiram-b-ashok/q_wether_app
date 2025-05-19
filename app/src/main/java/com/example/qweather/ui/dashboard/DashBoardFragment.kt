@@ -1,7 +1,6 @@
 package com.example.qweather.ui.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -11,9 +10,11 @@ import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentDashBoardBinding
-import com.example.qweather.ui.dashboard.city_bottom_sheet.CityBottomSheetFragment
+import com.example.qweather.ui.side_nav_fragments.about_us.AboutUsFragment
+import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -22,8 +23,7 @@ class DashBoardFragment : Fragment() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     lateinit var navigationView: NavigationView
-    lateinit var cityBottomSheetFragment: CityBottomSheetFragment
-
+    private lateinit var navController: NavController
 
 
     override fun onCreateView(
@@ -36,18 +36,7 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.locationSelector.setOnClickListener {
-            cityBottomSheetFragment = CityBottomSheetFragment()
-            cityBottomSheetFragment.show(childFragmentManager, "CityBottomSheetFragment")
-        }
 
-
-        childFragmentManager.setFragmentResultListener("citySelectionKey", viewLifecycleOwner) { requestKey, bundle ->
-            val selectedCity = bundle.getString("selectedCity")
-            if (selectedCity != null) {
-                binding.locationSelector.text = selectedCity
-            }
-        }
 
         drawerLayout = binding.drawerLayout
         actionBarDrawerToggle = ActionBarDrawerToggle(requireActivity(),drawerLayout,R.string.nav_open,R.string.nav_close)
@@ -62,44 +51,141 @@ class DashBoardFragment : Fragment() {
             drawerLayout.closeDrawer(binding.navDrawer)
         }
 
+        val navHostFragment =
+            childFragmentManager.findFragmentById(R.id.dash_box_fragment_container) as NavHostFragment
+        navController = navHostFragment.navController
 
 
         binding.navToggler.setOnClickListener {
             drawerLayout.openDrawer(binding.navDrawer)
         }
+
+       /* binding.navDrawer.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.weatherNewsFragment -> {
+                    navController.navigate(R.id.weatherNewsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.rainRadarFragment -> {
+                    navController.navigate(R.id.rainRadarFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.activitiesFragment -> {
+                    navController.navigate(R.id.activitiesFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.weatherMapFragment -> {
+                    navController.navigate(R.id.weatherMapFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.notificationsFragment -> {
+                    navController.navigate(R.id.notificationsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.monthlyReportFragment -> {
+                    navController.navigate(R.id.monthlyReportFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.worldWideCitiesFragment -> {
+                    navController.navigate(R.id.worldWideCitiesFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.aboutUsFragment -> {
+                    navController.navigate(R.id.aboutUsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.settingsFragment -> {
+                    navController.navigate(R.id.settingsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.contactUsFragment -> {
+                    navController.navigate(R.id.contactUsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.disclaimerFragment -> {
+                    navController.navigate(R.id.disclaimerFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+
+                else -> {
+
+                    false
+                }
+            }
+
+        }*/
+
         binding.navDrawer.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.weather_news -> {
+                R.id.defaultDashboardFragment -> {
+                    navController.navigate(R.id.defaultDashboardFragment)
                     true
                 }
-                R.id.rain_radar -> {
+
+                R.id.weatherNewsFragment -> {
+                    navController.navigate(R.id.weatherNewsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.activities -> {
+                R.id.rainRadarFragment -> {
+                    navController.navigate(R.id.rainRadarFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.weather_maps -> {
+                R.id.activitiesFragment -> {
+                    navController.navigate(R.id.activitiesFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.notifications_center -> {
+                R.id.weatherMapFragment -> {
+                    navController.navigate(R.id.weatherMapFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.monthly_report -> {
+                R.id.notificationsFragment -> {
+                    navController.navigate(R.id.notificationsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.worldwide_cities -> {
+                R.id.monthlyReportFragment -> {
+                    navController.navigate(R.id.monthlyReportFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.about_us -> {
+                R.id.worldWideCitiesFragment -> {
+                    navController.navigate(R.id.worldWideCitiesFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.settings -> {
+                R.id.aboutUsFragment -> {
+                    navController.navigate(R.id.aboutUsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.contact_us -> {
+                R.id.settingsFragment -> {
+                    navController.navigate(R.id.settingsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
-                R.id.disclaimer -> {
+                R.id.contactUsFragment -> {
+                    navController.navigate(R.id.contactUsFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.disclaimerFragment -> {
+                    navController.navigate(R.id.disclaimerFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
 
