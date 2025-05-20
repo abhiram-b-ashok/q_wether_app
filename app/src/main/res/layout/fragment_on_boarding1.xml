@@ -26,8 +26,70 @@
             android:layout_height="wrap_content"
             android:src="@drawable/layer2_realtime"
             app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/layer2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#8A1538"
+            tools:text = "Doha"
+            android:id="@+id/city_name"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/layer2"
+            app:layout_constraintEnd_toEndOf="@+id/layer2"
+            app:layout_constraintTop_toTopOf="@+id/layer2"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/layer2"
+            app:layout_constraintEnd_toEndOf="@+id/layer2"
+            app:layout_constraintTop_toBottomOf="@+id/city_name"
+            android:textColor="#1D1D1D"
+            tools:text ="Thu, 19 May, 11:00 AM"
+            android:id="@+id/date"
+
+            android:layout_marginStart="30dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#8A1538"
+            android:id="@+id/temp"
+            tools:text = "34°C"
+            app:layout_constraintTop_toBottomOf="@+id/date"
+            app:layout_constraintStart_toStartOf="@+id/layer2"
+            app:layout_constraintEnd_toEndOf="@+id/layer2"
+            android:layout_marginStart="30dp"
+            android:textSize="70sp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#1D1D1D"
+            android:id="@+id/condition"
+            tools:text = "Sunny"
+            android:layout_marginStart="30dp"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/temp"
+            app:layout_constraintStart_toStartOf="@+id/layer2"
+            app:layout_constraintEnd_toEndOf="@+id/layer2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#08043D"
+            android:id="@+id/approx"
+            app:layout_constraintStart_toStartOf="@id/layer2"
+            app:layout_constraintEnd_toEndOf="@id/layer2"
+            app:layout_constraintTop_toBottomOf="@id/condition"
+            tools:text = "Feels like 38°"
+            android:layout_marginStart="30dp"
+            android:textSize="15sp"
+            />
+
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,9 +120,55 @@
             app:layout_constraintStart_toEndOf="@+id/km_layout"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/precipitation_layout"/>
-
-
-
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/guideline_1"
+            app:layout_constraintGuide_percent="0.33"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline_1"
+            tools:text = "23.3"
+            android:id="@+id/wind_speed"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#2B2758"
+            app:layout_constraintTop_toTopOf="@+id/precipitation_layout"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline_1"
+            android:text = "km/h"
+            android:textColor="#2B2758"
+            app:layout_constraintTop_toBottomOf="@id/wind_speed"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/guideline_2"
+            app:layout_constraintGuide_percent="0.67"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline_2"
+            android:text = "PRECIP"
+            android:textColor="#535353"
+            android:layout_marginTop="10dp"
+            android:id="@+id/precip_label"
+            app:layout_constraintTop_toTopOf="@+id/precipitation_layout"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline_2"
+            tools:text = "3%"
+            android:id="@+id/precip_percent"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/precip_label"/>
 
 
 
@@ -68,6 +176,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,7 +194,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/real_time_label"
             android:textColor="#FAA82E"
-            android:paddingBottom="10dp"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"/>
 
@@ -97,6 +206,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:textSize="18sp"
+            android:fontFamily="@font/poppins_regular"
             android:id="@+id/tv_description"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/real_time_label"/>
@@ -125,8 +235,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 

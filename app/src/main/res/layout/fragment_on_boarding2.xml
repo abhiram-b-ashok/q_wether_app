@@ -79,17 +79,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/real_time_label"
             android:textColor="#FAA82E"
-            android:paddingBottom="10dp"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Indulge in various weather overspreads with interactive maps for wind, rain and radar"
+            android:text="Indulge various weather with active maps for wind, rain and radar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
             android:id="@+id/tv_description"
             android:textSize="18sp"
             android:textColor="@color/white"

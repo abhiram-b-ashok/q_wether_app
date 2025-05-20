@@ -22,6 +22,9 @@ class RainRadarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val webView = binding.webView
+        webView.loadUrl("https://www.google.com")
+
     }
 
 

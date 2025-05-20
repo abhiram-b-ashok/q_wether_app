@@ -1,5 +1,6 @@
 package com.example.qweather.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -60,76 +61,11 @@ class DashBoardFragment : Fragment() {
             drawerLayout.openDrawer(binding.navDrawer)
         }
 
-       /* binding.navDrawer.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.weatherNewsFragment -> {
-                    navController.navigate(R.id.weatherNewsFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.rainRadarFragment -> {
-                    navController.navigate(R.id.rainRadarFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.activitiesFragment -> {
-                    navController.navigate(R.id.activitiesFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.weatherMapFragment -> {
-                    navController.navigate(R.id.weatherMapFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.notificationsFragment -> {
-                    navController.navigate(R.id.notificationsFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.monthlyReportFragment -> {
-                    navController.navigate(R.id.monthlyReportFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.worldWideCitiesFragment -> {
-                    navController.navigate(R.id.worldWideCitiesFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.aboutUsFragment -> {
-                    navController.navigate(R.id.aboutUsFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.settingsFragment -> {
-                    navController.navigate(R.id.settingsFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.contactUsFragment -> {
-                    navController.navigate(R.id.contactUsFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-                R.id.disclaimerFragment -> {
-                    navController.navigate(R.id.disclaimerFragment)
-                    drawerLayout.closeDrawer(binding.navDrawer)
-                    true
-                }
-
-                else -> {
-
-                    false
-                }
-            }
-
-        }*/
-
         binding.navDrawer.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.defaultDashboardFragment -> {
                     navController.navigate(R.id.defaultDashboardFragment)
+                    drawerLayout.closeDrawer(binding.navDrawer)
                     true
                 }
 
@@ -186,6 +122,18 @@ class DashBoardFragment : Fragment() {
                 R.id.disclaimerFragment -> {
                     navController.navigate(R.id.disclaimerFragment)
                     drawerLayout.closeDrawer(binding.navDrawer)
+                    true
+                }
+                R.id.share_app -> {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "https://github.com/abhiram-b-ashok/q_wether_app")
+                        type = "text/html"
+                    }
+
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
+
                     true
                 }
 

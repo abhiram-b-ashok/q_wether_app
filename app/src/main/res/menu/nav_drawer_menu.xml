@@ -47,7 +47,7 @@
         android:id="@+id/nav_footer">
         <item
             android:title=""
-            android:id="@+id/nav_log_version"
+            android:id="@+id/share_app"
             app:actionLayout="@layout/footer_navigation_menu_xml" />
     </group>
 

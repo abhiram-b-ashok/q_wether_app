@@ -33,8 +33,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
         val qatarCities = arrayListOf(
             QatarCitiesModel("Doha"),
             QatarCitiesModel("Al-Ahsa"),
@@ -94,6 +92,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 qatarButtonLayout.setBackgroundColor(Color.WHITE)
                 worldwideButtonLayout.setBackgroundColor("#8B1738".toColorInt())
                 locationsRecyclerView.adapter = qatarAdapter
+                locationType.text = "Qatar - Cities"
 
 
             } else {
@@ -102,6 +101,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 worldwideButtonLayout.setBackgroundColor(Color.WHITE)
                 qatarButtonLayout.setBackgroundColor("#8B1738".toColorInt())
                 locationsRecyclerView.adapter = worldAdapter
+                locationType.text = "World - Wide Cities"
 
             }
         }

@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/location_bottom_sheet_shape"
                 android:paddingHorizontal="15dp"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header_label">
@@ -61,7 +62,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Terms of usage"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_heading" />
@@ -71,6 +72,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textColor="#2B2758"
                     android:fontFamily="@font/poppins_light"
                     android:text="The Civil Aviation Authority endeavour, through its APP to enable its clients and visitors obtain, share, and use the materials uploaded to the APP for personal and non-commercial purposes, and as per the terms of usage of the app. \nTherefore, you need to read and review the terms and conditions stated below carefully. As using or visiting, this APP shall be deemed an acceptance of and agreement."
                     app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +87,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Legal Notice"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/description" />
@@ -94,7 +96,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ca_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -131,8 +133,9 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/md_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="wrap_content"
                     app:cardCornerRadius="15dp"
+                    android:layout_marginTop="20dp"
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +154,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:gravity="center"
                             android:paddingTop="3dp"
-                            android:text="Meteorology Deapartment"
+                            android:text="Meteorology Department"
                             android:textColor="#123456"
                             android:textSize="16sp" />
 
@@ -173,6 +176,7 @@
                     android:fontFamily="@font/poppins_light"
                     android:text="The Civil Aviation Authority endeavour, through its APP to enable its clients and visitors obtain, share, and use the materials uploaded to the APP for personal and non-commercial purposes, and as per the terms of usage of the app. "
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="#2B2758"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/md_layout" />
 

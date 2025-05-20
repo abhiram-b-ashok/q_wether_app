@@ -28,16 +28,7 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = arrayListOf<Notification>(
-            Date("April 2025"),
-            NotificationModel("Weather","Morning cloud, then increasing fine spells. Odd afternoon shower.","Monday, May 23, 2022, 12:30 am"),
-            NotificationModel("Weather","Morning cloud, then increasing fine spells. Odd afternoon shower.","Monday, May 23, 2022, 12:30 am"),
-            NotificationModel("Weather","Morning cloud, then increasing fine spells. Odd afternoon shower.","Monday, May 23, 2022, 12:30 am"),
-            Date("May 2025"),
-            NotificationModel("Weather","Morning cloud, then increasing fine spells. Odd afternoon shower.","Monday, May 23, 2022, 12:30 am"),
-            NotificationModel("Weather","Morning cloud, then increasing fine spells. Odd afternoon shower.","Monday, May 23, 2022, 12:30 am"),
-            NotificationModel("Weather","Morning cloud, then increasing fine spells. Odd afternoon shower.","Monday, May 23, 2022, 12:30 am"),
-        )
+
 
 //        notificationAdapter= NotificationAdapter(list)
 //        binding.notificationsRecycler.adapter = notificationAdapter
