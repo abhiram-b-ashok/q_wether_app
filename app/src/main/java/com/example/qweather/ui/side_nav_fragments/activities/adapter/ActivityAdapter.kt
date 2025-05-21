@@ -21,8 +21,6 @@ class ActivityAdapter(private val list: ArrayList<ActivityModel>) : RecyclerView
         return list.size
     }
 
-
-
     class ActivityViewHolder(private val binding: CellActivitiesItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(activityModel: ActivityModel) {
             binding.activityTitle.text = activityModel.title

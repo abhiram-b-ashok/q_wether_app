@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.side_nav_fragments.disclaimer.DisclaimerFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +25,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_label"
+            android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weather_news_layout"
             android:layout_width="match_parent"
@@ -537,19 +541,16 @@
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:paddingBottom="30dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/dashboard_settings_description"/>
 
 
-
-
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

@@ -35,37 +35,46 @@ class WeatherNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val list = arrayListOf(
+            WeatherNewsModel("https://static.zawya.com/view/acePublic/alias/contentid/MDI0NzYzMDEtNGMyMi00/12/2026763638.webp?f=3%3A2&q=0.75&w=3840","Qatar: Hot, humid with some clouds weather expected today","August 19, 2024"),
+            WeatherNewsModel("https://www.qatar-tribune.com/uploads/imported_images/upload/latestnews/8219/ad5c7c04-8239-48f1-b945-a1e0fff51913.jpg","Unstable weather conditions expected from today: QMD", "December 29, 2021"),
+            WeatherNewsModel("https://metbeatnews.com/wp-content/uploads/2024/02/1000152223.jpg","Qatar Meteorology forecasts thunder, rain with strong wind for weekend","August 1, 2024")
 
-        adapter = WeatherNewsAdapter(newsList)
+        )
+
+
+        adapter = WeatherNewsAdapter(list)
         binding.newsRecycler.adapter = adapter
 
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return WeatherNewsViewModel(WeatherNewsRepository()) as T
-            }
-        })[WeatherNewsViewModel::class.java]
 
-        viewModel.weatherNewsList.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is NetworkResult.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
 
-                is NetworkResult.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    val items = result.data ?: emptyList()
-                    newsList.clear()
-                    newsList.addAll(items)
-                    adapter.notifyDataSetChanged()
-                }
-
-                is NetworkResult.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.message ?: "Error occurred", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        viewModel.getWeatherNews()
+//        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//                return WeatherNewsViewModel(WeatherNewsRepository()) as T
+//            }
+//        })[WeatherNewsViewModel::class.java]
+//
+//        viewModel.weatherNewsList.observe(viewLifecycleOwner) { result ->
+//            when (result) {
+//                is NetworkResult.Loading -> {
+//                    binding.progressBar.visibility = View.VISIBLE
+//                }
+//
+//                is NetworkResult.Success -> {
+//                    binding.progressBar.visibility = View.GONE
+//                    val items = result.data ?: emptyList()
+//                    newsList.clear()
+//                    newsList.addAll(items)
+//                    adapter.notifyDataSetChanged()
+//                }
+//
+//                is NetworkResult.Error -> {
+//                    binding.progressBar.visibility = View.GONE
+//                    Toast.makeText(requireContext(), result.message ?: "Error occurred", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//
+//        viewModel.getWeatherNews()
     }
 }

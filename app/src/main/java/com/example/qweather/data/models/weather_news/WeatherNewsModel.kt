@@ -37,11 +37,14 @@ fun JSONObject.toAPIResponse(): ApiResponse {
 }
 
 fun JSONObject.toResponseData(): ResponseData {
+    val result = if (this.has("result")) this.getJSONObject("result").toResultData() else null
+    val status = this.optBoolean("status", false)
     return ResponseData(
-        status = this.getBoolean("status"),
-        result = this.getJSONObject("result").toResultData()
+        status = status,
+        result = result
     )
 }
+
 
 fun JSONObject.toResultData(): ResultData {
     val listArray = this.getJSONArray("list")

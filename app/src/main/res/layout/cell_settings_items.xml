@@ -12,23 +12,24 @@
         android:layout_height="30dp"
         android:id="@+id/ic_menu"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="10dp"
         android:src="@drawable/ic_menu"/>
     <TextView
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text = "Current Weather"
-        android:textSize="25sp"
-        android:layout_marginStart="30dp"
+        android:textSize="20sp"
+        android:id="@+id/label"
+        android:layout_marginStart="15dp"
         app:layout_constraintStart_toEndOf="@+id/ic_menu"
         android:textColor="@color/black"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toggle_img"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/to_select_ic"/>
+        tools:src="@drawable/to_select_ic"/>
 
 
 

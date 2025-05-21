@@ -2,23 +2,28 @@ package com.example.qweather.data.network.api_call
 
 import com.example.qweather.data.models.activities.ActivitiesApiResponse
 import com.example.qweather.data.models.activities.toActivitiesApiResponse
+import com.example.qweather.data.models.weather_news.ResponseData
+import com.example.qweather.data.models.weather_news.toResponseData
+import com.example.qweather.data.network.ApiResponse
 import com.example.qweather.data.network.NetworkHandler
 import com.example.qweather.data.network.buildUrl
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import kotlin.text.ifEmpty
 
-suspend fun getNotificationsApi(httpClient: OkHttpClient = NetworkHandler.okHttpClient): ActivitiesApiResponse =
+suspend fun getActivitiesApi(httpClient: OkHttpClient = NetworkHandler.okHttpClient): ActivitiesApiResponse =
     withContext(Dispatchers.IO) {
         try {
-            val url = buildUrl("user")
-                .addPathSegment("getnotifications")
-                .addQueryParameter("id", "109740")
+            val url = buildUrl("activities")
+                .addQueryParameter("type", "outdoor")
                 .addQueryParameter("page", "1")
-                .addQueryParameter("lang", "en")
                 .build()
 
             val request = Request.Builder()
@@ -39,3 +44,6 @@ suspend fun getNotificationsApi(httpClient: OkHttpClient = NetworkHandler.okHttp
             throw e
         }
     }
+
+
+
