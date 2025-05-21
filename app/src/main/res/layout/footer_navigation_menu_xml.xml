@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/share_app"
             android:textSize="18sp"
+            android:textColor="@color/white"
             android:layout_marginStart="10dp"
             android:paddingTop="2dp"
             app:layout_constraintStart_toEndOf="@+id/share_ic"
