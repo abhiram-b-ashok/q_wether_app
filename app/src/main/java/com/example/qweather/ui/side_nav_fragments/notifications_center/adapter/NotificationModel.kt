@@ -26,6 +26,20 @@ data class Dates(
 
 
 
+data class NotificationApiResponse(
+    val response: ResponseData
+)
+
+data class ResponseData(
+    val status: Boolean,
+    val result: Result
+)
+
+data class Result(
+    val list: List<NotificationGroup>
+)
+
+
 
 data class NotificationGroup(
     val year: String,
@@ -39,3 +53,43 @@ data class NotificationItem(
     val publicMessage: String,
     val created_at: String
 )
+
+fun JSONObject.toNotificationApiResponse(): NotificationApiResponse {
+    val responseObj = this.getJSONObject("Response")
+    val status = responseObj.getBoolean("status")
+    val resultObj = responseObj.getJSONObject("result")
+    val listJsonArray = resultObj.getJSONArray("list")
+
+    val groups = mutableListOf<NotificationGroup>()
+
+    for (i in 0 until listJsonArray.length()) {
+        val groupObj = listJsonArray.getJSONObject(i)
+        val year = groupObj.getString("year")
+        val month = groupObj.getString("month")
+        val dataArray = groupObj.getJSONArray("data")
+
+        val notifications = mutableListOf<NotificationItem>()
+        for (j in 0 until dataArray.length()) {
+            val itemObj = dataArray.getJSONObject(j)
+            val id = itemObj.getInt("id")
+            val title = itemObj.getString("title")
+            val publicMessage = itemObj.getString("publicMessage")
+            val createdAt = itemObj.getString("created_at")
+
+            notifications.add(
+                NotificationItem(id, title, publicMessage, createdAt)
+            )
+        }
+
+        groups.add(NotificationGroup(year, month, notifications))
+    }
+
+    return NotificationApiResponse(
+        response = ResponseData(
+            status = status,
+            result = Result(groups)
+        )
+    )
+}
+
+

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.qweather.databinding.FragmentCityBottomSheetBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
@@ -13,18 +14,23 @@ import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import androidx.core.graphics.toColorInt
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.example.qweather.data.network.NetworkResult
+import com.example.qweather.repository.CitiesRepository
+import com.example.qweather.view_models.cities.CitiesViewModel
+import com.example.qweather.view_models.cities.ViewModelProviderFactory
+import kotlinx.coroutines.launch
 
 
 class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCityBottomSheetBinding
     private lateinit var qatarAdapter: QatarAdapter
     private lateinit var worldAdapter: WorldAdapter
+    private lateinit var viewModel: CitiesViewModel
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentCityBottomSheetBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -32,69 +38,71 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val factory = ViewModelProviderFactory(CitiesRepository())
+        viewModel = ViewModelProvider(this, factory)[CitiesViewModel::class.java]
 
-        val qatarCities = arrayListOf(
-            QatarCitiesModel("Doha"),
-            QatarCitiesModel("Al-Ahsa"),
-            QatarCitiesModel("Al-Qusais"),
-            QatarCitiesModel("Al-Ushuaia"),
-        )
-        qatarAdapter = QatarAdapter(qatarCities)
+        observeCities()
 
+        binding.qatarButton.setOnClickListener { selectedType(1) }
+        binding.worldwideButton.setOnClickListener { selectedType(2) }
+        binding.backButton.setOnClickListener { dismiss() }
 
-        val worldCities = arrayListOf(
-            WorldCitiesModel("Dubai"),
-            WorldCitiesModel("Abu Dhabi"),
-            WorldCitiesModel("Sharjah"),
-            WorldCitiesModel("Ajman"),
-        )
-        worldAdapter = WorldAdapter(worldCities)
-
-        selectedType(1)
-
-        binding.apply {
-            qatarButton.setOnClickListener {
-                selectedType(1)
-
-
-            }
-            worldwideButton.setOnClickListener {
-                selectedType(2)
-
-
-            }
-            backButton.setOnClickListener {
-                dismiss()
-            }
-
-        }
-
-        qatarAdapter.onItemClickListener = { item ->
-            sendResult(item.cityName)
-            Log.d("CitySelection", "Selected city: ${item.cityName}")
-            dismiss()
-
-        }
-        worldAdapter.onItemClickListener = { item ->
-            sendResult(item.cityName)
-            Log.d("CitySelection", "Selected city: ${item.cityName}")
-            dismiss()
-        }
-
+        viewModel.fetchCities()
     }
 
-    fun selectedType(type: Int) {
+    private fun observeCities() {
+        viewModel.citiesResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is NetworkResult.Loading -> {
+                    // Show loading UI
+                }
+
+                is NetworkResult.Success -> {
+                    result.data?.let { citiesApiResponse ->
+                        val qatarList = citiesApiResponse.response.result.cities.qatar.map {
+                            QatarCitiesModel(it.name)
+                        }
+
+                        val worldList = citiesApiResponse.response.result.cities.world.map {
+                            WorldCitiesModel(it.name)
+                        }
+
+                        setupAdapters(qatarList, worldList)
+                        selectedType(1)
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), result.message ?: "Error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun setupAdapters(qatarCities: List<QatarCitiesModel>, worldCities: List<WorldCitiesModel>) {
+        qatarAdapter = QatarAdapter(qatarCities)
+        worldAdapter = WorldAdapter(worldCities)
+
+        qatarAdapter.onItemClickListener = {
+            sendResult(it.cityName)
+            dismiss()
+        }
+
+        worldAdapter.onItemClickListener = {
+            sendResult(it.cityName)
+            dismiss()
+        }
+    }
+
+    private fun selectedType(type: Int) {
         binding.apply {
             if (type == 1) {
-
                 qatarLabel.setTextColor("#8B1738".toColorInt())
                 worldLabel.setTextColor(Color.WHITE)
                 qatarButtonLayout.setBackgroundColor(Color.WHITE)
                 worldwideButtonLayout.setBackgroundColor("#8B1738".toColorInt())
                 locationsRecyclerView.adapter = qatarAdapter
                 locationType.text = "Qatar - Cities"
-
-
             } else {
                 worldLabel.setTextColor("#8B1738".toColorInt())
                 qatarLabel.setTextColor(Color.WHITE)
@@ -102,16 +110,14 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 qatarButtonLayout.setBackgroundColor("#8B1738".toColorInt())
                 locationsRecyclerView.adapter = worldAdapter
                 locationType.text = "World - Wide Cities"
-
             }
         }
     }
+
     private fun sendResult(city: String) {
         parentFragmentManager.setFragmentResult("citySelectionKey", Bundle().apply {
-            Log.d("CitySelection", "Sending city: $city")
             putString("selectedCity", city)
         })
-
     }
-
 }
+
