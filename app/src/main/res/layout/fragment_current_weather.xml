@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    tools:cardBackgroundColor="@color/black"
+    tools:context=".ui.dashboard.inner_fragments.current_weather.CurrentWeatherFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/current_weather_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/city_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Qatar" />
+
+        <TextView
+            android:id="@+id/city_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_name"
+            tools:text="Thu, 22 May, 10:07 AM" />
+
+        <ImageView
+            android:id="@+id/city_weather_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_time"
+            tools:src="@drawable/cloud_group" />
+
+        <TextView
+            android:id="@+id/city_temperature"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="200"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_weather_icon" />
+
+        <TextView
+            android:id="@+id/temperature_unit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="K"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/city_temperature"
+            app:layout_constraintTop_toBottomOf="@+id/city_weather_icon" />
+
+        <TextView
+            android:id="@+id/city_weather_condition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_temperature"
+            tools:text="Scattered Clouds" />
+
+        <TextView
+            android:id="@+id/feels_like"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="Feels like "
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_weather_condition" />
+
+        <TextView
+            android:id="@+id/feels_lik_temp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/feels_like"
+            app:layout_constraintTop_toBottomOf="@+id/city_weather_condition"
+            tools:text="200" />
+
+        <ImageView
+            android:id="@+id/ic_up"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/temp_up_ic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like" />
+
+        <TextView
+            android:id="@+id/temp_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/ic_up"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/temp_up_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/ic_down"
+            app:layout_constraintStart_toEndOf="@id/temp_up"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like"
+            tools:text="°" />
+
+        <ImageView
+            android:id="@+id/ic_down"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/temp_down_ic"
+            app:layout_constraintEnd_toStartOf="@+id/temp_down"
+            app:layout_constraintStart_toEndOf="@+id/temp_up_unit"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like" />
+
+        <TextView
+            android:id="@+id/temp_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/temp_down_unit"
+            app:layout_constraintStart_toEndOf="@+id/ic_down"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/temp_down_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/temp_down"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like"
+            tools:text="°" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:paddingVertical="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temp_up">
+
+            <ImageView
+                android:id="@+id/humi_lo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/humi_lo"
+                app:layout_constraintEnd_toStartOf="@+id/wind_lo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/humi_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="HUMI"
+                app:layout_constraintBottom_toTopOf="@+id/humi_percent"
+                app:layout_constraintEnd_toEndOf="@id/humi_lo"
+                app:layout_constraintStart_toStartOf="@+id/humi_lo"
+                app:layout_constraintTop_toTopOf="@id/humi_lo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/humi_lo"
+                app:layout_constraintStart_toStartOf="@+id/humi_lo"
+                tools:text="3"
+                android:textSize="20sp"
+                android:textColor="#08043D"
+                android:id="@+id/humi_percent"
+                app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
+                app:layout_constraintTop_toBottomOf="@+id/humi_label"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/humi_percent"
+                app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
+                android:text="%"
+                android:textColor="#08043D"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/humi_label" />
+
+            <ImageView
+                android:id="@+id/wind_lo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wind_lo"
+                app:layout_constraintEnd_toStartOf="@+id/swoosh_lo"
+                app:layout_constraintStart_toEndOf="@+id/humi_lo"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="NE"
+                android:textSize="20sp"
+                android:layout_marginStart="20sp"
+                android:textColor="#08043D"
+                app:layout_constraintStart_toStartOf="@+id/wind_lo"
+                app:layout_constraintEnd_toEndOf="@id/wind_lo"
+                app:layout_constraintTop_toTopOf="@id/wind_lo"
+                app:layout_constraintBottom_toBottomOf="@+id/wind_lo"/>
+
+
+            <ImageView
+                android:id="@+id/swoosh_lo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/swoosh_lo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/wind_lo"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
+                app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
+                tools:text = "23.2"
+                android:textSize="20sp"
+                android:textColor="#08043D"
+                android:id="@+id/wind_percent"
+                android:layout_marginStart="17sp"
+                app:layout_constraintTop_toTopOf="@+id/swoosh_lo"
+                app:layout_constraintBottom_toTopOf="@id/wind_speed_unit" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wind_speed_unit"
+                android:textColor="#08043D"
+                app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
+                app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
+                tools:text ="km/h"
+                android:layout_marginStart="17sp"
+                app:layout_constraintBottom_toBottomOf="@+id/swoosh_lo"
+                app:layout_constraintTop_toBottomOf="@+id/wind_percent"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

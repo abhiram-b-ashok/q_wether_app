@@ -40,7 +40,7 @@ class SettingsAdapter(private val items: List<DashboardSettingsModel>) : Recycle
                 }
                 if (item.isSelect) {
                     toggleImg.setImageResource(R.drawable.selected_ic)
-                } else if (position == 0) {
+                } else if (item.title == "Current Weather") {
                     toggleImg.setImageResource(R.drawable.default_selected_ic)
                 } else {
                     toggleImg.setImageResource(R.drawable.to_select_ic)

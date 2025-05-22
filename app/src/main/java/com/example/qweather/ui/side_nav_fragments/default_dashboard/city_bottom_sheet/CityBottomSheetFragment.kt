@@ -54,7 +54,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         viewModel.citiesResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is NetworkResult.Loading -> {
-                    // Show loading UI
+
                 }
 
                 is NetworkResult.Success -> {

@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.R
 import com.example.qweather.data.models.settings.DashboardSettingsModel
 import com.example.qweather.databinding.FragmentSettingsBinding
 import com.example.qweather.ui.side_nav_fragments.settings.adapter.SettingsAdapter
+import java.util.Collections
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
@@ -142,6 +145,31 @@ class SettingsFragment : Fragment() {
                 val currentSelectedTitles = list.filter { it.isSelect }.map { it.title }.toSet()
                 sharedPreferences.edit().putStringSet(KEY_SELECTED_DASHBOARD_ITEMS, currentSelectedTitles).apply()
             }
+
+            val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0){
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    source: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                   val sourcePosition = source.adapterPosition
+                    val targetPosition = target.adapterPosition
+
+                    Collections.swap(list, sourcePosition, targetPosition)
+                    settingsAdapter.notifyItemMoved(sourcePosition, targetPosition)
+                    return true
+                }
+
+                override fun onSwiped(
+                    viewHolder: RecyclerView.ViewHolder,
+                    direction: Int
+                ) {
+                    TODO("Not yet implemented")
+                }
+            })
+            itemTouchHelper.attachToRecyclerView(binding.recyclerForSettings)
+
         }
     }
 

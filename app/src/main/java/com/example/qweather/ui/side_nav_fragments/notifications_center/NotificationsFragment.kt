@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.databinding.FragmentNotificationsBinding
 import com.example.qweather.repository.NotificationRepository
 import com.example.qweather.ui.side_nav_fragments.notifications_center.adapter.NotificationAdapter
 import com.example.qweather.view_models.notifications.NotificationViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class NotificationsFragment : Fragment() {
@@ -39,6 +43,11 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        lifecycleScope.launch {
+            delay(3500)
+            binding.progressBar.visibility = View.GONE
+        }
+
         notificationAdapter = NotificationAdapter(emptyList())
         binding.notificationsRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -46,8 +55,10 @@ class NotificationsFragment : Fragment() {
         }
 
 
+
         viewModel.notificationList.observe(viewLifecycleOwner) { notificationList ->
             notificationAdapter.updateData(notificationList)
+
         }
 
         viewModel.getNotifications()

@@ -237,6 +237,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#F44336"
+                        android:id="@+id/mail_error"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mail_et"
+                        android:visibility="invisible"
+                        android:text="Type email"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Subject"
                         android:textColor="#2B2758"
                         android:textSize="16sp"
@@ -256,6 +267,17 @@
                         android:textColor="@color/black"
                         android:id="@+id/subject_et"
                         app:layout_constraintTop_toBottomOf="@+id/subject_label"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F44336"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/subject_error"
+                        app:layout_constraintTop_toBottomOf="@+id/subject_et"
+                        android:visibility="invisible"
+                        android:text="Type subject"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -279,7 +301,17 @@
                         android:textColor="@color/black"
                         android:gravity="top"
                         app:layout_constraintTop_toBottomOf="@+id/message_label"/>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F44336"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/message_error"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/message_et"
+                        android:visibility="invisible"
+                        android:text="Type message"
+                        />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -287,7 +319,7 @@
                     android:id="@+id/contact_submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginHorizontal="10dp"
                     android:background="@drawable/add_button_shape"
                     android:fontFamily="@font/poppins_medium"
@@ -300,9 +332,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/contact_us_layout" />
-
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dashboard.inner_fragments.tides.TidesFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingHorizontal="20dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0095DA"
+            android:text="Tidal information"
+            android:textSize="30sp"
+            android:id="@+id/tide_heading"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/poppins_semibold"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tide_ic"
+            android:id="@+id/tide_icon"
+            android:paddingTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tide_heading"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/tide_icon"
+            app:layout_constraintTop_toBottomOf="@+id/tide_heading"
+            tools:text="0.55"
+            android:layout_marginStart="10dp"
+            android:textSize="30sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:id="@+id/tide_value"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/tide_value"
+            app:layout_constraintTop_toBottomOf="@+id/tide_heading"
+            tools:text="m"
+            android:textSize="30sp"
+            android:fontFamily="@font/poppins_medium"
+
+            android:textColor="@color/black"
+            android:id="@+id/tide_unit"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tide_unit"
+            android:textColor="#1D1D1D"
+            android:text="Last updated at "
+            android:id="@+id/last_update"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/last_update"
+            app:layout_constraintTop_toBottomOf="@+id/tide_unit"
+            android:textColor="#1D1D1D"
+            tools:text ="09:34 AM"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_update"
+            android:src="@drawable/tide_line"
+            android:layout_marginTop="10dp"
+            android:id="@+id/line"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tide_high"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            android:id="@+id/tide_high"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tide_low"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            android:id="@+id/tide_low"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#8D1B3D"
+            android:text="High"
+            android:textSize="20sp"
+            android:id="@+id/tide_high_label"
+            app:layout_constraintStart_toEndOf="@+id/tide_high"
+            app:layout_constraintTop_toBottomOf="@+id/line"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#8D1B3D"
+                android:text="Low"
+                android:textSize="20sp"
+                android:id="@+id/tide_low_label"
+                app:layout_constraintEnd_toStartOf="@+id/tide_low"
+                app:layout_constraintTop_toBottomOf="@+id/line"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tide_high_value"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
+            app:layout_constraintStart_toEndOf="@+id/tide_high"
+            tools:text ="0.005"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tide_low_value"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
+            app:layout_constraintEnd_toStartOf="@+id/tide_low"
+            tools:text ="0.005"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tide_high_unit"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
+            app:layout_constraintStart_toEndOf="@+id/tide_high"
+            tools:text ="m"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.cardview.widget.CardView>

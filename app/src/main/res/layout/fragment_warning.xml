@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    tools:cardBackgroundColor="@color/white"
+    tools:context=".ui.dashboard.inner_fragments.warning.WarningFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/warning_layout"
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/warning_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Warning"
+            android:textColor="#0095DA"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            app:cardBackgroundColor="#FFCCAC"
+            app:cardCornerRadius="10dp"
+            android:id="@+id/card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/warning_label">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <ImageView
+                    android:id="@+id/warning_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/warning_ic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="#8A1538"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/warning_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Expected strong wind with poor visibility daytime" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/warning_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/warning_temp_lo"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toStartOf="@+id/warning_wind"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/temp_label"
+            android:text="TEMP"
+            android:textColor="#535353"
+            android:layout_marginStart="25dp"
+            app:layout_constraintStart_toStartOf="@+id/warning_temp"
+            app:layout_constraintEnd_toEndOf="@+id/warning_temp"
+            app:layout_constraintTop_toTopOf="@+id/warning_temp"
+            app:layout_constraintBottom_toTopOf="@+id/temp_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/temp_value"
+            android:layout_marginStart="25dp"
+            android:textColor="#08043D"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/warning_temp"
+            app:layout_constraintEnd_toEndOf="@+id/warning_temp"
+            app:layout_constraintTop_toBottomOf="@+id/temp_label"
+            app:layout_constraintBottom_toBottomOf="@+id/warning_temp"/>
+
+
+        <ImageView
+            android:id="@+id/warning_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/swoosh_lo"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toStartOf="@+id/warning_visible"
+            app:layout_constraintStart_toEndOf="@+id/warning_temp"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wind_label"
+            android:layout_marginStart="25dp"
+            app:layout_constraintStart_toStartOf="@+id/warning_wind"
+            app:layout_constraintTop_toTopOf="@+id/warning_wind"
+            app:layout_constraintBottom_toTopOf="@+id/wind_value"
+            app:layout_constraintEnd_toEndOf="@+id/warning_wind"
+            android:text="WIND"
+            android:textColor="#535353"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wind_value"
+            android:layout_marginStart="25dp"
+            android:textColor="#08043D"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/warning_wind"
+            app:layout_constraintTop_toBottomOf="@+id/wind_label"
+            app:layout_constraintBottom_toBottomOf="@+id/warning_wind"
+            app:layout_constraintEnd_toEndOf="@+id/warning_wind"
+            />
+
+
+        <ImageView
+            android:id="@+id/warning_visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+
+            android:src="@drawable/warning_visible_lo"
+            app:layout_constraintStart_toEndOf="@+id/warning_wind"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/visible_label"
+            android:layout_marginStart="25dp"
+            android:textColor="#535353"
+            app:layout_constraintStart_toStartOf="@+id/warning_visible"
+            app:layout_constraintTop_toTopOf="@+id/warning_visible"
+            app:layout_constraintBottom_toTopOf="@+id/visible_value"
+            app:layout_constraintEnd_toEndOf="@+id/warning_visible"
+            android:text="VISIBILITY"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/visible_value"
+            android:layout_marginStart="7dp"
+            android:textColor="#08043D"
+            android:textSize="20sp"
+            tools:text ="9"
+            app:layout_constraintStart_toStartOf="@+id/warning_visible"
+            app:layout_constraintTop_toBottomOf="@+id/visible_label"
+            app:layout_constraintBottom_toBottomOf="@+id/warning_visible"
+            app:layout_constraintEnd_toEndOf="@+id/warning_visible"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#08043D"
+            app:layout_constraintStart_toEndOf="@+id/visible_value"
+            app:layout_constraintTop_toBottomOf="@+id/visible_label"
+            app:layout_constraintBottom_toBottomOf="@+id/warning_visible"
+            android:text=" km"
+            />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

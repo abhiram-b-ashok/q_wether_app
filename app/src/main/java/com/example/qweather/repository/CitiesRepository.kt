@@ -3,10 +3,7 @@ package com.example.qweather.repository
 import com.example.qweather.data.models.cities.CitiesApiResponse
 import com.example.qweather.data.network.NetworkHandler
 import com.example.qweather.data.network.NetworkResult
-import com.example.qweather.data.network.api_call.getNotificationsApi
 import com.example.qweather.data.network.buildUrl
-import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
-import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Request
@@ -16,7 +13,7 @@ class CitiesRepository {
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     private val adapter = moshi.adapter(CitiesApiResponse::class.java)
 
-    suspend fun getCities(): NetworkResult<CitiesApiResponse> {
+    fun getCities(): NetworkResult<CitiesApiResponse> {
         return try {
             val url = buildUrl("cities").build()
             val request = Request.Builder().url(url).build()
