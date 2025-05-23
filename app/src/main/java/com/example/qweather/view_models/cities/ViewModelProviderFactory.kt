@@ -6,9 +6,9 @@ import com.example.qweather.repository.CitiesRepository
 
 class ViewModelProviderFactory(private val repository: CitiesRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CitiesViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(CityViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return CitiesViewModel(repository) as T
+            return CityViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

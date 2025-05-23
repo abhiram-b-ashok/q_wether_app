@@ -1,6 +1,12 @@
 package com.example.qweather.data.models.cities
 
-data class CitiesApiResponse(val response: CitiesResponseWrapper)
+import com.squareup.moshi.Json
+
+data class CitiesApiResponse(
+    @Json(name = "Response")
+    val response: CitiesResponseWrapper
+)
+
 
 data class CitiesResponseWrapper(
     val status: Boolean,

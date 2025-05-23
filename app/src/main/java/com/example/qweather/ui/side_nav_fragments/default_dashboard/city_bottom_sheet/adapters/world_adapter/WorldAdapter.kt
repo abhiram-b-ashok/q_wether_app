@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.databinding.CellWorldCitesBinding
 
-class WorldAdapter(private val cities: List<WorldCitiesModel>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
+class WorldAdapter(private var cities: MutableList<WorldCitiesModel>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
 
     var onItemClickListener: ((WorldCitiesModel) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorldViewHolder {
-        val binding =
-            CellWorldCitesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CellWorldCitesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WorldViewHolder(binding)
     }
 
@@ -18,19 +18,20 @@ class WorldAdapter(private val cities: List<WorldCitiesModel>) : RecyclerView.Ad
         holder.bind(cities[position], onItemClickListener)
     }
 
-    override fun getItemCount(): Int {
-        return cities.size
+    override fun getItemCount(): Int = cities.size
+
+    fun updateList(newCities: List<WorldCitiesModel>) {
+        cities.clear()
+        cities.addAll(newCities)
+        notifyDataSetChanged()
     }
 
-
-    class WorldViewHolder(private val binding: CellWorldCitesBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-            fun bind(city: WorldCitiesModel, onItemClickListener: ((WorldCitiesModel) -> Unit)?) {
-                binding.qatarCityName.text = city.cityName
-                binding.root.setOnClickListener {
-                    onItemClickListener?.invoke(city)
-                }
-
+    class WorldViewHolder(private val binding: CellWorldCitesBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(city: WorldCitiesModel, onItemClickListener: ((WorldCitiesModel) -> Unit)?) {
+            binding.qatarCityName.text = city.cityName
+            binding.root.setOnClickListener {
+                onItemClickListener?.invoke(city)
             }
+        }
     }
 }

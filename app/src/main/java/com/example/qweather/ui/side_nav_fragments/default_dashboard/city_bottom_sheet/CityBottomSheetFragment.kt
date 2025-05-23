@@ -12,26 +12,25 @@ import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import androidx.core.graphics.toColorInt
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.repository.CitiesRepository
-import com.example.qweather.view_models.cities.CitiesViewModel
+import com.example.qweather.view_models.cities.CityViewModel
 import com.example.qweather.view_models.cities.ViewModelProviderFactory
-import kotlinx.coroutines.launch
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
+
 
 
 class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCityBottomSheetBinding
     private lateinit var qatarAdapter: QatarAdapter
     private lateinit var worldAdapter: WorldAdapter
-    private lateinit var viewModel: CitiesViewModel
+    private lateinit var viewModel: CityViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentCityBottomSheetBinding.inflate(layoutInflater, container, false)
+        binding = FragmentCityBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,7 +38,10 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val factory = ViewModelProviderFactory(CitiesRepository())
-        viewModel = ViewModelProvider(this, factory)[CitiesViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[CityViewModel::class.java]
+
+        // Initialize adapters with empty lists (immutable lists are fine here)
+        setupAdapters(emptyList(), emptyList())
 
         observeCities()
 
@@ -47,41 +49,46 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         binding.worldwideButton.setOnClickListener { selectedType(2) }
         binding.backButton.setOnClickListener { dismiss() }
 
+        // Show Qatar cities by default
+        selectedType(1)
+
+        // Fetch cities data from API
         viewModel.fetchCities()
     }
 
     private fun observeCities() {
-        viewModel.citiesResult.observe(viewLifecycleOwner) { result ->
+        viewModel.citiesLiveData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is NetworkResult.Loading -> {
-
+                    // Optionally show a loading indicator here
+                    // e.g. binding.progressBar.visibility = View.VISIBLE
                 }
-
                 is NetworkResult.Success -> {
-                    result.data?.let { citiesApiResponse ->
-                        val qatarList = citiesApiResponse.response.result.cities.qatar.map {
-                            QatarCitiesModel(it.name)
-                        }
+                    // Hide loading indicator if any
+                    // e.g. binding.progressBar.visibility = View.GONE
 
-                        val worldList = citiesApiResponse.response.result.cities.world.map {
-                            WorldCitiesModel(it.name)
-                        }
+                    val qatarCities = result.data?.response?.result?.cities?.qatar
+                    val worldCities = result.data?.response?.result?.cities?.world
 
-                        setupAdapters(qatarList, worldList)
-                        selectedType(1)
-                    }
+                    val qatarList = qatarCities?.map { QatarCitiesModel(cityName = it.name) } ?: emptyList()
+                    val worldList = worldCities?.map { WorldCitiesModel(cityName = it.name) } ?: emptyList()
+
+                    qatarAdapter.updateList(qatarList)
+                    worldAdapter.updateList(worldList)
                 }
-
                 is NetworkResult.Error -> {
-                    Toast.makeText(requireContext(), result.message ?: "Error", Toast.LENGTH_SHORT).show()
+                    // Hide loading indicator if any
+                    // e.g. binding.progressBar.visibility = View.GONE
+
+                    Toast.makeText(requireContext(), result.message ?: "Unknown error", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
     private fun setupAdapters(qatarCities: List<QatarCitiesModel>, worldCities: List<WorldCitiesModel>) {
-        qatarAdapter = QatarAdapter(qatarCities)
-        worldAdapter = WorldAdapter(worldCities)
+        qatarAdapter = QatarAdapter(qatarCities.toMutableList())
+        worldAdapter = WorldAdapter(worldCities.toMutableList())
 
         qatarAdapter.onItemClickListener = {
             sendResult(it.cityName)
@@ -92,6 +99,9 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
             sendResult(it.cityName)
             dismiss()
         }
+
+        // Set Qatar adapter by default
+        binding.locationsRecyclerView.adapter = qatarAdapter
     }
 
     private fun selectedType(type: Int) {

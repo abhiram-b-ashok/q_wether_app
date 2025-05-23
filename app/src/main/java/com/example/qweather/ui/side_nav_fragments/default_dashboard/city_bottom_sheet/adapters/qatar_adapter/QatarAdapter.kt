@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.databinding.CellQatarCitiesBinding
 
-class QatarAdapter(private val cities: List<QatarCitiesModel>) : RecyclerView.Adapter<QatarAdapter.QatarViewHolder>() {
+class QatarAdapter(private var cities: MutableList<QatarCitiesModel>) : RecyclerView.Adapter<QatarAdapter.QatarViewHolder>() {
     var onItemClickListener: ((QatarCitiesModel) -> Unit)? = null
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QatarViewHolder {
-        val binding =
-            CellQatarCitiesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return QatarViewHolder(binding)
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QatarViewHolder {
+        val binding = CellQatarCitiesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return QatarViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: QatarViewHolder, position: Int) {
@@ -19,18 +18,21 @@ class QatarAdapter(private val cities: List<QatarCitiesModel>) : RecyclerView.Ad
     }
 
     override fun getItemCount(): Int {
-       return cities.size
+        return cities.size
     }
 
-    class QatarViewHolder(private val binding: CellQatarCitiesBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    fun updateList(newCities: List<QatarCitiesModel>) {
+        cities.clear()
+        cities.addAll(newCities)
+        notifyDataSetChanged()  // refreshes the whole list
+    }
 
-            fun bind(city: QatarCitiesModel, onItemClickListener: ((QatarCitiesModel) -> Unit)?) {
-                binding.qatarCityName.text = city.cityName
-                binding.root.setOnClickListener {
-                    onItemClickListener?.invoke(city)
-                }
-
+    class QatarViewHolder(private val binding: CellQatarCitiesBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(city: QatarCitiesModel, onItemClickListener: ((QatarCitiesModel) -> Unit)?) {
+            binding.qatarCityName.text = city.cityName
+            binding.root.setOnClickListener {
+                onItemClickListener?.invoke(city)
             }
+        }
     }
 }
