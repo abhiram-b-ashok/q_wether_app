@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    tools:context=".ui.dashboard.inner_fragments.sun_info.SunInfoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/sun_info_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Sunrise / Sunset info"
+            android:textColor="#0095DA"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sunrise_ic"
+            android:id="@+id/sunrise_ic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sun_info_heading" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sunrise_label"
+            android:text="Sunrise"
+            android:textSize="18sp"
+            android:textColor="#8D1B3D"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintStart_toEndOf="@+id/sunrise_ic"
+            app:layout_constraintTop_toTopOf="@id/sunrise_ic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sunrise_time"
+            android:text="4:53 am"
+            android:textSize="15sp"
+            android:textColor="#2B2758"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintStart_toEndOf="@+id/sunrise_ic"
+            app:layout_constraintBottom_toBottomOf="@+id/sunrise_ic"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sunset_ic"
+            android:id="@+id/sunset_ic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sun_info_heading" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sunset_label"
+            android:text="Sunset"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="#8D1B3D"
+            app:layout_constraintEnd_toStartOf="@+id/sunset_ic"
+            app:layout_constraintTop_toTopOf="@id/sunset_ic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sunset_time"
+            tools:text ="6:08 pm"
+            android:textSize="15sp"
+            android:textColor="#2B2758"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintEnd_toStartOf="@+id/sunset_ic"
+            app:layout_constraintBottom_toBottomOf="@+id/sunset_ic"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
