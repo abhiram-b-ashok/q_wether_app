@@ -13,14 +13,12 @@ import com.example.qweather.R
 import com.example.qweather.data.models.weather_news.WeatherNewsModel
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.databinding.FragmentWeatherNewsBinding
-import com.example.qweather.repository.WeatherNewsRepository
 import com.example.qweather.ui.side_nav_fragments.weather_news.adapter.WeatherNewsAdapter
-import com.example.qweather.view_models.weather_news.WeatherNewsViewModel
+
 
 
 class WeatherNewsFragment : Fragment() {
     private lateinit var binding: FragmentWeatherNewsBinding
-    private lateinit var viewModel: WeatherNewsViewModel
     private lateinit var adapter: WeatherNewsAdapter
     private val newsList = arrayListOf<WeatherNewsModel>()
 

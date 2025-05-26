@@ -15,10 +15,9 @@ import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.databinding.FragmentActivitiesBinding
 import com.example.qweather.databinding.FragmentNotificationsBinding
 import com.example.qweather.repository.ActivityRepository
-import com.example.qweather.repository.WeatherNewsRepository
 import com.example.qweather.ui.side_nav_fragments.activities.adapter.ActivityAdapter
 import com.example.qweather.view_models.activities.ActivityViewModel
-import com.example.qweather.view_models.weather_news.WeatherNewsViewModel
+
 
 
 class ActivitiesFragment : Fragment() {

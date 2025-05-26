@@ -18,6 +18,9 @@
             app:destination="@id/defaultDashboardFragment"
             app:popUpTo="@id/defaultDashboardFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_seasonalDeatiledFragment"
+            app:destination="@id/seasonalDeatiledFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"
@@ -74,5 +77,10 @@
         android:name="com.example.qweather.ui.side_nav_fragments.disclaimer.DisclaimerFragment"
         android:label="fragment_disclaimer"
         tools:layout="@layout/fragment_disclaimer" />
+    <fragment
+        android:id="@+id/seasonalDeatiledFragment"
+        android:name="com.example.qweather.ui.dashboard.inner_fragments.seasonal.seasonal_detailed.SeasonalDeatiledFragment"
+        android:label="fragment_seasonal_deatiled"
+        tools:layout="@layout/fragment_seasonal_deatiled" />
 
 </navigation>

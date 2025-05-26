@@ -24,8 +24,6 @@ data class Dates(
     override fun provideType(): Int = DATE
 }
 
-
-
 data class NotificationApiResponse(
     val response: ResponseData
 )

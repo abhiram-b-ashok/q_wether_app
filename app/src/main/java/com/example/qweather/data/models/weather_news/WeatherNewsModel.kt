@@ -1,6 +1,5 @@
 package com.example.qweather.data.models.weather_news
 
-import com.example.qweather.data.network.ApiResponse
 import org.json.JSONObject
 
 
@@ -27,14 +26,14 @@ data class WeatherNewsModel(
 )
 
 
-fun JSONObject.toAPIResponse(): ApiResponse {
-    return ApiResponse(
-        code = this.getInt("code"),
-        exception = null,
-        message = this.getString("message"),
-        response = this.getJSONObject("response").toResponseData(),
-    )
-}
+//fun JSONObject.toAPIResponse(): ApiResponse {
+//    return ApiResponse(
+//        code = this.getInt("code"),
+//        exception = null,
+//        message = this.getString("message"),
+//        response = this.getJSONObject("response").toResponseData(),
+//    )
+//}
 
 fun JSONObject.toResponseData(): ResponseData {
     val result = if (this.has("result")) this.getJSONObject("result").toResultData() else null

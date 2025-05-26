@@ -3,6 +3,7 @@ package com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,6 +72,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         qatarAdapter = QatarAdapter(mutableListOf()).apply {
             onItemClickListener = { city ->
                 sendSelection(city.cityName, true, city.longitude, city.latitude)
+                Log.e("@@@@@longitude,latitude", "${city.longitude},${city.latitude}")
                 dismiss()
             }
         }
@@ -78,6 +80,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         worldAdapter = WorldAdapter(mutableListOf()).apply {
             onItemClickListener = { city ->
                 sendSelection(city.cityName, false, city.longitude, city.latitude)
+                Log.e("@@@@@longitude,latitude", "${city.longitude},${city.latitude}")
                 dismiss()
             }
         }
@@ -117,10 +120,10 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private fun updateAdapters(response: CitiesResponse) {
         response.response.result.cities.let { cities ->
             qatarAdapter.updateList(
-                cities.qatar.map { QatarCitiesModel(it.name, it) }
+                cities.qatar.map { QatarCitiesModel(it.name, it, it.longitude, it.latitude) }
             )
             worldAdapter.updateList(
-                cities.world.map { WorldCitiesModel(it.name, it) }
+                cities.world.map { WorldCitiesModel(it.name, it, it.longitude, it.latitude) }
             )
         }
     }
@@ -183,6 +186,8 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
             selectedType(CityType.QATAR)
         }
     }
+
+
 
 }
 

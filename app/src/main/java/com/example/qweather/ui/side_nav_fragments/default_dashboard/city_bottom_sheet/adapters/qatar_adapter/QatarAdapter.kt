@@ -24,7 +24,7 @@ class QatarAdapter(private var cities: MutableList<QatarCitiesModel>) : Recycler
     fun updateList(newCities: List<QatarCitiesModel>) {
         cities.clear()
         cities.addAll(newCities)
-        notifyDataSetChanged()  // refreshes the whole list
+        notifyDataSetChanged()
     }
 
     class QatarViewHolder(private val binding: CellQatarCitiesBinding) : RecyclerView.ViewHolder(binding.root) {

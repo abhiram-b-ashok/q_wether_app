@@ -24,6 +24,8 @@ class CurrentWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.currentWeatherLayout.setBackgroundResource(R.drawable.weather_img)
+
     }
 
 

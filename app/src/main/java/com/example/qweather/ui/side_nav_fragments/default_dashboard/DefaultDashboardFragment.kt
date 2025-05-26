@@ -2,6 +2,7 @@ package com.example.qweather.ui.side_nav_fragments.default_dashboard
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,6 @@ class DefaultDashboardFragment : Fragment() {
     private val allFragmentContainerIds = defaultFragmentContainers + qatarOnlyFragmentContainers
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,7 +54,16 @@ class DefaultDashboardFragment : Fragment() {
         view.post {
             applyFragmentContainerVisibility()
         }
+
+        Log.e("@@@@@latitude", "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))}")
+        Log.e(
+            "@@@@@longitude",
+            "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))}"
+        )
+
+
     }
+
 
     private fun setupCitySelection() {
         binding.locationSelector.apply {
@@ -80,18 +89,25 @@ class DefaultDashboardFragment : Fragment() {
             handleCitySelection(
                 bundle.getString("SELECTED_CITY") ?: return@setFragmentResultListener,
                 bundle.getBoolean("IS_QATAR", true),
-                bundle.getDouble("LATITUDE", 0.0),
-                bundle.getDouble("LONGITUDE", 0.0)
+                bundle.getDouble("LATITUDE"),
+                bundle.getDouble("LONGITUDE")
             )
         }
     }
 
-    private fun handleCitySelection(cityName: String, isQatar: Boolean, latitude: Double, longitude: Double) {
+    private fun handleCitySelection(
+        cityName: String,
+        isQatar: Boolean,
+        latitude: Double,
+        longitude: Double
+    ) {
         binding.locationSelector.text = cityName
 
         with(sharedPrefs.edit()) {
             putString("LAST_SELECTED_CITY", cityName)
             putBoolean("LAST_CITY_IS_QATAR", isQatar)
+            putLong("LAST_CITY_LATITUDE", java.lang.Double.doubleToRawLongBits(latitude))
+            putLong("LAST_CITY_LONGITUDE", java.lang.Double.doubleToRawLongBits(longitude))
             apply()
         }
 
@@ -99,38 +115,25 @@ class DefaultDashboardFragment : Fragment() {
         if (currentDestinationId == R.id.defaultDashboardFragment) {
             findNavController().navigate(R.id.action_defaultDashboardFragment_to_defaultDashboardFragment)
         }
-
-        // Optional: Refresh data based on new city
-        refreshCityData(cityName, isQatar)
     }
 
     private fun loadSavedCity() {
-        binding.locationSelector.text = sharedPrefs.getString("LAST_SELECTED_CITY",
-            getString(R.string.select_city))
-    }
-
-
-    private fun refreshCityData(cityName: String, isQatar: Boolean) {
-        // Implement your data refresh logic here
-        // For example, if your child fragments have public methods to refresh data:
-        // for (containerId in allFragmentContainerIds) {
-        //     val fragment = childFragmentManager.findFragmentById(containerId)
-        //     if (fragment is YourRefreshableFragmentInterface) {
-        //         fragment.refreshData(cityName, isQatar)
-        //     }
-        // }
+        binding.locationSelector.text = sharedPrefs.getString(
+            "LAST_SELECTED_CITY",
+            getString(R.string.select_city)
+        )
     }
 
     private fun applyFragmentContainerVisibility() {
         val isQatar = sharedPrefs.getBoolean("LAST_CITY_IS_QATAR", true)
 
-        for (containerId in allFragmentContainerIds) {
-            val containerView = binding.root.findViewById<View>(containerId)
+        for (id in allFragmentContainerIds) {
+            val containerView = binding.root.findViewById<View>(id)
 
-            containerView?.let { // Safely access the view
-                if (defaultFragmentContainers.contains(containerId)) {
+            containerView?.let {
+                if (defaultFragmentContainers.contains(id)) {
                     it.visibility = View.VISIBLE
-                } else if (qatarOnlyFragmentContainers.contains(containerId)) {
+                } else if (qatarOnlyFragmentContainers.contains(id)) {
                     if (isQatar) {
                         it.visibility = View.VISIBLE
                     } else {
@@ -140,4 +143,5 @@ class DefaultDashboardFragment : Fragment() {
             }
         }
     }
+
 }

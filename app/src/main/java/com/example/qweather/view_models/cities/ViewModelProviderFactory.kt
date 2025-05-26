@@ -12,11 +12,7 @@ class CityViewModelFactory(private val repository: CitiesRepository) : ViewModel
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-    companion object {
-        const val REQUEST_KEY = "city_selection_request"
-        const val KEY_CITY_NAME = "selected_city"
-        const val KEY_IS_QATAR = "is_qatar"
-    }
+
 
 
 }

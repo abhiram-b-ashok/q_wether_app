@@ -73,10 +73,3 @@ data class WorldCityData(
 )
 
 
-object MoshiHelper {
-    val moshi: Moshi by lazy {
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-    }
-}
