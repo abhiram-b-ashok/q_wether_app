@@ -1,40 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#23331313"
-        >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_locate"
-                    android:drawableEnd="@drawable/ic_drop"
-                    android:drawablePadding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:id="@+id/location_selector"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/select_location" />
+        android:background="#23331313">
 
-        <androidx.fragment.app.FragmentContainerView
+        <TextView
+            android:id="@+id/location_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_locate"
+            android:drawableEnd="@drawable/ic_drop"
+            android:drawablePadding="10dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/dashboard_fragment_container"
-            app:layout_constraintTop_toBottomOf="@+id/location_selector"/>
+            app:layout_constraintTop_toBottomOf="@+id/location_selector">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:paddingBottom="50dp"
+                android:orientation="vertical">
+
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/current_weather_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.current_weather.CurrentWeatherFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/warning_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.warning.WarningFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_weather_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/forecast_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.forecast.ForecastFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/warning_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/sun_rise_set_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.sun_info.SunInfoFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/forecast_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/moon_phase_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.moon_phase.MoonPhaseFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sun_rise_set_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/tide_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.tides.TidesFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/moon_phase_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/radar_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.rain_radar.RadarFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/weather_map_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.weather_map.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radar_fragment_container" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/seasonal_fragment_container"
+                    android:name="com.example.qweather.ui.dashboard.inner_fragments.seasonal.SeasonalFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weather_map_container" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/add_button"
+                    android:id="@+id/dashboard_settings_button"
+                    android:layout_marginTop="5dp" />
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,61 +1,60 @@
 package com.example.qweather.data.network.api_call
 
 import android.util.Log
-import com.example.qweather.data.models.cities.CitiesApiResponse
-import com.example.qweather.data.models.cities.CitiesByType
+import com.example.qweather.data.models.cities.CitiesResponse
 import com.example.qweather.data.network.NetworkHandler
+import com.example.qweather.data.network.NetworkHandler.okHttpClient
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.data.network.buildUrl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.MediaType.Companion.toMediaType
 
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
-suspend fun fetchCitiesApi(): NetworkResult<CitiesApiResponse> {
-    val url = buildUrl("cities").build().toString()
-    Log.d("CitiesRepository", "Fetching cities from URL: $url")
+suspend fun getCities(): NetworkResult<CitiesResponse> = withContext(Dispatchers.IO) {
+    try {
+        val url = buildUrl("cities").build()
 
-    val request = Request.Builder().url(url).build()
+        // Create JSON request body (if required)
+        val requestBody = JSONObject()
+            .put("key", "value") // Add required parameters
+            .toString()
+            .toRequestBody("application/json".toMediaType())
 
-    return try {
-        val response = NetworkHandler.okHttpClient.newCall(request).execute()
-        Log.d("CitiesRepository", "HTTP Response code: ${response.code}")
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody) // Use POST instead of GET
+            .addHeader("Content-Type", "application/json")
+            .addHeader("Authorization", "Bearer YOUR_TOKEN") // If needed
+            .build()
 
-        if (response.isSuccessful) {
-            val jsonString = response.body?.string()
-            Log.d("CitiesRepository", "Raw JSON response: $jsonString")
+        val response = okHttpClient.newCall(request).execute()
 
-            if (jsonString != null) {
-                val moshi = Moshi.Builder()
-                    .add(KotlinJsonAdapterFactory())
-                    .build()
+        if (!response.isSuccessful) {
+            return@withContext NetworkResult.Error("API failed: ${response.code}")
+        }
 
-                val adapter = moshi.adapter(CitiesApiResponse::class.java)
+        val responseBody = response.body?.string()
+        if (responseBody.isNullOrEmpty()) {
+            return@withContext NetworkResult.Error("Empty response")
+        }
 
-                val citiesApiResponse = adapter.fromJson(jsonString)
+        // Parse with Moshi
+        val moshi = Moshi.Builder().build()
+        val adapter = moshi.adapter(CitiesResponse::class.java)
+        val citiesResponse = adapter.fromJson(responseBody)
 
-                if (citiesApiResponse != null && citiesApiResponse.response.status) {
-                    Log.d("CitiesRepository", "Parsed response is successful")
-                    NetworkResult.Success(citiesApiResponse)
-                } else {
-                    Log.e("CitiesRepository", "API status false or parsing failed")
-                    NetworkResult.Error("API status false or parsing failed")
-                }
-            } else {
-                Log.e("CitiesRepository", "Empty response body")
-                NetworkResult.Error("Empty response body")
-            }
+        if (citiesResponse?.response?.status == true) {
+            NetworkResult.Success(citiesResponse)
         } else {
-            Log.e("CitiesRepository", "HTTP error code: ${response.code}")
-            NetworkResult.Error("HTTP error code: ${response.code}")
+            NetworkResult.Error("API returned false status")
         }
     } catch (e: Exception) {
-        Log.e("CitiesRepository", "Exception during API call", e)
-        NetworkResult.Error("Exception: ${e.message}")
+        NetworkResult.Error("Network error: ${e.message}")
     }
 }
-
-
-

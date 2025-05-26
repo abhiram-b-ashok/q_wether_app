@@ -1,35 +1,45 @@
 package com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.qweather.databinding.FragmentCityBottomSheetBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
-import androidx.core.graphics.toColorInt
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.qweather.R
+import com.example.qweather.data.models.cities.CitiesResponse
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.repository.CitiesRepository
 import com.example.qweather.view_models.cities.CityViewModel
-import com.example.qweather.view_models.cities.ViewModelProviderFactory
+import com.example.qweather.view_models.cities.CityViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
-
-
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 
 class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCityBottomSheetBinding
     private lateinit var qatarAdapter: QatarAdapter
     private lateinit var worldAdapter: WorldAdapter
     private lateinit var viewModel: CityViewModel
+    private val sharedPrefs by lazy {
+        requireContext().getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
+    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentCityBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,97 +47,149 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelProviderFactory(CitiesRepository())
-        viewModel = ViewModelProvider(this, factory)[CityViewModel::class.java]
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
 
-        // Initialize adapters with empty lists (immutable lists are fine here)
-        setupAdapters(emptyList(), emptyList())
+        val repository = CitiesRepository(okHttpClient)
+        viewModel = ViewModelProvider(
+            this,
+            CityViewModelFactory(repository)
+        )[CityViewModel::class.java]
 
-        observeCities()
+        setupAdapters()
+        setupClickListeners()
+        observeViewModel()
 
-        binding.qatarButton.setOnClickListener { selectedType(1) }
-        binding.worldwideButton.setOnClickListener { selectedType(2) }
-        binding.backButton.setOnClickListener { dismiss() }
-
-        // Show Qatar cities by default
-        selectedType(1)
-
-        // Fetch cities data from API
         viewModel.fetchCities()
+        loadSavedCityType()
     }
 
-    private fun observeCities() {
+    private fun setupAdapters() {
+        qatarAdapter = QatarAdapter(mutableListOf()).apply {
+            onItemClickListener = { city ->
+                sendSelection(city.cityName, true, city.longitude, city.latitude)
+                dismiss()
+            }
+        }
+
+        worldAdapter = WorldAdapter(mutableListOf()).apply {
+            onItemClickListener = { city ->
+                sendSelection(city.cityName, false, city.longitude, city.latitude)
+                dismiss()
+            }
+        }
+
+        binding.locationsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = qatarAdapter
+        }
+    }
+
+    private fun setupClickListeners() {
+        binding.apply {
+            qatarButton.setOnClickListener { selectedType(CityType.QATAR) }
+            worldwideButton.setOnClickListener { selectedType(CityType.WORLD) }
+            backButton.setOnClickListener { dismiss() }
+        }
+    }
+
+    private fun observeViewModel() {
         viewModel.citiesLiveData.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is NetworkResult.Loading -> {
-                    // Optionally show a loading indicator here
-                    // e.g. binding.progressBar.visibility = View.VISIBLE
-                }
+                is NetworkResult.Loading -> showLoading(true)
                 is NetworkResult.Success -> {
-                    // Hide loading indicator if any
-                    // e.g. binding.progressBar.visibility = View.GONE
-
-                    val qatarCities = result.data?.response?.result?.cities?.qatar
-                    val worldCities = result.data?.response?.result?.cities?.world
-
-                    val qatarList = qatarCities?.map { QatarCitiesModel(cityName = it.name) } ?: emptyList()
-                    val worldList = worldCities?.map { WorldCitiesModel(cityName = it.name) } ?: emptyList()
-
-                    qatarAdapter.updateList(qatarList)
-                    worldAdapter.updateList(worldList)
+                    showLoading(false)
+                    result.data?.let { response ->
+                        updateAdapters(response)
+                    }
                 }
                 is NetworkResult.Error -> {
-                    // Hide loading indicator if any
-                    // e.g. binding.progressBar.visibility = View.GONE
-
-                    Toast.makeText(requireContext(), result.message ?: "Unknown error", Toast.LENGTH_LONG).show()
+                    showLoading(false)
+                    showError(result.message ?: getString(R.string.error_unknown))
                 }
             }
         }
     }
 
-    private fun setupAdapters(qatarCities: List<QatarCitiesModel>, worldCities: List<WorldCitiesModel>) {
-        qatarAdapter = QatarAdapter(qatarCities.toMutableList())
-        worldAdapter = WorldAdapter(worldCities.toMutableList())
-
-        qatarAdapter.onItemClickListener = {
-            sendResult(it.cityName)
-            dismiss()
+    private fun updateAdapters(response: CitiesResponse) {
+        response.response.result.cities.let { cities ->
+            qatarAdapter.updateList(
+                cities.qatar.map { QatarCitiesModel(it.name, it) }
+            )
+            worldAdapter.updateList(
+                cities.world.map { WorldCitiesModel(it.name, it) }
+            )
         }
-
-        worldAdapter.onItemClickListener = {
-            sendResult(it.cityName)
-            dismiss()
-        }
-
-        // Set Qatar adapter by default
-        binding.locationsRecyclerView.adapter = qatarAdapter
     }
 
-    private fun selectedType(type: Int) {
+    private fun selectedType(type: CityType) {
         binding.apply {
-            if (type == 1) {
-                qatarLabel.setTextColor("#8B1738".toColorInt())
-                worldLabel.setTextColor(Color.WHITE)
-                qatarButtonLayout.setBackgroundColor(Color.WHITE)
-                worldwideButtonLayout.setBackgroundColor("#8B1738".toColorInt())
-                locationsRecyclerView.adapter = qatarAdapter
-                locationType.text = "Qatar - Cities"
-            } else {
-                worldLabel.setTextColor("#8B1738".toColorInt())
-                qatarLabel.setTextColor(Color.WHITE)
-                worldwideButtonLayout.setBackgroundColor(Color.WHITE)
-                qatarButtonLayout.setBackgroundColor("#8B1738".toColorInt())
-                locationsRecyclerView.adapter = worldAdapter
-                locationType.text = "World - Wide Cities"
+            val primaryColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+            when (type) {
+                CityType.QATAR -> {
+                    qatarLabel.setTextColor(primaryColor)
+                    worldLabel.setTextColor(Color.WHITE)
+                    qatarButtonLayout.setBackgroundColor(Color.WHITE)
+                    worldwideButtonLayout.setBackgroundColor(primaryColor)
+                    locationsRecyclerView.adapter = qatarAdapter
+                    locationType.text = getString(R.string.qatar_cities)
+                }
+                CityType.WORLD -> {
+                    worldLabel.setTextColor(primaryColor)
+                    qatarLabel.setTextColor(Color.WHITE)
+                    worldwideButtonLayout.setBackgroundColor(Color.WHITE)
+                    qatarButtonLayout.setBackgroundColor(primaryColor)
+                    locationsRecyclerView.adapter = worldAdapter
+                    locationType.text = getString(R.string.worldwide_cities)
+                }
             }
         }
     }
 
-    private fun sendResult(city: String) {
-        parentFragmentManager.setFragmentResult("citySelectionKey", Bundle().apply {
-            putString("selectedCity", city)
-        })
+    private fun showLoading(show: Boolean) {
+        binding.apply {
+            progressBar.visibility = if (show) View.VISIBLE else View.GONE
+            locationsRecyclerView.visibility = if (show) View.GONE else View.VISIBLE
+        }
     }
+
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun sendSelection(cityName: String, isQatar: Boolean, latitude: Double, longitude: Double) {
+        parentFragmentManager.setFragmentResult(
+            "CITY_SELECTION_RESULT",
+            bundleOf(
+                "SELECTED_CITY" to cityName,
+                "IS_QATAR" to isQatar,
+                "LATITUDE" to latitude,
+                "LONGITUDE" to longitude
+            )
+        )
+        dismiss()
+    }
+
+    private fun loadSavedCityType(){
+        if(!sharedPrefs.getBoolean("LAST_CITY_IS_QATAR", true))
+        {
+            selectedType(CityType.WORLD)
+        }
+        else
+        {
+            selectedType(CityType.QATAR)
+        }
+    }
+
 }
+
+enum class CityType {
+    QATAR, WORLD
+}
+
+
+
 

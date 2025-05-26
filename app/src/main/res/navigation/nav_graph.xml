@@ -9,7 +9,16 @@
         android:id="@+id/defaultDashboardFragment"
         android:name="com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment"
         android:label="fragment_default_dashboard"
-        tools:layout="@layout/fragment_default_dashboard" />
+        tools:layout="@layout/fragment_default_dashboard" >
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_defaultDashboardFragment"
+            app:destination="@id/defaultDashboardFragment"
+            app:popUpTo="@id/defaultDashboardFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"
         android:name="com.example.qweather.ui.side_nav_fragments.weather_news.WeatherNewsFragment"

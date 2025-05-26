@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
     tools:context=".ui.dashboard.inner_fragments.forecast.ForecastFragment">
 

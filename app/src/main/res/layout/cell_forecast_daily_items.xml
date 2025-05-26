@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/day"
-        android:layout_width="150"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
         android:textColor="#2B2758"

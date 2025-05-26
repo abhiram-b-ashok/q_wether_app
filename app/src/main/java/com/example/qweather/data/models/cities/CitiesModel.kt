@@ -1,45 +1,82 @@
 package com.example.qweather.data.models.cities
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-data class CitiesApiResponse(
+@JsonClass(generateAdapter = true)
+data class CitiesResponse(
     @Json(name = "Response")
-    val response: CitiesResponseWrapper
+    val response: ResponseData
 )
-
-
-data class CitiesResponseWrapper(
+@JsonClass(generateAdapter = true)
+data class ResponseData(
+    @Json(name = "status")
     val status: Boolean,
-    val result: CitiesResult
+    @Json(name = "result")
+    val result: ResultData
 )
-
-data class CitiesResult(
-    val cities: CitiesByType
+@JsonClass(generateAdapter = true)
+data class ResultData(
+    @Json(name = "cities")
+    val cities: CitiesData
 )
-
-data class CitiesByType(
-    val qatar: List<CityModel>,
-    val world: List<CityModel>
+@JsonClass(generateAdapter = true)
+data class CitiesData(
+    @Json(name = "qatar")
+    val qatar: List<QatarCityData>,
+    @Json(name = "world")
+    val world: List<WorldCityData>
 )
-
-data class CityModel(
-    val city_id: Int,
+@JsonClass(generateAdapter = true)
+data class QatarCityData(
+    @Json(name = "city_id")
+    val cityId: Int,
+    @Json(name = "name")
     val name: String,
-    val name_ar: String,
+    @Json(name = "country")
     val country: String,
-    val country_name: String,
-    val country_name_ar: String,
+    @Json(name = "country_name")
+    val countryName: String,
+    @Json(name = "country_name_ar")
+    val countryNameAr: String,
+    @Json(name = "latitude")
     val latitude: Double,
+    @Json(name = "longitude")
     val longitude: Double,
-    val utc_offset: String
+    @Json(name = "utc_offset")
+    val utcOffset: String,
+    @Json(name = "name_ar")
+    val nameAr: String
+)
+@JsonClass(generateAdapter = true)
+data class WorldCityData(
+    @Json(name = "city_id")
+    val cityId: Int,
+    @Json(name = "name")
+    val name: String,
+    @Json(name = "country")
+    val country: String,
+    @Json(name = "country_name")
+    val countryName: String,
+    @Json(name = "country_name_ar")
+    val countryNameAr: String,
+    @Json(name = "latitude")
+    val latitude: Double,
+    @Json(name = "longitude")
+    val longitude: Double,
+    @Json(name = "utc_offset")
+    val utcOffset: String,
+    @Json(name = "name_ar")
+    val nameAr: String
 )
 
-data class QatarCitiesModel(
-    val cityName: String,
-    var isSelected: Boolean = false
-)
 
-data class WorldCitiesModel(
-    val cityName: String,
-    var isSelected: Boolean = false
-)
+object MoshiHelper {
+    val moshi: Moshi by lazy {
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
+}

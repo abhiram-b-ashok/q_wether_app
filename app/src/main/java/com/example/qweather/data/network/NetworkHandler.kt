@@ -18,6 +18,7 @@ return HttpUrl
 
 }
 
+
 object NetworkHandler {
     lateinit var okHttpClient: OkHttpClient
     fun init() {
@@ -40,3 +41,4 @@ sealed class NetworkResult<T>(
     class Loading<T> : NetworkResult<T>()
 
 }
+

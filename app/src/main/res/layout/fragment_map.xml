@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
     tools:context=".ui.dashboard.inner_fragments.weather_map.MapFragment">
 
@@ -60,6 +61,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="10dp"
+            android:paddingHorizontal="10dp"
             app:layout_constraintBottom_toBottomOf="@id/web_view_card"
             android:src="@drawable/kallayi"
             android:id="@+id/weather_map_rainbow"/>

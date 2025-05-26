@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
     tools:context=".ui.dashboard.inner_fragments.seasonal.SeasonalFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#0095DA"
-            android:text="Weather Map"
+            android:text="Seasonal"
             android:textSize="30sp"
             android:id="@+id/tide_heading"
             app:layout_constraintStart_toStartOf="parent"

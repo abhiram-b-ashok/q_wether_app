@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="15dp"
+    app:cardBackgroundColor="@color/white"
     app:cardElevation="0dp"
     tools:cardBackgroundColor="@color/white"
     tools:context=".ui.dashboard.inner_fragments.warning.WarningFragment">
@@ -12,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/warning_layout"
         android:layout_width="match_parent"
-        android:padding="15dp"
+        android:padding="10dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -146,7 +147,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-
             android:src="@drawable/warning_visible_lo"
             app:layout_constraintStart_toEndOf="@+id/warning_wind"
             app:layout_constraintEnd_toEndOf="parent"

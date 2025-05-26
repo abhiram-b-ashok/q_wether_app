@@ -23,7 +23,7 @@ class RainRadarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val webView = binding.webView
-        webView.loadUrl("https://www.weatherandradar.in/weather-map/doha/628970?center=25.14,50.4&placemark=25.2855,51.531&zoom=7.43&loop=true&tz=Asia%2FQatar")
+        webView.loadUrl("https://www.rainviewer.com/weather-radar-map-live.html")
 
     }
 
