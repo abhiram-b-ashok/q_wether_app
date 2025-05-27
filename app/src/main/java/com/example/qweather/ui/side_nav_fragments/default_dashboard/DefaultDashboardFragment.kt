@@ -7,14 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentDefaultDashboardBinding
+import com.example.qweather.repository.WeatherRepository
+import com.example.qweather.repository.WeatherRepository.WeatherRepositoryProvider
+import com.example.qweather.repository.WeatherRepository.WeatherRepositoryProvider.repository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
+import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
+import com.example.qweather.view_models.city_details_weather_model.WeatherViewModelFactory
 
 
 class DefaultDashboardFragment : Fragment() {
     private lateinit var binding: FragmentDefaultDashboardBinding
+    val weatherViewModel = ViewModelProvider(this, WeatherViewModelFactory(repository))[WeatherViewModel::class.java]
+
+
+
     private val sharedPrefs by lazy {
         requireContext().getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
     }
@@ -55,11 +66,17 @@ class DefaultDashboardFragment : Fragment() {
             applyFragmentContainerVisibility()
         }
 
+        val lat = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))
+        val lon = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))
+        val isQatar = sharedPrefs.getBoolean("LAST_CITY_IS_QATAR", true)
+
+        weatherViewModel.loadWeather(lat, lon, isQatar)
+
         Log.e("@@@@@latitude", "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))}")
         Log.e(
             "@@@@@longitude",
-            "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))}"
-        )
+            "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))}")
+        Log.d("WeatherVM", "DefaultDashboard VM hash: ${weatherViewModel.hashCode()}")
 
 
     }
@@ -115,6 +132,8 @@ class DefaultDashboardFragment : Fragment() {
         if (currentDestinationId == R.id.defaultDashboardFragment) {
             findNavController().navigate(R.id.action_defaultDashboardFragment_to_defaultDashboardFragment)
         }
+        weatherViewModel.loadWeather(latitude, longitude, isQatar)
+
     }
 
     private fun loadSavedCity() {
