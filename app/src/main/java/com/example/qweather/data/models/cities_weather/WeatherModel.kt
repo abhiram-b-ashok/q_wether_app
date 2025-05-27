@@ -23,6 +23,8 @@ data class CurrentWeather(
     val sunset: Long,
     val feels_like: Double,
     val pressure: Int,
+    val temperature_min: Double,
+    val temperature_max: Double,
     val pressure_unit: String,
     val rain: Double,
     val rain_unit: String,

@@ -71,7 +71,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private fun setupAdapters() {
         qatarAdapter = QatarAdapter(mutableListOf()).apply {
             onItemClickListener = { city ->
-                sendSelection(city.cityName, true, city.longitude, city.latitude)
+                sendSelection(city.cityName, true, city.longitude, city.latitude, city.cityId)
                 Log.e("@@@@@longitude,latitude", "${city.longitude},${city.latitude}")
                 dismiss()
             }
@@ -79,7 +79,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
 
         worldAdapter = WorldAdapter(mutableListOf()).apply {
             onItemClickListener = { city ->
-                sendSelection(city.cityName, false, city.longitude, city.latitude)
+                sendSelection(city.cityName, false, city.longitude, city.latitude, city.cityId)
                 Log.e("@@@@@longitude,latitude", "${city.longitude},${city.latitude}")
                 dismiss()
             }
@@ -120,10 +120,10 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private fun updateAdapters(response: CitiesResponse) {
         response.response.result.cities.let { cities ->
             qatarAdapter.updateList(
-                cities.qatar.map { QatarCitiesModel(it.name, it, it.longitude, it.latitude) }
+                cities.qatar.map { QatarCitiesModel(it.name, it, it.longitude, it.latitude, it.cityId) }
             )
             worldAdapter.updateList(
-                cities.world.map { WorldCitiesModel(it.name, it, it.longitude, it.latitude) }
+                cities.world.map { WorldCitiesModel(it.name, it, it.longitude, it.latitude, it.cityId) }
             )
         }
     }
@@ -163,14 +163,15 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun sendSelection(cityName: String, isQatar: Boolean, latitude: Double, longitude: Double) {
+    private fun sendSelection(cityName: String, isQatar: Boolean, latitude: Double, longitude: Double, cityId:Int) {
         parentFragmentManager.setFragmentResult(
             "CITY_SELECTION_RESULT",
             bundleOf(
                 "SELECTED_CITY" to cityName,
                 "IS_QATAR" to isQatar,
                 "LATITUDE" to latitude,
-                "LONGITUDE" to longitude
+                "LONGITUDE" to longitude,
+                "CITY_ID" to cityId
             )
         )
         dismiss()

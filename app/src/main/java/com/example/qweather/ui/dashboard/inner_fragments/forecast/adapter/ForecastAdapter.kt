@@ -1,13 +1,17 @@
 package com.example.qweather.ui.dashboard.inner_fragments.forecast.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qweather.data.models.forecast.ForecastModel
+import com.example.qweather.data.models.cities_weather.DailyWeather
 import com.example.qweather.databinding.CellForecastDailyItemsBinding
-import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
-class ForecastAdapter(private val list: List<ForecastModel>) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(){
+class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         val binding = CellForecastDailyItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ForecastViewHolder(binding)
@@ -23,14 +27,32 @@ class ForecastAdapter(private val list: List<ForecastModel>) : RecyclerView.Adap
     }
 
     class ForecastViewHolder(private val binding: CellForecastDailyItemsBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ForecastModel) {
+        fun bind(item: DailyWeather) {
 
 
-            binding.day.text =item.date
+            val formattedDisplayDate = try {
+                val dateStringFromApi = item.date
+                Log.d("ForecastAdapter", "Attempting to parse date: '$dateStringFromApi'")
+
+                val inputFormatter = DateTimeFormatter.ofPattern("E, MMM d, yyyy h:mm a", Locale.ENGLISH)
+                val localDateTime = LocalDateTime.parse(dateStringFromApi, inputFormatter)
+                val date = localDateTime.toLocalDate()
+                val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                val dayOfMonth = date.dayOfMonth
+                val year = date.year
+
+                "$dayOfWeek, $dayOfMonth, $year"
+
+            } catch (e: Exception) {
+                Log.e("ForecastAdapter", "Error parsing date: '${item.date}'", e)
+                item.date
+            }
+            binding.day.text =formattedDisplayDate
             binding.temperature.text = item.temperature.toString()
             binding.temperatureUnit.text = item.temperature_unit
-            binding.forecastIcon.setImageResource(item.icon)
-            binding.condition.text = item.temperature_min.toString()
+            binding.condition.text = item.weather_type
+            binding.minMaxTemp.text = "${item.temperature_min}/${item.temperature_max}${item.temperature_unit}"
+
         }
 
 

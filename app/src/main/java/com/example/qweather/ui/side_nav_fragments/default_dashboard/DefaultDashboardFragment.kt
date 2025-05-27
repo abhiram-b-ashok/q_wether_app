@@ -1,19 +1,17 @@
 package com.example.qweather.ui.side_nav_fragments.default_dashboard
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentDefaultDashboardBinding
-import com.example.qweather.repository.WeatherRepository
-import com.example.qweather.repository.WeatherRepository.WeatherRepositoryProvider
 import com.example.qweather.repository.WeatherRepository.WeatherRepositoryProvider.repository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
 import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
@@ -22,13 +20,10 @@ import com.example.qweather.view_models.city_details_weather_model.WeatherViewMo
 
 class DefaultDashboardFragment : Fragment() {
     private lateinit var binding: FragmentDefaultDashboardBinding
-    val weatherViewModel = ViewModelProvider(this, WeatherViewModelFactory(repository))[WeatherViewModel::class.java]
+    internal lateinit var weatherViewModel: WeatherViewModel
 
 
-
-    private val sharedPrefs by lazy {
-        requireContext().getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
-    }
+    private lateinit var sharedPrefs: SharedPreferences
     private val defaultFragmentContainers = setOf(
         R.id.current_weather_fragment_container,
         R.id.forecast_fragment_container,
@@ -41,6 +36,7 @@ class DefaultDashboardFragment : Fragment() {
         R.id.warning_fragment_container,
         R.id.seasonal_fragment_container,
         R.id.radar_fragment_container,
+        R.id.marine_forecast_fragment_container
     )
     private val allFragmentContainerIds = defaultFragmentContainers + qatarOnlyFragmentContainers
 
@@ -56,6 +52,10 @@ class DefaultDashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        weatherViewModel = ViewModelProvider(
+            this,
+            WeatherViewModelFactory(repository)
+        )[WeatherViewModel::class.java]
         setupCitySelection()
         loadSavedCity()
         binding.dashboardSettingsButton.setOnClickListener {
@@ -69,16 +69,27 @@ class DefaultDashboardFragment : Fragment() {
         val lat = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))
         val lon = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))
         val isQatar = sharedPrefs.getBoolean("LAST_CITY_IS_QATAR", true)
+        val cityId = sharedPrefs.getInt("LAST_CITY_ID", 0)
 
         weatherViewModel.loadWeather(lat, lon, isQatar)
+
 
         Log.e("@@@@@latitude", "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))}")
         Log.e(
             "@@@@@longitude",
-            "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))}")
-        Log.d("WeatherVM", "DefaultDashboard VM hash: ${weatherViewModel.hashCode()}")
+            "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))}"
+        )
+        Log.d("@@@@CityId", "${sharedPrefs.getInt("LAST_CITY_ID", 0)}")
 
 
+
+
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
     }
 
 
@@ -107,7 +118,8 @@ class DefaultDashboardFragment : Fragment() {
                 bundle.getString("SELECTED_CITY") ?: return@setFragmentResultListener,
                 bundle.getBoolean("IS_QATAR", true),
                 bundle.getDouble("LATITUDE"),
-                bundle.getDouble("LONGITUDE")
+                bundle.getDouble("LONGITUDE"),
+                bundle.getInt("CITY_ID"),
             )
         }
     }
@@ -116,7 +128,8 @@ class DefaultDashboardFragment : Fragment() {
         cityName: String,
         isQatar: Boolean,
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        cityId: Int
     ) {
         binding.locationSelector.text = cityName
 
@@ -125,6 +138,7 @@ class DefaultDashboardFragment : Fragment() {
             putBoolean("LAST_CITY_IS_QATAR", isQatar)
             putLong("LAST_CITY_LATITUDE", java.lang.Double.doubleToRawLongBits(latitude))
             putLong("LAST_CITY_LONGITUDE", java.lang.Double.doubleToRawLongBits(longitude))
+            putInt("LAST_CITY_ID", cityId)
             apply()
         }
 
@@ -133,6 +147,7 @@ class DefaultDashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_defaultDashboardFragment_to_defaultDashboardFragment)
         }
         weatherViewModel.loadWeather(latitude, longitude, isQatar)
+
 
     }
 
@@ -162,5 +177,6 @@ class DefaultDashboardFragment : Fragment() {
             }
         }
     }
+
 
 }

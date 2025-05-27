@@ -7,5 +7,6 @@ data class WorldCitiesModel(
     val originalData: WorldCityData? = null,
     val longitude: Double,
     val latitude: Double,
+    val cityId: Int,
     var isSelected: Boolean = false
 )

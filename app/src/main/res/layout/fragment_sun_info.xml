@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sunrise_time"
-            android:text="4:53 am"
+            tools:text="4:53 am"
             android:textSize="15sp"
             android:textColor="#2B2758"
             android:fontFamily="@font/poppins_regular"

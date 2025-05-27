@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:paddingTop="50dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
@@ -49,9 +49,10 @@
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city_time"
-            tools:src="@drawable/cloud_group" />
+            android:src="@drawable/cloud_group" />
 
         <TextView
             android:id="@+id/city_temperature"
@@ -224,7 +225,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/humi_lo"
                 app:layout_constraintStart_toStartOf="@+id/humi_lo"
                 tools:text="3"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="#08043D"
                 android:id="@+id/humi_percent"
                 app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
@@ -236,7 +237,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
                 android:text="%"
                 android:textColor="#08043D"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:id="@+id/humi_unit"
                 app:layout_constraintTop_toBottomOf="@+id/humi_label" />
 
             <ImageView
@@ -251,9 +253,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="NE"
-                android:textSize="20sp"
-                android:layout_marginStart="20sp"
+                android:textSize="18sp"
+                android:layout_marginStart="25sp"
                 android:textColor="#08043D"
+                android:id="@+id/wind_direction"
                 app:layout_constraintStart_toStartOf="@+id/wind_lo"
                 app:layout_constraintEnd_toEndOf="@id/wind_lo"
                 app:layout_constraintTop_toTopOf="@id/wind_lo"
@@ -274,9 +277,9 @@
                 app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
                 app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
                 tools:text = "23.2"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="#08043D"
-                android:id="@+id/wind_percent"
+                android:id="@+id/wind_speed"
                 android:layout_marginStart="17sp"
                 app:layout_constraintTop_toTopOf="@+id/swoosh_lo"
                 app:layout_constraintBottom_toTopOf="@id/wind_speed_unit" />
@@ -290,7 +293,7 @@
                 tools:text ="km/h"
                 android:layout_marginStart="17sp"
                 app:layout_constraintBottom_toBottomOf="@+id/swoosh_lo"
-                app:layout_constraintTop_toBottomOf="@+id/wind_percent"/>
+                app:layout_constraintTop_toBottomOf="@+id/wind_speed"/>
 
 
 

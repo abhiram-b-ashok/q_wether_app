@@ -152,5 +152,8 @@ class DashBoardFragment : Fragment() {
             true
         } else super.onOptionsItemSelected(item)
     }
+    companion object{
+
+    }
 
 }

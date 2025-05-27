@@ -7,5 +7,6 @@ data class QatarCitiesModel(
     val originalData: QatarCityData? = null,
     val longitude: Double,
     val latitude: Double,
+    val cityId: Int,
     var isSelectedItem: Boolean = false
 )

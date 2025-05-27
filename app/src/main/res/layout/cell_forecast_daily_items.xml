@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
+    android:paddingHorizontal="10dp"
+    android:paddingTop="10dp"
     android:layout_height="wrap_content">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
         android:textColor="#2B2758"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/temperature"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,13 +56,15 @@
         tools:src="@drawable/forecast_ic" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textSize="18sp"
+        android:gravity="center"
         android:id="@+id/condition"
-        android:layout_marginStart="10dp"
+        android:maxLines="2"
+        android:layout_marginStart="-10dp"
         app:layout_constraintBottom_toBottomOf="@+id/temperature"
         app:layout_constraintStart_toEndOf="@id/forecast_icon"
         app:layout_constraintTop_toTopOf="@+id/day"
@@ -76,7 +79,7 @@
         app:layout_constraintTop_toTopOf="@+id/day"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         tools:text="200/300" />
 
     <TextView
@@ -90,6 +93,11 @@
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/day"
         android:textSize="20sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/grey"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,10 @@
 package com.example.qweather.repository
 
 import android.util.Log
-import com.example.qweather.data.models.cities_weather.WeatherResponse
 import com.example.qweather.data.models.cities_weather.WeatherResponseWrapper
 import com.example.qweather.data.models.cities_weather.WeatherResult
-import com.example.qweather.data.network.ApiResponse
 import com.example.qweather.data.network.NetworkHandler
 import com.example.qweather.data.network.NetworkResult
-import com.example.qweather.data.network.api_call.getCityDetailsApi
 import com.example.qweather.data.network.buildUrl
 import com.google.gson.Gson
 import okhttp3.Call
@@ -15,12 +12,9 @@ import okhttp3.Callback
 import okhttp3.FormBody
 import okhttp3.Request
 import okhttp3.Response
-import org.json.JSONObject
 import java.io.IOException
 
 class WeatherRepository {
-
-
 
     fun fetchWeatherData(
         lat: Double,
@@ -69,16 +63,6 @@ class WeatherRepository {
             }
         })
     }
-
-
-
-
-    private fun parseWeatherJson(json: String): WeatherResult {
-        val gson = Gson()
-        val wrapper = gson.fromJson(json, WeatherResponseWrapper::class.java)
-        return wrapper.response.result
-    }
-
 
     object WeatherRepositoryProvider {
         val repository by lazy { WeatherRepository() }
