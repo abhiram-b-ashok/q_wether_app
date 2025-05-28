@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentDefaultDashboardBinding
 import com.example.qweather.repository.WeatherRepository.WeatherRepositoryProvider.repository
+import com.example.qweather.ui.dashboard.inner_fragments.moon_phase.MoonPhaseFragment
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
 import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
 import com.example.qweather.view_models.city_details_weather_model.WeatherViewModelFactory
@@ -72,6 +73,15 @@ class DefaultDashboardFragment : Fragment() {
         val cityId = sharedPrefs.getInt("LAST_CITY_ID", 0)
 
         weatherViewModel.loadWeather(lat, lon, isQatar)
+        val fragment = MoonPhaseFragment().apply {
+            arguments = Bundle().apply {
+                putInt("CITY_ID", cityId)
+            }
+        }
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.moon_phase_fragment_container, fragment)
+            .commit()
+
 
 
         Log.e("@@@@@latitude", "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))}")
