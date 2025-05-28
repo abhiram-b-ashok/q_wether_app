@@ -9,19 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.qweather.R
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.databinding.FragmentMoonPhaseBinding
 import com.example.qweather.repository.MoonPhaseRepository
 import com.example.qweather.view_models.moon_phase.MoonPhaseViewModel
 import com.example.qweather.view_models.moon_phase.MoonPhaseViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MoonPhaseFragment : Fragment() {
 
     private lateinit var viewModel: MoonPhaseViewModel
     private lateinit var binding: FragmentMoonPhaseBinding
     private lateinit var sharedPrefs: SharedPreferences
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
@@ -57,11 +58,11 @@ class MoonPhaseFragment : Fragment() {
                 }
                 is NetworkResult.Success -> {
                    binding.apply {
-                       moonSetTime.text = result.data?.moonData[0]?.moonset.toString()
-                       moonRiseTime.text = result.data?.moonData[0]?.moonrise.toString()
-                       fullMoonDate.text = result.data?.moonData[0]?.date.toString()
-                       newMoonDate.text = result.data?.moonData[0]?.date.toString()
-
+                       moonSetTime.text = convertTimestampToTime(result.data?.moonData[0]?.moonset.toString().toLong())
+                       moonRiseTime.text = convertTimestampToTime(result.data?.moonData[0]?.moonrise.toString().toLong())
+                       newMoonDate.text = result.data?.moonPhases?.currentNewMoon
+                       moonType.text = result.data?.moonData[0]?.phaseName
+                       fullMoonDate.text = result.data?.moonPhases?.currentFullMoon
 
                    }
                 }
@@ -71,4 +72,12 @@ class MoonPhaseFragment : Fragment() {
             }
         }
     }
+    private fun convertTimestampToTime(timestamp: Long, pattern: String =  "HH:mm a"): String {
+        val date = Date(timestamp *1000L)
+        val format = SimpleDateFormat(pattern, Locale.ENGLISH)
+        return format.format(date)
+    }
+
+
+
 }

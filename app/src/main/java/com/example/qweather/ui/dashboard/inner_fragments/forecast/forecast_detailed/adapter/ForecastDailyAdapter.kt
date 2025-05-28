@@ -1,4 +1,4 @@
-package com.example.qweather.ui.dashboard.inner_fragments.forecast.adapter
+package com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,25 +12,23 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
-class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
+class ForecastDailyAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapter<ForecastDailyAdapter.ForecastDailyViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastDailyViewHolder {
         val binding = CellForecastDailyItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ForecastViewHolder(binding)
+        return ForecastDailyViewHolder(binding)
 
     }
 
-    override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        holder.bind(list[position], position)
+    override fun onBindViewHolder(holder: ForecastDailyViewHolder, position: Int) {
+        holder.bind(list[position],position)
     }
 
     override fun getItemCount(): Int {
-        return 7
+        return list.size
     }
 
-    class ForecastViewHolder(private val binding: CellForecastDailyItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ForecastDailyViewHolder(private val binding: CellForecastDailyItemsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DailyWeather, position: Int) {
-
-
             val formattedDisplayDate = try {
                 val dateStringFromApi = item.date
                 Log.d("ForecastAdapter", "Attempting to parse date: '$dateStringFromApi'")
@@ -48,18 +46,19 @@ class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapt
                 Log.e("ForecastAdapter", "Error parsing date: '${item.date}'", e)
                 item.date
             }
-            binding.day.text =formattedDisplayDate
-            binding.temperature.text = item.temperature.toString()
-            binding.temperatureUnit.text = item.temperature_unit
-            binding.condition.text = item.weather_type
-            binding.minMaxTemp.text = "${item.temperature_min}/${item.temperature_max}${item.temperature_unit}"
-            if (position%2!=0) {
-                binding.layout.setBackgroundResource(R.color.lightYellow)
+            binding.apply {
+                day.text =formattedDisplayDate
+                temperature.text = item.temperature.toString()
+                temperatureUnit.text = item.temperature_unit
+                condition.text = item.weather_type
+                minMaxTemp.text = "${item.temperature_min}/${item.temperature_max}${item.temperature_unit}"
+                if (position%2!=0) {
+                    layout.setBackgroundResource(R.color.lightYellow)
+                }
 
             }
 
         }
-
 
     }
 

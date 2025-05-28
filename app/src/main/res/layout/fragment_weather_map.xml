@@ -15,9 +15,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
         android:text="Weather Map"
-        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        android:fontFamily="@font/poppins_bold"
         android:textColor="@color/white"
         android:id="@+id/page_heading"
         app:layout_constraintTop_toTopOf="parent"

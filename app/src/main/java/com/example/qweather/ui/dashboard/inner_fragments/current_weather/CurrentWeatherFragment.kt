@@ -36,12 +36,10 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("WeatherVM", "CurrentWeather VM hash: ${weatherViewModel.hashCode()}")
 
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
             result?.currentWeather?.let { current ->
                 Log.d("WeatherVM", "Current Weather: $current")
-
 
                     binding.apply {
                         cityName.text = sharedPrefs.getString("LAST_SELECTED_CITY", "Qatar")
@@ -57,6 +55,18 @@ class CurrentWeatherFragment : Fragment() {
                         temperatureUnit.text = current.temperature_unit.toString()
                         tempUp.text = current.temperature_max.toString()
                         tempDown.text = current.temperature_min.toString()
+                        with(sharedPrefs.edit()){
+                            putLong("LAST_TEMPERATURE",java.lang.Double.doubleToRawLongBits(current.temperature.toDouble()))
+                            putLong("LAST_TEMP_MIN",java.lang.Double.doubleToRawLongBits(current.temperature_min.toDouble()))
+                            putLong("LAST_TEMP_MAX",java.lang.Double.doubleToRawLongBits(current.temperature_max.toDouble()))
+                            putString("LAST_WEATHER_TYPE", current.weather_type)
+                            putLong("LAST_FEELS_LIKE", java.lang.Double.doubleToRawLongBits(current.feels_like.toDouble()))
+                            putLong("LAST_HUMIDITY", java.lang.Double.doubleToRawLongBits(current.humidity.toDouble()))
+                            putLong("LAST_WIND_SPEED", java.lang.Double.doubleToRawLongBits(current.wind_power.toDouble()))
+                            putString("LAST_DATE", convertTimestampToTime(timeStamp))
+
+                            apply()
+                        }
 
                         if (current.weather_type == "Clear") {
                             currentWeatherLayout.setBackgroundResource(R.drawable.clear_sky_day)

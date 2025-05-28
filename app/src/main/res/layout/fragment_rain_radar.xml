@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="Rain Radar"
-        android:layout_marginTop="20dp"
         android:id="@+id/page_heading"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"

@@ -64,7 +64,7 @@
             android:id="@+id/moon_set_label"
             app:layout_constraintTop_toBottomOf="@+id/moon_set_time"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text = "Moonset"
+            android:text = "Moonset"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"/>
@@ -74,7 +74,7 @@
             android:id="@+id/moon_rise_label"
             app:layout_constraintTop_toBottomOf="@+id/moon_rise_time"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text = "Moonrise"
+            android:text = "Moonrise"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"/>
@@ -98,7 +98,7 @@
             android:id="@+id/full_moon_label"
             app:layout_constraintTop_toBottomOf="@+id/line1"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text = "Full Moon"
+            android:text = "Full Moon"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"/>
@@ -108,7 +108,7 @@
             android:id="@+id/new_moon_label"
             app:layout_constraintTop_toBottomOf="@+id/line2"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text = "New Moon"
+            android:text = "New Moon"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"/>

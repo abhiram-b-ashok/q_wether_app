@@ -58,12 +58,12 @@
             android:layout_height="wrap_content"
             android:textColor="#8A1538"
             android:id="@+id/temp"
-            tools:text = "34°C"
+            tools:text = "34.45°C"
             app:layout_constraintTop_toBottomOf="@+id/date"
             app:layout_constraintStart_toStartOf="@+id/layer2"
             app:layout_constraintEnd_toEndOf="@+id/layer2"
             android:layout_marginStart="30dp"
-            android:textSize="70sp"
+            android:textSize="50sp"
             />
         <TextView
             android:layout_width="0dp"

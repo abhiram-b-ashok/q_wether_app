@@ -31,5 +31,5 @@ data class MoonDayData(
     val moonset: Long,
     @SerializedName("moon_phase") val moonPhase: Double,
     @SerializedName("phase_name") val phaseName: String,
-    val date: String
+
 )

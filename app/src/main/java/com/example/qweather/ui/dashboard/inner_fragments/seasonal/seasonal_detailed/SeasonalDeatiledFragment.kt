@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentSeasonalDeatiledBinding
 
 
 class SeasonalDeatiledFragment : Fragment() {
     private lateinit var binding: FragmentSeasonalDeatiledBinding
+    private val args: SeasonalDeatiledFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -23,6 +25,13 @@ class SeasonalDeatiledFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            dateValue.text = args.date
+            daysValue.text = args.days
+            signValue.text = args.sign
+            descriptionValue.text = args.description
+            seasonName.text = args.season
+        }
 
     }
 

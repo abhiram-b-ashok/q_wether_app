@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentForecastBinding
 import com.example.qweather.ui.dashboard.inner_fragments.forecast.adapter.ForecastAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
+import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
 import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
 
 
@@ -31,6 +33,7 @@ class ForecastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewDetailsButton.setOnClickListener {
+            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToForecastDetailedFragment())
 
         }
 
@@ -39,6 +42,7 @@ class ForecastFragment : Fragment() {
                 binding.dailyRecyclerView.adapter = ForecastAdapter(forecast)
             }
         }
+
 
     }
 

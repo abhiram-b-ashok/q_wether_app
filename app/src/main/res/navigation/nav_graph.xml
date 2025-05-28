@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_defaultDashboardFragment_to_seasonalDeatiledFragment"
             app:destination="@id/seasonalDeatiledFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_forecastDetailedFragment"
+            app:destination="@id/forecastDetailedFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"
@@ -81,6 +84,26 @@
         android:id="@+id/seasonalDeatiledFragment"
         android:name="com.example.qweather.ui.dashboard.inner_fragments.seasonal.seasonal_detailed.SeasonalDeatiledFragment"
         android:label="fragment_seasonal_deatiled"
-        tools:layout="@layout/fragment_seasonal_deatiled" />
+        tools:layout="@layout/fragment_seasonal_deatiled" >
+        <argument
+            android:name="season"
+            app:argType= "string" />
+        <argument
+            android:name="date"
+            app:argType= "string" />
+        <argument
+            android:name="days"
+            app:argType= "string" />
+        <argument
+            android:name="sign"
+            app:argType= "string" />
+        <argument android:name="description"
+            app:argType= "string" />
+    </fragment>
+    <fragment
+        android:id="@+id/forecastDetailedFragment"
+        android:name="com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.ForecastDetailedFragment"
+        android:label="ForecastDetailedFragment"
+        tools:layout="@layout/fragment_forecast_detailed" />
 
 </navigation>
