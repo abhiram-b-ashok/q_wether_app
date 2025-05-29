@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.qweather.data.network.NetworkResult
+import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.databinding.FragmentNotificationsBinding
 import com.example.qweather.repository.NotificationRepository
 import com.example.qweather.ui.side_nav_fragments.notifications_center.adapter.NotificationAdapter
@@ -23,6 +23,7 @@ class NotificationsFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationsBinding
     private lateinit var notificationAdapter: NotificationAdapter
+    private var page =1
     private val viewModel: NotificationViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -50,17 +51,27 @@ class NotificationsFragment : Fragment() {
 
         notificationAdapter = NotificationAdapter(emptyList())
         binding.notificationsRecycler.apply {
+
             layoutManager = LinearLayoutManager(requireContext())
             adapter = notificationAdapter
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                    if (dy>0)
+                    page++
+                }
+
+            })
         }
-
-
 
         viewModel.notificationList.observe(viewLifecycleOwner) { notificationList ->
             notificationAdapter.updateData(notificationList)
 
         }
 
-        viewModel.getNotifications()
+        viewModel.getNotifications(page)
     }
 }
+
+

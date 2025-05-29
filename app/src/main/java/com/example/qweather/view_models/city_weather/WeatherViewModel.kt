@@ -1,4 +1,4 @@
-package com.example.qweather.view_models.city_details_weather_model
+package com.example.qweather.view_models.city_weather
 
 import android.util.Log
 import androidx.lifecycle.LiveData

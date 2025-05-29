@@ -7,17 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.qweather.repository.NotificationRepository
 import com.example.qweather.ui.side_nav_fragments.notifications_center.adapter.Notification
-import com.example.qweather.ui.side_nav_fragments.notifications_center.adapter.NotificationModel
 import kotlinx.coroutines.launch
 
 class NotificationViewModel(private val notificationRepository: NotificationRepository) : ViewModel() {
     private val _notificationList = MutableLiveData<List<Notification>>()
     val notificationList: LiveData<List<Notification>> = _notificationList
 
-    fun getNotifications() {
+    fun getNotifications(page:Int) {
         viewModelScope.launch {
             try {
-                val data = notificationRepository.getNotifications()
+                val data = notificationRepository.getNotifications(page)
                 _notificationList.value = data
             } catch (e: Exception) {
                 Log.e("NotificationViewModel", "Error: ${e.message}")
@@ -25,4 +24,5 @@ class NotificationViewModel(private val notificationRepository: NotificationRepo
         }
     }
 }
+
 

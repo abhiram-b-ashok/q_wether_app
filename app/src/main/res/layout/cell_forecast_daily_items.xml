@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingHorizontal="10dp"
     android:id="@+id/layout"
     android:paddingTop="10dp"
     android:layout_height="wrap_content">
@@ -14,12 +13,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
         android:textColor="#2B2758"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toTopOf="@+id/temperature"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:maxLines="2"
-        tools:text="Mon, May 26, 2025 11:00 AM" />
+        tools:text="Mon, May 26, 2025" />
 
     <TextView
         android:id="@+id/temperature"
@@ -28,6 +28,7 @@
         android:fontFamily="@font/poppins_medium"
         android:textColor="#8D1B3D"
         android:textSize="25sp"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/day"
@@ -88,17 +89,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="K"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/temperature"
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/day"
         android:textSize="20sp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/grey"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:background="@color/grey"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

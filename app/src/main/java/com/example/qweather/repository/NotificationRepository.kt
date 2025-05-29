@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 class NotificationRepository {
 
 suspend fun getNotifications(
-    page: Int = 1,
+    page: Int,
     userId: String = "109740",
     lang: String = "en"
 ): List<Notification> = withContext(Dispatchers.IO) {

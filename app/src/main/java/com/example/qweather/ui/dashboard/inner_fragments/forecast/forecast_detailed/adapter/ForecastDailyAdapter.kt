@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.R
 import com.example.qweather.data.models.cities_weather.DailyWeather
+import com.example.qweather.data.models.forecast.DailyWeatherModel
 import com.example.qweather.databinding.CellForecastDailyItemsBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -16,7 +17,6 @@ class ForecastDailyAdapter(private val list: List<DailyWeather>) : RecyclerView.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastDailyViewHolder {
         val binding = CellForecastDailyItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ForecastDailyViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: ForecastDailyViewHolder, position: Int) {
@@ -38,9 +38,10 @@ class ForecastDailyAdapter(private val list: List<DailyWeather>) : RecyclerView.
                 val date = localDateTime.toLocalDate()
                 val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
                 val dayOfMonth = date.dayOfMonth
+                val month = date.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
                 val year = date.year
 
-                "$dayOfWeek, $dayOfMonth, $year"
+                "$dayOfWeek,$month $dayOfMonth, $year"
 
             } catch (e: Exception) {
                 Log.e("ForecastAdapter", "Error parsing date: '${item.date}'", e)

@@ -1,4 +1,4 @@
-package com.example.qweather.view_models.city_details_weather_model
+package com.example.qweather.view_models.city_weather
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

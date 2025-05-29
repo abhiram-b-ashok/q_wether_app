@@ -25,7 +25,8 @@ data class Dates(
 }
 
 data class NotificationApiResponse(
-    val response: ResponseData
+    val response: ResponseData,
+
 )
 
 data class ResponseData(

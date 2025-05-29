@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.qweather.R
 import com.example.qweather.databinding.FragmentSunInfoBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
-import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
+import com.example.qweather.view_models.city_weather.WeatherViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

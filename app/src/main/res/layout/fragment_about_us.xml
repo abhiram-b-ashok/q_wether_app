@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.side_nav_fragments.disclaimer.DisclaimerFragment">
 
-
             <TextView
                 android:id="@+id/header_label"
                 android:layout_width="wrap_content"

@@ -31,7 +31,7 @@ class ContactUsFragment : Fragment() {
 
            contactSubmitButton.setOnClickListener {
                 if (validate()) {
-
+//api
                    contactSubmitButton.isEnabled = false
                     contactSubmitButton.text = "Submitted"
                 }
@@ -78,12 +78,9 @@ class ContactUsFragment : Fragment() {
                     "https://www.linkedin.com/company/qcaa".toUri())
                 startActivity(browserIntent)
             }
-
-
         }
-
-
     }
+
     private fun validate(): Boolean{
         var isValid = true
         binding.apply {
@@ -104,7 +101,5 @@ class ContactUsFragment : Fragment() {
         }
         return isValid
     }
-
-
 
 }

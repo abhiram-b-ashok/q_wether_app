@@ -2,10 +2,6 @@ package com.example.qweather.data.models.cities_weather
 
 import com.google.gson.annotations.SerializedName
 
-data class WeatherResponse(
-    @SerializedName("current_weather") val currentWeather: CurrentWeather,
-    @SerializedName("daily_forecast") val dailyForecast: List<DailyWeather>
-)
 
 data class CurrentWeather(
     val time: Long,
@@ -51,17 +47,7 @@ data class DailyWeather(
     val rain_unit: String,
     val humidity_unit: String
 )
-data class HourlyWeather(
-    val time: String,
-    val temperature: Double,
-    val temperature_unit: String,
-    val weather_type: String,
-    val humidity: Int,
-    val humidity_unit: String,
-    val wind_power: Double,
-    val wind_power_unit: String,
-    val wind_direction: Int,
-)
+
 
 data class WeatherResponseWrapper(
     @SerializedName("Response") val response: WeatherResponseContent
@@ -76,5 +62,24 @@ data class WeatherResult(
     @SerializedName("current_weather") val currentWeather: CurrentWeather?,
     @SerializedName("daily_weather") val dailyForecast: List<DailyWeather>?,
     @SerializedName("hourly_data") val hourlyForecast: List<HourlyWeather>?
+)
+data class HourlyWeather(
+    val date: String,
+    @SerializedName("day_details") val dayDetails: List<HourlyForecast>
+)
+
+data class HourlyForecast(
+    val time: String,
+    val temperature: Double,
+    val temperature_unit: String,
+    val weather_type: String,
+    val humidity: Int,
+    val humidity_unit: String,
+    val wind_power: Double,
+    val wind_direction_text: String,
+    val wind_power_unit: String,
+    val wind_direction: Int,
+    val visibility: Int,
+    val visibility_unit: String
 )
 

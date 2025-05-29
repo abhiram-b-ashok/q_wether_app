@@ -1,17 +1,17 @@
 package com.example.qweather.ui.dashboard.inner_fragments.forecast
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.qweather.R
 import com.example.qweather.databinding.FragmentForecastBinding
 import com.example.qweather.ui.dashboard.inner_fragments.forecast.adapter.ForecastAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
-import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
+import com.example.qweather.view_models.city_weather.WeatherViewModel
 
 
 class ForecastFragment : Fragment() {
@@ -41,6 +41,10 @@ class ForecastFragment : Fragment() {
             result?.dailyForecast?.let { forecast ->
                 binding.dailyRecyclerView.adapter = ForecastAdapter(forecast)
             }
+            result?.hourlyForecast?.let { forecast ->
+                Log.d("ForecastFragment", "Hourly Forecast: $forecast")
+            }
+
         }
 
 

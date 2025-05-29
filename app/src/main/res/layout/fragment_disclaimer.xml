@@ -6,246 +6,248 @@
     android:layout_height="match_parent"
     tools:context=".ui.side_nav_fragments.disclaimer.DisclaimerFragment">
 
+
+    <TextView
+        android:id="@+id/header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingBottom="20dp"
+        android:text="Disclaimer"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weather_news_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/location_bottom_sheet_shape"
+            android:paddingHorizontal="15dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_label">
 
             <TextView
-                android:id="@+id/header_label"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_heading"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:paddingBottom="10dp"
-                android:text="Disclaimer"
-                android:textColor="@color/white"
-                android:textSize="25sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Civil Aviation Authority"
+                android:textColor="#3BA5F8"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/weather_news_layout"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_sub_heading"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/location_bottom_sheet_shape"
-                android:paddingHorizontal="15dp"
-                android:paddingBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Terms of usage"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_label">
+                app:layout_constraintTop_toBottomOf="@+id/tv_heading" />
 
-                <TextView
-                    android:id="@+id/tv_heading"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Civil Aviation Authority"
-                    android:textColor="#3BA5F8"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="The Civil Aviation Authority endeavour, through its APP to enable its clients and visitors obtain, share, and use the materials uploaded to the APP for personal and non-commercial purposes, and as per the terms of usage of the app. \nTherefore, you need to read and review the terms and conditions stated below carefully. As using or visiting, this APP shall be deemed an acceptance of and agreement."
+                android:textColor="#2B2758"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_heading" />
 
-                <TextView
-                    android:id="@+id/tv_sub_heading"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Terms of usage"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_heading" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="#2B2758"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="The Civil Aviation Authority endeavour, through its APP to enable its clients and visitors obtain, share, and use the materials uploaded to the APP for personal and non-commercial purposes, and as per the terms of usage of the app. \nTherefore, you need to read and review the terms and conditions stated below carefully. As using or visiting, this APP shall be deemed an acceptance of and agreement."
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_sub_heading" />
-
-                <TextView
-                    android:id="@+id/legal_heading"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Legal Notice"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description" />
+            <TextView
+                android:id="@+id/legal_heading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Legal Notice"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/ca_layout"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ca_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/legal_heading">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/legal_heading">
+                    android:background="@drawable/notice_frames"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/notice_frames"
-                        android:orientation="vertical">
+                        android:background="#EBEBEB"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:text="Civil Aviation Authority"
+                        android:textColor="#123456"
+                        android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#EBEBEB"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center"
-                            android:paddingTop="3dp"
-                            android:text="Civil Aviation Authority"
-                            android:textColor="#123456"
-                            android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="10dp"
+                        android:src="@drawable/splash_logo_2" />
+                </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/splash_logo_2" />
-                    </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/md_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ca_layout">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/md_layout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginTop="20dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ca_layout">
+                    android:background="@drawable/notice_frames"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/notice_frames"
-                        android:orientation="vertical">
+                        android:background="#EBEBEB"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:text="Meteorology Department"
+                        android:textColor="#123456"
+                        android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#EBEBEB"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center"
-                            android:paddingTop="3dp"
-                            android:text="Meteorology Department"
-                            android:textColor="#123456"
-                            android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="10dp"
+                        android:src="@drawable/qmd_logo" />
+                </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="180dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/qmd_logo" />
-                    </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_legal_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="The Civil Aviation Authority endeavour, through its APP to enable its clients and visitors obtain, share, and use the materials uploaded to the APP for personal and non-commercial purposes, and as per the terms of usage of the app. "
+                android:textColor="#2B2758"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_layout" />
 
-                <TextView
-                    android:id="@+id/tv_legal_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="The Civil Aviation Authority endeavour, through its APP to enable its clients and visitors obtain, share, and use the materials uploaded to the APP for personal and non-commercial purposes, and as per the terms of usage of the app. "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:textColor="#2B2758"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/md_layout" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/library_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_legal_description">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/library_layout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_legal_description">
+                    android:background="@drawable/notice_frames"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/notice_frames"
-                        android:orientation="vertical">
+                        android:background="#EFEFEF"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:text="Third Party Libraries"
+                        android:textColor="#123456"
+                        android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#EFEFEF"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center"
-                            android:paddingTop="3dp"
-                            android:text="Third Party Libraries"
-                            android:textColor="#123456"
-                            android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/open_weather_map" />
 
-                        <ImageView
-                            android:layout_width="180dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/open_weather_map" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:id="@+id/www_co"
+                        android:text="www.openweathermap.co.uk"
+                        android:textColor="#8D1B3D"
+                        android:textSize="15sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="www.openweathermap.co.uk"
-                            android:textColor="#8D1B3D"
-                            android:layout_marginStart="15dp"
-                            android:textSize="15sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="www.openweathermap.co.uk"
-                            android:textColor="#8D1B3D"
-                            android:layout_marginStart="15dp"
-                            android:textSize="15sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="www.openweathermap.co.uk"
-                            android:textColor="#8D1B3D"
-                            android:layout_marginStart="15dp"
-                            android:textSize="15sp"
-                            android:layout_marginBottom="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:id="@+id/www_about"
+                        android:text="www.openweathermap.co.uk/about"
+                        android:textColor="#8D1B3D"
+                        android:textSize="15sp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="www.openweathermap.org"
+                        android:id="@+id/www_org"
+                        android:textColor="#8D1B3D"
+                        android:textSize="15sp" />
 
 
-                    </LinearLayout>
+                </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 
 

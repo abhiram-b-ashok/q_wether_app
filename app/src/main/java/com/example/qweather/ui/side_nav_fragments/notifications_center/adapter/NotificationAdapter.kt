@@ -3,7 +3,6 @@ package com.example.qweather.ui.side_nav_fragments.notifications_center.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.qweather.databinding.CellNotificationDateBinding
 import com.example.qweather.databinding.CellNotificationItemBinding
 
@@ -45,3 +44,6 @@ class NotificationAdapter(private var list: List<Notification>) : RecyclerView.A
         notifyDataSetChanged()
     }
 }
+
+
+

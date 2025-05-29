@@ -15,8 +15,8 @@ import com.example.qweather.databinding.FragmentDefaultDashboardBinding
 import com.example.qweather.repository.WeatherRepository.WeatherRepositoryProvider.repository
 import com.example.qweather.ui.dashboard.inner_fragments.moon_phase.MoonPhaseFragment
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
-import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
-import com.example.qweather.view_models.city_details_weather_model.WeatherViewModelFactory
+import com.example.qweather.view_models.city_weather.WeatherViewModel
+import com.example.qweather.view_models.city_weather.WeatherViewModelFactory
 
 
 class DefaultDashboardFragment : Fragment() {

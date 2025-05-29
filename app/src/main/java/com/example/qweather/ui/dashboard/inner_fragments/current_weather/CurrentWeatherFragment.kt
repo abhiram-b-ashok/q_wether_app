@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentCurrentWeatherBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
-import com.example.qweather.view_models.city_details_weather_model.WeatherViewModel
-import java.security.Timestamp
+import com.example.qweather.view_models.city_weather.WeatherViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -69,23 +68,38 @@ class CurrentWeatherFragment : Fragment() {
                         }
 
                         if (current.weather_type == "Clear") {
-                            currentWeatherLayout.setBackgroundResource(R.drawable.clear_sky_day)
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_clear_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.clear_sky_ic)
+
                         }
                         else if (current.weather_type == "Dust") {
-                            currentWeatherLayout.setBackgroundResource(R.drawable.dusty_day)
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_dust_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.dust_ic)
                         }
                         else if (current.weather_type == "Rain") {
-                            currentWeatherLayout.setBackgroundResource(R.drawable.rainy)
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_rain_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.rain_ic)
                         }
                         else if (current.weather_type == "Stormy") {
-                            currentWeatherLayout.setBackgroundResource(R.drawable.thunderstorm)
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_thuder_storm_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.thunder_ic)
                         }
                         else if (current.weather_type == "Snow") {
-                            currentWeatherLayout.setBackgroundResource(R.drawable.snowy)
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_snow_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.snow_ic)
+                        }
+                        else if (current.weather_type == "Mist") {
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_mist_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.mist_ic)
+                        }
+                        else if (current.weather_type == "Few Clouds") {
+                            currentWeatherLayout.setBackgroundResource(R.drawable.currrent_few_clouds_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.few_clouds_ic)
                         }
                         else
                         {
-                            currentWeatherLayout.setBackgroundResource(R.drawable.clear_sky_day)
+                            currentWeatherLayout.setBackgroundResource(R.drawable.current_shower_rain_bg)
+                            cityWeatherIcon.setImageResource(R.drawable.shower_rain_ic)
                         }
 
                     }
