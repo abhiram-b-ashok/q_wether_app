@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.qweather.data.models.cities_weather.WeatherResponse
 import com.example.qweather.data.models.cities_weather.WeatherResult
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.repository.WeatherRepository

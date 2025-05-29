@@ -18,6 +18,10 @@ class ForecastDetailedFragment : Fragment() {
     private lateinit var binding: FragmentForecastDetailedBinding
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var dailyAdapter: ForecastDailyAdapter
+    private val weatherViewModel: WeatherViewModel by lazy {
+        (parentFragment as? DefaultDashboardFragment)?.weatherViewModel
+            ?: throw IllegalStateException("Must be in DefaultDashboardFragment")
+    }
 
 
     override fun onAttach(context: Context) {
@@ -53,6 +57,12 @@ class ForecastDetailedFragment : Fragment() {
 
 
         }
+
+        weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
+            result?.hourlyForecast?.let { forecast ->
+                dailyAdapter = ForecastDailyAdapter(forecast)
+                binding.dailyRecyclerView.adapter = dailyAdapter
+            }
 
 
     }

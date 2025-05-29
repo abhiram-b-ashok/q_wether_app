@@ -51,6 +51,18 @@ data class DailyWeather(
     val rain_unit: String,
     val humidity_unit: String
 )
+data class HourlyWeather(
+    val time: String,
+    val temperature: Double,
+    val temperature_unit: String,
+    val weather_type: String,
+    val humidity: Int,
+    val humidity_unit: String,
+    val wind_power: Double,
+    val wind_power_unit: String,
+    val wind_direction: Int,
+)
+
 data class WeatherResponseWrapper(
     @SerializedName("Response") val response: WeatherResponseContent
 )
@@ -62,6 +74,7 @@ data class WeatherResponseContent(
 
 data class WeatherResult(
     @SerializedName("current_weather") val currentWeather: CurrentWeather?,
-    @SerializedName("daily_weather") val dailyForecast: List<DailyWeather>?
+    @SerializedName("daily_weather") val dailyForecast: List<DailyWeather>?,
+    @SerializedName("hourly_data") val hourlyForecast: List<HourlyWeather>?
 )
 
