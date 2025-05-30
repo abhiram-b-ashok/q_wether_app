@@ -34,14 +34,15 @@
             android:layout_height="150dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <WebView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/radar_web_view"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rain_radar_img"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -54,7 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/web_view_card"
-            android:src="@drawable/rain_radar_rainbow"/>
+            android:src="@drawable/rain_radar_rainbow_jpg"/>
 
 
 

@@ -58,6 +58,20 @@
             android:id="@+id/date_container"
 
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/date_container"
+            app:layout_constraintEnd_toEndOf="@+id/date_container"
+            app:layout_constraintTop_toTopOf="@+id/date_container"
+            app:layout_constraintBottom_toBottomOf="@+id/date_container"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_medium"
+            tools:text="Thu, 19 May, 2025"
+            android:paddingTop="3dp"
+            android:id="@+id/date_main"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

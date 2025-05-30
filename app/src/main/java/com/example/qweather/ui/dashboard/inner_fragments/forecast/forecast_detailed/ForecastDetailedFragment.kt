@@ -16,7 +16,10 @@ import com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detai
 import com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.adapter.ForecastDailyAdapter
 import com.example.qweather.view_models.city_weather.WeatherViewModel
 import com.example.qweather.view_models.city_weather.WeatherViewModelFactory
-
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import kotlin.text.format
 
 
 class ForecastDetailedFragment : Fragment() {
@@ -25,7 +28,8 @@ class ForecastDetailedFragment : Fragment() {
     private lateinit var dailyAdapter: ForecastDailyAdapter
     private lateinit var hourlyAdapter: ForeCastHourlyAdapter
     private lateinit var weatherViewModel: WeatherViewModel
-
+    var dateDown = 0
+    var dailyForecastSize = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,48 +50,87 @@ class ForecastDetailedFragment : Fragment() {
 
         val forecastRepository = WeatherRepository()
         val viewModelFactory = WeatherViewModelFactory(forecastRepository)
-        weatherViewModel = ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
+        weatherViewModel =
+            ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
 
         val lat = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))
         val lon = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))
         val isQatar = sharedPrefs.getBoolean("LAST_CITY_IS_QATAR", true)
-        weatherViewModel.loadWeather(lat,lon,isQatar)
+        weatherViewModel.loadWeather(lat, lon, isQatar)
 
         binding.apply {
             cityName.text = sharedPrefs.getString("LAST_SELECTED_CITY", "Qatar")
-            temp.text = "${Double.fromBits(sharedPrefs.getLong("LAST_TEMPERATURE", 0L))}°C"
-            tempDown.text = "${Double.fromBits(sharedPrefs.getLong("LAST_TEMP_MIN", 0L))}°C"
-            tempUp.text = "${Double.fromBits(sharedPrefs.getLong("LAST_TEMP_MAX", 0L))}°C"
-            condition.text = sharedPrefs.getString("LAST_WEATHER_TYPE", "Clear")
-            approx.text =
-                "Feels like ${Double.fromBits(sharedPrefs.getLong("LAST_FEELS_LIKE", 0L))}°C"
-            humiPercent.text = Double.fromBits(sharedPrefs.getLong("LAST_HUMIDITY", 0L)).toString()
-            windSpeed.text = Double.fromBits(sharedPrefs.getLong("LAST_WIND_SPEED", 0L)).toString()
-            date.text = sharedPrefs.getString("LAST_DATE", "0.0")
-            windDirection.text = sharedPrefs.getString("LAST_WIND_DIRECTION", "N")
-        }
 
-        weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
-            result?.dailyForecast?.let { forecast ->
-                Log.d("ForecastDetailedFragment", "Daily Forecast: $forecast")
-                dailyAdapter = ForecastDailyAdapter(forecast)
-                binding.dailyRecyclerView.adapter = dailyAdapter
-                binding.rainValue.text = forecast[0].rain.toString()
-                binding.pressureValue.text = forecast[0].pressure.toString()
+            prevBt.setOnClickListener {
 
-            }
-            result?.hourlyForecast?.let { forecast ->
-                val allHourlyForecasts: List<HourlyForecast> = forecast.flatMap { hourlyWeather ->
-                    hourlyWeather.dayDetails
+                if (dateDown > 0) {
+                    dateDown--
+                    weatherViewModel.loadWeather(lat, lon, isQatar)
                 }
-                Log.d("ForecastDetailedFragment", "Hourly Forecast: $allHourlyForecasts")
+                else{
+                    prevBt.isEnabled = false
+                    Log.d("ForecastDetailedFragment", "Daily Forecast: $dailyForecastSize is out of bounds")
+                }
 
-                hourlyAdapter = ForeCastHourlyAdapter(allHourlyForecasts)
-                binding.hourlyRecyclerView.adapter = hourlyAdapter
+
+            }
+            nextBt.setOnClickListener {
+                if (dateDown < 4) {
+                    dateDown++
+                    weatherViewModel.loadWeather(lat, lon, isQatar)
+                }
+                else{
+                    nextBt.isEnabled = false
+                    Log.d("ForecastDetailedFragment", "Daily Forecast: $dailyForecastSize is out of bounds")
+                }
+
+
+            }
+
+            weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
+                result?.dailyForecast?.let { forecast ->
+                     dailyForecastSize = (forecast.size)
+                    Log.d("ForecastDetailedFragment", "Daily Forecastsize: ${forecast.size}")
+                    dailyAdapter = ForecastDailyAdapter(forecast)
+                    dailyRecyclerView.adapter = dailyAdapter
+                    dailyAdapter.notifyDataSetChanged()
+                    rainValue.text = forecast[dateDown].rain.toString()
+                    pressureValue.text = forecast[dateDown].pressure.toString()
+
+                    temp.text = "${forecast[dateDown].temperature}°C"
+                    tempDown.text = "${forecast[dateDown].temperature_min}°C"
+                    tempUp.text = "${forecast[dateDown].temperature_max}°C"
+                    condition.text = forecast[dateDown].weather_type
+                    approx.text = "Feels like ${forecast[dateDown].feels_like_day}°C"
+                    humiPercent.text = forecast[dateDown].humidity.toString()
+                    windSpeed.text = forecast[dateDown].wind_speed.toString()
+                    val originalDateString = forecast[dateDown].date
+
+                    val inputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a",Locale.ENGLISH)
+                    val outputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy", Locale.ENGLISH)
+
+                    try {
+                        val dateTime1 = LocalDateTime.parse(originalDateString, inputFormatter)
+                        val formattedDate = dateTime1.format(outputFormatter)
+                        date.text = formattedDate
+                        binding.dateMain.text = formattedDate
+                    } catch (e: Exception) {
+                        Log.e("ForecastDetailedFragment", "Error formatting date: ${e.message}")
+                        date.text = originalDateString
+                    }
+                    windDirection.text = sharedPrefs.getString("LAST_WIND_DIRECTION", "N")
+                }
+                result?.hourlyForecast?.let { forecast ->
+                    val allHourlyForecasts: List<HourlyForecast> = forecast.map { hourlyWeather ->
+                        hourlyWeather.dayDetails[dateDown]
+                    }
+                    hourlyAdapter = ForeCastHourlyAdapter(allHourlyForecasts)
+                    binding.hourlyRecyclerView.adapter = hourlyAdapter
+                    hourlyAdapter.notifyDataSetChanged()
+
+                }
             }
         }
-
-
     }
 }
 

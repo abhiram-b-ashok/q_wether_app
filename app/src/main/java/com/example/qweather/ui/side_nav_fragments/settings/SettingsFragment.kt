@@ -284,6 +284,7 @@
 package com.example.qweather.ui.side_nav_fragments.settings
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -296,6 +297,7 @@ import com.example.qweather.data.models.settings.DashboardSettingsModel
 import com.example.qweather.databinding.FragmentSettingsBinding
 import com.example.qweather.ui.side_nav_fragments.settings.adapter.SettingsAdapter
 import java.util.Collections
+import kotlin.text.split
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
@@ -410,6 +412,7 @@ class SettingsFragment : Fragment() {
 
 
             val selectedItemsSet = sharedPreferences.getStringSet(KEY_SELECTED_DASHBOARD_ITEMS, HashSet()) ?: HashSet()
+
             list.forEach  { item ->
                 item.isSelect = selectedItemsSet.contains(item.title)
                 item.toggleImage = if (item.isSelect) R.drawable.default_selected_ic else R.drawable.to_select_ic
@@ -441,6 +444,8 @@ class SettingsFragment : Fragment() {
                     Collections.swap(list, sourcePosition, targetPosition)
                     settingsAdapter.notifyItemMoved(sourcePosition, targetPosition)
                     return true
+
+
                 }
 
                 override fun onSwiped(
@@ -559,4 +564,5 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+
 }

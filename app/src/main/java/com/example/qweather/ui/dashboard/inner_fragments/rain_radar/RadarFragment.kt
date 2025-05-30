@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentRadarBinding
+import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
 
 
 class RadarFragment : Fragment() {
@@ -22,6 +24,9 @@ class RadarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.webViewCard.setOnClickListener {
+            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToRainRadarFragment())
+        }
 
     }
 

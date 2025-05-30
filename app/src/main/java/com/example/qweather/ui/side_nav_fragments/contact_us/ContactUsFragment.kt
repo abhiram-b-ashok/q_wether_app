@@ -31,9 +31,13 @@ class ContactUsFragment : Fragment() {
 
            contactSubmitButton.setOnClickListener {
                 if (validate()) {
-//api
                    contactSubmitButton.isEnabled = false
                     contactSubmitButton.text = "Submitted"
+                    contactSubmitButton.isClickable = false
+                    mailEt.text?.clear()
+                    subjectEt.text?.clear()
+                    messageEt.text?.clear()
+
                 }
             }
 

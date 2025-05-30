@@ -24,6 +24,12 @@
         <action
             android:id="@+id/action_defaultDashboardFragment_to_forecastDetailedFragment"
             app:destination="@id/forecastDetailedFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_rainRadarFragment"
+            app:destination="@id/rainRadarFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_weatherMapFragment"
+            app:destination="@id/weatherMapFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"

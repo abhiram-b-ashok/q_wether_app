@@ -160,7 +160,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tide_low_unit"
-            android:text="View Deatils"
+            android:text="View Details"
             android:gravity="center"
             android:textSize="20sp"
             android:padding="10dp" android:layout_marginTop="15dp"/>
