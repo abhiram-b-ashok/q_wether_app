@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:paddingBottom="50dp"
+                android:id="@+id/dashboard_container_layout"
                 android:orientation="vertical">
 
 

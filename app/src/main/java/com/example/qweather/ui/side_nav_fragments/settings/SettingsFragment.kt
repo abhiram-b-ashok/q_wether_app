@@ -284,7 +284,6 @@
 package com.example.qweather.ui.side_nav_fragments.settings
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -311,6 +310,8 @@ class SettingsFragment : Fragment() {
 
     private val PREF_NAME = "settingPreference"
     private val KEY_SELECTED_DASHBOARD_ITEMS = "selectedDashboardItems"
+    private val KEY_ORDERED_TITLES = "dashboardOrderString"
+
 
 
     override fun onCreateView(
@@ -398,42 +399,88 @@ class SettingsFragment : Fragment() {
             }
 
 
-            list = arrayListOf(
-                DashboardSettingsModel(R.drawable.default_selected_ic, "Current Weather"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Warning"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Alerts"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Sunrise / Sunset info"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Moon phase"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Air quality index"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Forecast"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Tidal information"),
-                DashboardSettingsModel(R.drawable.to_select_ic, "Health and activities"),
-            )
+            val sharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-
+// Load previously selected titles
             val selectedItemsSet = sharedPreferences.getStringSet(KEY_SELECTED_DASHBOARD_ITEMS, HashSet()) ?: HashSet()
 
-            list.forEach  { item ->
-                item.isSelect = selectedItemsSet.contains(item.title)
-                item.toggleImage = if (item.isSelect) R.drawable.default_selected_ic else R.drawable.to_select_ic
+// Base dashboard list (default order)
+            val defaultList = arrayListOf(
+                DashboardSettingsModel(R.drawable.default_selected_ic, "Current Weather"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Warning"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Forecast"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Sunrise / Sunset info"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Moon phase"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Tidal information"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Rain Radar"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Weather Map"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Seasonal"),
+                DashboardSettingsModel(R.drawable.to_select_ic, "Marine Forecast"),
+            )
+
+// Load saved order
+            val savedOrderString = sharedPreferences.getString(KEY_ORDERED_TITLES, null)
+            list = if (!savedOrderString.isNullOrEmpty()) {
+                val savedOrder = savedOrderString.split(",")
+                val orderedList = mutableListOf<DashboardSettingsModel>()
+
+                // Add items in saved order
+                savedOrder.forEach { title ->
+                    defaultList.find { it.title == title }?.let { orderedList.add(it) }
+                }
+
+                // Add new items that weren’t saved before
+                defaultList.forEach { item ->
+                    if (orderedList.none { it.title == item.title }) {
+                        orderedList.add(item)
+                    }
+                }
+
+                ArrayList(orderedList)
+            } else {
+                defaultList
             }
+
+// Apply selected state
+            list.forEach { item ->
+                item.isSelect = selectedItemsSet.contains(item.title)
+                item.toggleImage = if (item.isSelect || item.title == "Current Weather") {
+                    R.drawable.default_selected_ic
+                } else {
+                    R.drawable.to_select_ic
+                }
+            }
+            val currentSelectedTitles = list.filter { it.isSelect }.map { it.title }.toSet()
+            sharedPreferences.edit().putStringSet(KEY_SELECTED_DASHBOARD_ITEMS, currentSelectedTitles).apply()
+
+
+
 
             settingsAdapter = SettingsAdapter(list)
             binding.recyclerForSettings.adapter = settingsAdapter
 
             settingsAdapter.onItemSelect = { selectedModel ->
-                selectedModel.isSelect = !selectedModel.isSelect
-
-                selectedModel.toggleImage = if (selectedModel.isSelect) R.drawable.default_selected_ic else R.drawable.to_select_ic
-                settingsAdapter.notifyDataSetChanged()
+                // Prevent unselecting "Current Weather"
+                if (selectedModel.title != "Current Weather") {
 
 
-                val currentSelectedTitles = list.filter { it.isSelect }.map { it.title }.toSet()
-                sharedPreferences.edit().putStringSet(KEY_SELECTED_DASHBOARD_ITEMS, currentSelectedTitles).apply()
+                    selectedModel.isSelect = !selectedModel.isSelect
+                    selectedModel.toggleImage =
+                        if (selectedModel.isSelect) R.drawable.selected_ic else R.drawable.to_select_ic
+                    settingsAdapter.notifyDataSetChanged()
+
+                    val selectedTitles =
+                        list.filter { it.isSelect || it.title == "Current Weather" }
+                            .map { it.title }.toSet()
+                    sharedPreferences.edit()
+                        .putStringSet(KEY_SELECTED_DASHBOARD_ITEMS, selectedTitles).apply()
+                }
             }
 
-            val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0){
+
+            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+            ) {
                 override fun onMove(
                     recyclerView: RecyclerView,
                     source: RecyclerView.ViewHolder,
@@ -443,9 +490,11 @@ class SettingsFragment : Fragment() {
                     val targetPosition = target.adapterPosition
                     Collections.swap(list, sourcePosition, targetPosition)
                     settingsAdapter.notifyItemMoved(sourcePosition, targetPosition)
+                    // Save reordered titles as comma-separated string
+                    val newOrderString = list.joinToString(",") { it.title }
+                    sharedPreferences.edit().putString(KEY_ORDERED_TITLES, newOrderString).apply()
+
                     return true
-
-
                 }
 
                 override fun onSwiped(

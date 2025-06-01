@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,7 @@ class DefaultDashboardFragment : Fragment() {
 
 
     private lateinit var sharedPrefs: SharedPreferences
+
     private val defaultFragmentContainers = setOf(
         R.id.current_weather_fragment_container,
         R.id.forecast_fragment_container,
@@ -40,6 +42,20 @@ class DefaultDashboardFragment : Fragment() {
         R.id.marine_forecast_fragment_container
     )
     private val allFragmentContainerIds = defaultFragmentContainers + qatarOnlyFragmentContainers
+
+    private val titleToContainerId = mapOf(
+        "Current Weather" to R.id.current_weather_fragment_container,
+        "Warning" to R.id.warning_fragment_container,
+        "Forecast" to R.id.forecast_fragment_container,
+        "Sunrise / Sunset info" to R.id.sun_rise_set_fragment_container,
+        "Moon phase" to R.id.moon_phase_fragment_container,
+        "Tidal information" to R.id.tide_fragment_container,
+        "Rain Radar" to R.id.radar_fragment_container,
+        "Weather Map" to R.id.weather_map_container,
+        "Seasonal" to R.id.seasonal_fragment_container,
+        "Marine Forecast" to R.id.marine_forecast_fragment_container
+    )
+
 
 
     override fun onCreateView(
@@ -62,6 +78,9 @@ class DefaultDashboardFragment : Fragment() {
         binding.dashboardSettingsButton.setOnClickListener {
             findNavController().navigate(R.id.action_defaultDashboardFragment_to_settingsFragment)
         }
+
+        reorderDashboardFragments()
+
 
         view.post {
             applyFragmentContainerVisibility()
@@ -187,6 +206,32 @@ class DefaultDashboardFragment : Fragment() {
             }
         }
     }
+
+    private fun reorderDashboardFragments() {
+        val containerParent = binding.root.findViewById<LinearLayout>(R.id.dashboard_container_layout)
+        val prefs = requireContext().getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
+        val savedOrderString = prefs.getString("dashboardOrderString", null)
+
+        if (!savedOrderString.isNullOrEmpty()) {
+            val orderedTitles = savedOrderString.split(",")
+
+            val orderedViews = orderedTitles.mapNotNull { title ->
+                titleToContainerId[title]?.let { containerId ->
+                    containerParent.findViewById<View>(containerId)
+                }
+            }
+
+            val addButton = containerParent.findViewById<View>(R.id.dashboard_settings_button)
+            containerParent.removeAllViews()
+
+            // Add views in saved order
+            orderedViews.forEach { containerParent.addView(it) }
+
+            // Add the settings button back at the bottom
+            containerParent.addView(addButton)
+        }
+    }
+
 
 
 }

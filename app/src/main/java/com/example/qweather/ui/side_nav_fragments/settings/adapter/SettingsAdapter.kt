@@ -38,13 +38,21 @@ class SettingsAdapter(private val items: List<DashboardSettingsModel>) : Recycle
                 toggleImg.setOnClickListener {
                     onItemSelect?.invoke(item)
                 }
-                if (item.isSelect) {
-                    toggleImg.setImageResource(R.drawable.selected_ic)
-                } else if (item.title == "Current Weather") {
+//                if (item.isSelect) {
+//                    toggleImg.setImageResource(R.drawable.selected_ic)
+//                } else if (item.title == "Current Weather") {
+//                    toggleImg.setImageResource(R.drawable.default_selected_ic)
+//                } else {
+//                    toggleImg.setImageResource(R.drawable.to_select_ic)
+//                }
+                if (item.title == "Current Weather") {
                     toggleImg.setImageResource(R.drawable.default_selected_ic)
+                    toggleImg.isEnabled = false // optional: disables the click
                 } else {
-                    toggleImg.setImageResource(R.drawable.to_select_ic)
+                    toggleImg.isEnabled = true
+                    toggleImg.setImageResource(if (item.isSelect) R.drawable.selected_ic else R.drawable.to_select_ic)
                 }
+
             }
 
         }
