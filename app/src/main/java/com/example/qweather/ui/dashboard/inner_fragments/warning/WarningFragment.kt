@@ -28,17 +28,20 @@ class WarningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
-            result?.currentWeather?.let { currentWeather ->
+            result?.hourlyForecast?.let { hourlyForecast ->
                 binding.apply {
-                    visibleValue.text = ((currentWeather.visibility.toInt()) / 1000).toString()
-                    windValue.text = currentWeather.wind_power.toString()
-                    tempValue.text = "${currentWeather.temperature}°C"
+                    val hourlyForecast = hourlyForecast[0].dayDetails
+                    warningValue.text = hourlyForecast[0].warning_text
+                    visibleValue.text = "${hourlyForecast[0].visibility} ${hourlyForecast[0].visibility_unit}"
+                    windValue.text = "${hourlyForecast[0].wind_power} ${hourlyForecast[0].wind_power_unit}"
+                    tempValue.text = "${hourlyForecast[0].temperature}${hourlyForecast[0].temperature_unit}"
 
                 }
 
+
             }
+
+
         }
-
-
     }
 }

@@ -1,173 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="0dp"
-    app:cardCornerRadius="15dp"
     app:cardBackgroundColor="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
     tools:context=".ui.dashboard.inner_fragments.tides.TidesFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="10dp"
-        android:layout_height="wrap_content">
+        android:paddingBottom="10dp">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#0095DA"
-            android:text="Tidal information"
-            android:textSize="30sp"
             android:id="@+id/tide_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Tidal information"
+            android:textColor="#0095DA"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/poppins_semibold"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tide_ic"
             android:id="@+id/tide_icon"
-            android:paddingTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tide_heading"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:src="@drawable/tide_ic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tide_heading" />
+
+        <TextView
+            android:id="@+id/tide_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/tide_icon"
             app:layout_constraintTop_toBottomOf="@+id/tide_heading"
-            tools:text="0.55"
-            android:layout_marginStart="10dp"
-            android:textSize="30sp"
-            android:fontFamily="@font/poppins_medium"
-            android:textColor="@color/black"
-            android:id="@+id/tide_value"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/tide_value"
-            app:layout_constraintTop_toBottomOf="@+id/tide_heading"
-            tools:text="m"
-            android:textSize="30sp"
-            android:fontFamily="@font/poppins_medium"
+            tools:text="0.55" />
 
-            android:textColor="@color/black"
+        <TextView
             android:id="@+id/tide_unit"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tide_unit"
-            android:textColor="#1D1D1D"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/tide_value"
+
+            app:layout_constraintTop_toBottomOf="@+id/tide_heading"
+            tools:text="m" />
+
+        <TextView
+            android:id="@+id/last_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Last updated at "
-            android:id="@+id/last_update"/>
+            android:textColor="#1D1D1D"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tide_unit" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#1D1D1D"
             app:layout_constraintStart_toEndOf="@+id/last_update"
             app:layout_constraintTop_toBottomOf="@+id/tide_unit"
-            android:textColor="#1D1D1D"
-            tools:text ="09:34 AM"/>
+            tools:text="09:34 AM" />
+
         <ImageView
+            android:id="@+id/line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/last_update"
-            android:src="@drawable/tide_line"
             android:layout_marginTop="10dp"
-            android:id="@+id/line"/>
+            android:src="@drawable/tide_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_update" />
+
         <ImageView
+            android:id="@+id/tide_high"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tide_high"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line"
-            android:id="@+id/tide_high"/>
+            app:layout_constraintTop_toBottomOf="@+id/line" />
+
         <ImageView
+            android:id="@+id/tide_low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tide_low"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line"
-            android:id="@+id/tide_low"/>
+            app:layout_constraintTop_toBottomOf="@+id/line" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#8D1B3D"
-            android:text="High"
-            android:textSize="20sp"
             android:id="@+id/tide_high_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High"
+            android:textColor="#8D1B3D"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/tide_high"
-            app:layout_constraintTop_toBottomOf="@+id/line"/>
+            app:layout_constraintTop_toBottomOf="@+id/line" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#8D1B3D"
-                android:text="Low"
-                android:textSize="20sp"
-                android:id="@+id/tide_low_label"
-                app:layout_constraintEnd_toStartOf="@+id/tide_low"
-                app:layout_constraintTop_toBottomOf="@+id/line"/>
         <TextView
+            android:id="@+id/tide_low_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tide_high_value"
-            android:textColor="#2B2758"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
-            app:layout_constraintStart_toEndOf="@+id/tide_high"
-            tools:text ="0.005"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tide_low_value"
-            android:textColor="#2B2758"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
-            app:layout_constraintEnd_toStartOf="@+id/tide_low_unit"
-            tools:text ="0.005"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tide_high_unit"
-            android:textColor="#2B2758"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
-            app:layout_constraintStart_toEndOf="@+id/tide_high_value"
-            tools:text ="M"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tide_low_unit"
-            android:textColor="#2B2758"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
+            android:text="Low"
+            android:textColor="#8D1B3D"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/tide_low"
-            tools:text ="M"/>
+            app:layout_constraintTop_toBottomOf="@+id/line" />
 
         <TextView
+            android:id="@+id/tide_high_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/tide_high"
+            app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
+            tools:text="0.005" />
+
+        <TextView
+            android:id="@+id/tide_low_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/tide_low_unit"
+            app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
+            tools:text="0.005" />
+
+        <TextView
+            android:id="@+id/tide_high_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/tide_high_value"
+            app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
+            tools:text="M" />
+
+        <TextView
+            android:id="@+id/tide_low_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2B2758"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/tide_low"
+            app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
+            tools:text="M" />
+
+        <TextView
+            android:id="@+id/view_details_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:background="@drawable/add_button_shape"
-            android:id="@+id/view_details_button"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tide_low_unit"
-            android:text="View Details"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="4dp"
+            android:text="View Details"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:padding="10dp" android:layout_marginTop="15dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tide_low_unit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.cardview.widget.CardView>

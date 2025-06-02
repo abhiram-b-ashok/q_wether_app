@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#0095DA"
-            android:text="Marine Forecst"
+            android:text="Marine Forecast"
             android:textSize="30sp"
             android:id="@+id/tide_heading"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +34,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/marine_forecast_lay_out"
                 android:background="#D3EDF3">
                 <ImageView
                     android:layout_width="wrap_content"

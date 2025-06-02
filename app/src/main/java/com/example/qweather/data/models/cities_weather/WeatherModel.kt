@@ -80,6 +80,7 @@ data class HourlyForecast(
     val wind_power_unit: String,
     val wind_direction: Int,
     val visibility: Int,
-    val visibility_unit: String
+    val visibility_unit: String,
+    val warning_text: String
 )
 

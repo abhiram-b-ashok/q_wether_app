@@ -30,6 +30,12 @@
         <action
             android:id="@+id/action_defaultDashboardFragment_to_weatherMapFragment"
             app:destination="@id/weatherMapFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_weatherMapWebViewFragment"
+            app:destination="@id/weatherMapWebViewFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_radarWebViewFragment"
+            app:destination="@id/radarWebViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"
@@ -40,7 +46,11 @@
         android:id="@+id/rainRadarFragment"
         android:name="com.example.qweather.ui.side_nav_fragments.rain_radar.RainRadarFragment"
         android:label="fragment_weather_map"
-        tools:layout="@layout/fragment_weather_map" />
+        tools:layout="@layout/fragment_weather_map" >
+        <action
+            android:id="@+id/action_rainRadarFragment_to_radarWebViewFragment"
+            app:destination="@id/radarWebViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="com.example.qweather.ui.side_nav_fragments.about_us.AboutUsFragment"
@@ -75,7 +85,11 @@
         android:id="@+id/weatherMapFragment"
         android:name="com.example.qweather.ui.side_nav_fragments.weather_map.WeatherMapFragment"
         android:label="WeatherMapFragment"
-        tools:layout="@layout/fragment_weather_map" />
+        tools:layout="@layout/fragment_weather_map" >
+        <action
+            android:id="@+id/action_weatherMapFragment_to_weatherMapWebViewFragment"
+            app:destination="@id/weatherMapWebViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/activitiesFragment"
         android:name="com.example.qweather.ui.side_nav_fragments.activities.ActivitiesFragment"
@@ -111,5 +125,15 @@
         android:name="com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.ForecastDetailedFragment"
         android:label="ForecastDetailedFragment"
         tools:layout="@layout/fragment_forecast_detailed" />
+    <fragment
+        android:id="@+id/weatherMapWebViewFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.weather_map.weather_map_webview.WeatherMapWebViewFragment"
+        android:label="fragment_weather_map_web_view"
+        tools:layout="@layout/fragment_weather_map_web_view" />
+    <fragment
+        android:id="@+id/radarWebViewFragment"
+        android:name="com.example.qweather.ui.side_nav_fragments.rain_radar.radar_web_view.RadarWebViewFragment"
+        android:label="fragment_radar_web_view"
+        tools:layout="@layout/fragment_radar_web_view" />
 
 </navigation>

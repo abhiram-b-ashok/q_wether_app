@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentRainRadarBinding
 
@@ -22,8 +23,11 @@ class RainRadarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val webView = binding.webView
-        webView.loadUrl("https://www.rainviewer.com/weather-radar-map-live.html")
+
+        binding.imageWebView.setOnClickListener {
+            findNavController().navigate(R.id.action_rainRadarFragment_to_radarWebViewFragment)
+        }
+
 
     }
 

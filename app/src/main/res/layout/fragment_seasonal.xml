@@ -1,157 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="0dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
     tools:context=".ui.dashboard.inner_fragments.seasonal.SeasonalFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="15dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
         <TextView
+            android:id="@+id/tide_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#0095DA"
+            android:fontFamily="@font/poppins_semibold"
             android:text="Seasonal"
+            android:textColor="#0095DA"
             android:textSize="30sp"
-            android:id="@+id/tide_heading"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/poppins_semibold"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/seasonal_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="15dp"
             app:cardElevation="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/tide_heading"
-            android:layout_height="wrap_content">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tide_heading">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/sesonal_bg"
-                android:layout_height="match_parent">
+                android:padding="10dp">
+
                 <TextView
+                    android:id="@+id/season_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Season"
                     android:textColor="#FFD177"
                     android:textSize="18sp"
-                    android:id="@+id/season_label"
-                    android:fontFamily="@font/poppins_medium"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
+                    android:id="@+id/season_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/season_value"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/season_label"
-                    tools:text="Sa'ad Al-Akhabiya"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/white"
                     android:textSize="25sp"
-                    android:fontFamily="@font/poppins_semibold"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/season_label"
+                    tools:text="Sa'ad Al-Akhabiya" />
+
                 <TextView
+                    android:id="@+id/days_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/season_value"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Number of days"
                     android:textColor="#FFD177"
                     android:textSize="18sp"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/days_label"
-                    android:fontFamily="@font/poppins_medium"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/season_value" />
+
                 <TextView
+                    android:id="@+id/days_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/days_value"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/days_label"
-                    tools:text="23"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:fontFamily="@font/poppins_semibold"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/days_label"
+                    tools:text="23" />
+
                 <TextView
+                    android:id="@+id/date_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/days_value"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Starting from"
                     android:textColor="#FFD177"
                     android:textSize="18sp"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/date_label"
-                    android:fontFamily="@font/poppins_medium"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/days_value" />
+
                 <TextView
+                    android:id="@+id/date_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/date_value"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/date_label"
-                    tools:text="21-06-2022"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:fontFamily="@font/poppins_semibold"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/date_label"
+                    tools:text="21-06-2022" />
+
                 <ImageView
+                    android:id="@+id/seasonal_ics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/aries_lo"
-                    android:id="@+id/seasonal_ics"
+                    app:layout_constraintBottom_toBottomOf="@+id/date_value"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/date_label"
-                    app:layout_constraintBottom_toBottomOf="@+id/date_value"/>
+                    app:layout_constraintTop_toTopOf="@+id/date_label" />
+
                 <TextView
+                    android:id="@+id/sign_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sign_value"
-                    app:layout_constraintEnd_toEndOf="@+id/seasonal_ics"
-                    app:layout_constraintTop_toTopOf="@+id/seasonal_ics"
-                    app:layout_constraintBottom_toBottomOf="@+id/seasonal_ics"
-                    tools:text="Aries"
                     android:layout_marginStart="20dp"
-                    android:textSize="12sp"
-                    android:paddingBottom="3dp"
                     android:fontFamily="@font/poppins_regular"
                     android:paddingEnd="8dp"
-                    android:textColor="@color/white"/>
+                    android:paddingBottom="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/seasonal_ics"
+                    app:layout_constraintEnd_toEndOf="@+id/seasonal_ics"
+                    app:layout_constraintTop_toTopOf="@+id/seasonal_ics"
+                    tools:text="Aries" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/view_details_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seasonal_card"
-            android:background="@drawable/add_button_shape"
             android:layout_marginTop="20dp"
+            android:background="@drawable/add_button_shape"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="4dp"
             android:text="View Details"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:paddingHorizontal="5dp"
-            android:paddingTop="4dp"
-            android:gravity="center"
-            android:id="@+id/view_details_button"
-            android:fontFamily="@font/poppins_semibold"/>
-
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seasonal_card" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.cardview.widget.CardView>

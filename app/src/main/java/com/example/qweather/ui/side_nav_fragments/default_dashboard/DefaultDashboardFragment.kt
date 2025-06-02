@@ -24,7 +24,6 @@ class DefaultDashboardFragment : Fragment() {
     private lateinit var binding: FragmentDefaultDashboardBinding
     internal lateinit var weatherViewModel: WeatherViewModel
 
-
     private lateinit var sharedPrefs: SharedPreferences
 
     private val defaultFragmentContainers = setOf(
@@ -101,16 +100,13 @@ class DefaultDashboardFragment : Fragment() {
             .replace(R.id.moon_phase_fragment_container, fragment)
             .commit()
 
-
-
         Log.e("@@@@@latitude", "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))}")
         Log.e(
             "@@@@@longitude",
             "${Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))}"
         )
         Log.d("@@@@CityId", "${sharedPrefs.getInt("LAST_CITY_ID", 0)}")
-
-
+        Log.d("@@@@isQatar", "${sharedPrefs.getBoolean("LAST_CITY_IS_QATAR", true)}")
 
 
     }

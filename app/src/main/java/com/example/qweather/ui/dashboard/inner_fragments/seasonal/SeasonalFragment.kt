@@ -37,8 +37,6 @@ class SeasonalFragment : Fragment() {
 
         viewModel.loadSeasonalData()
 
-
-
         viewModel.seasonalData.observe(viewLifecycleOwner) { seasonalData ->
             seasonalData?.let { season -> 
                 Log.d("SeasonalFragment", "Received seasonal data: $season")

@@ -61,7 +61,9 @@
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     android:textColor="#8A1538"
+                    android:id="@+id/warning_value"
                     android:textSize="20sp"
+                    android:paddingTop="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/warning_icon"
                     app:layout_constraintTop_toTopOf="parent"
@@ -187,7 +189,8 @@
             app:layout_constraintStart_toEndOf="@+id/visible_value"
             app:layout_constraintTop_toBottomOf="@+id/visible_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_visible"
-            android:text=" km"
+            tools:text=" km"
+            android:visibility="gone"
             />
 
 

@@ -41,8 +41,9 @@ class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapt
                 val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
                 val dayOfMonth = date.dayOfMonth
                 val year = date.year
+                val month = date.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
 
-                "$dayOfWeek, $dayOfMonth, $year"
+                "$dayOfWeek,$month $dayOfMonth, $year"
 
             } catch (e: Exception) {
                 Log.e("ForecastAdapter", "Error parsing date: '${item.date}'", e)

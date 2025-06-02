@@ -27,9 +27,8 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.webViewCard.setOnClickListener {
-            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToWeatherMapFragment())
+            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToWeatherMapWebViewFragment())
         }
-
     }
 
 

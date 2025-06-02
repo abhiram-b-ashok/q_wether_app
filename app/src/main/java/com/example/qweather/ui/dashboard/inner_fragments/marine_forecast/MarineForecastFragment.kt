@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentMarineForecastBinding
 
@@ -21,6 +22,9 @@ class MarineForecastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.marineForecastLayOut.setOnClickListener {
+            findNavController().navigate(R.id.action_defaultDashboardFragment_to_weatherMapWebViewFragment)
+        }
 
     }
 

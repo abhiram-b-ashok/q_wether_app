@@ -25,7 +25,7 @@ class RadarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.webViewCard.setOnClickListener {
-            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToRainRadarFragment())
+            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToRadarWebViewFragment())
         }
 
     }

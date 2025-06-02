@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentWeatherMapBinding
 
@@ -23,8 +24,9 @@ class WeatherMapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val webView = binding.webView
-        webView.loadUrl("https://www.windy.com/-Waves-waves?waves,9.918,76.256,5")
+     binding.imageWebView.setOnClickListener {
+         findNavController().navigate(R.id.action_weatherMapFragment_to_weatherMapWebViewFragment)
+     }
     }
 
 
