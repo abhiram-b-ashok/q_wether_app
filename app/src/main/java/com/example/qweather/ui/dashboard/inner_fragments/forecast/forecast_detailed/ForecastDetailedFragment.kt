@@ -9,11 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.qweather.R
 import com.example.qweather.data.models.cities_weather.HourlyForecast
 import com.example.qweather.databinding.FragmentForecastDetailedBinding
 import com.example.qweather.repository.WeatherRepository
 import com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.adapter.ForeCastHourlyAdapter
 import com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.adapter.ForecastDailyAdapter
+import com.example.qweather.utility_funtions.compassPoints
+import com.example.qweather.utility_funtions.getCompassIndex
+import com.example.qweather.utility_funtions.temperatureConverter
 import com.example.qweather.view_models.city_weather.WeatherViewModel
 import com.example.qweather.view_models.city_weather.WeatherViewModelFactory
 import java.time.LocalDateTime
@@ -31,6 +35,8 @@ class ForecastDetailedFragment : Fragment() {
     var dateDown = 0
     var dailyForecastSize = 0
 
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
@@ -47,6 +53,10 @@ class ForecastDetailedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sharedPreferences =
+            requireContext().getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
+        var tempUnit = sharedPreferences.getString("selectedTemperature", "°C")
+
 
         val forecastRepository = WeatherRepository()
         val viewModelFactory = WeatherViewModelFactory(forecastRepository)
@@ -75,8 +85,9 @@ class ForecastDetailedFragment : Fragment() {
 
             }
             nextBt.setOnClickListener {
-                if (dateDown < 4) {
+                if (dateDown < dailyForecastSize-1) {
                     dateDown++
+
                     weatherViewModel.loadWeather(lat, lon, isQatar)
                 }
                 else{
@@ -95,15 +106,44 @@ class ForecastDetailedFragment : Fragment() {
                     dailyRecyclerView.adapter = dailyAdapter
                     dailyAdapter.notifyDataSetChanged()
                     rainValue.text = forecast[dateDown].rain.toString()
-                    pressureValue.text = forecast[dateDown].pressure.toString()
-
-                    temp.text = "${forecast[dateDown].temperature}°C"
-                    tempDown.text = "${forecast[dateDown].temperature_min}°C"
-                    tempUp.text = "${forecast[dateDown].temperature_max}°C"
+                    pressureValue.text =   forecast[dateDown].pressure.toString()
+                    temp.text =temperatureConverter(forecast[dateDown].temperature,
+                        tempUnit.toString()).toString()
+                    tempeUnit.text = tempUnit
+                    tempDown.text = "${temperatureConverter(forecast[dateDown].temperature_min,
+                        tempUnit.toString())}$tempUnit"
+                    tempUp.text = "${temperatureConverter(forecast[dateDown].temperature_max,
+                        tempUnit.toString())}$tempUnit"
                     condition.text = forecast[dateDown].weather_type
-                    approx.text = "Feels like ${forecast[dateDown].feels_like_day}°C"
+                    approx.text = "Feels like ${temperatureConverter(forecast[dateDown].feels_like_day,
+                        tempUnit.toString())}$tempUnit"
+
+                    if (forecast[dateDown].weather_type == "Clear"){
+                        cloudIcon.setImageResource(R.drawable.sun)
+                    }
+                    else if (forecast[dateDown].weather_type == "Overcast Clouds"){
+                        cloudIcon.setImageResource(R.drawable.few_clouds_ic)
+                    }
+                    else if (forecast[dateDown].weather_type == "Rain"){
+                        cloudIcon.setImageResource(R.drawable.rain_ic)
+                    }
+                    else if (forecast[dateDown].weather_type == "Snowy"){
+                        cloudIcon.setImageResource(R.drawable.snow_ic)
+                    }
+                    else if (forecast[dateDown].weather_type == "Dusty"){
+                        cloudIcon.setImageResource(R.drawable.dust_ic)
+                    }
+                    else if (forecast[dateDown].weather_type == "Mist"){
+                        cloudIcon.setImageResource(R.drawable.mist_ic)
+                    }
+                    else{
+                        cloudIcon.setImageResource(R.drawable.cloud_group)
+                    }
+
                     humiPercent.text = forecast[dateDown].humidity.toString()
                     windSpeed.text = forecast[dateDown].wind_speed.toString()
+                    val windDirectionIndex = getCompassIndex(forecast[dateDown].wind_direction)
+                    windDirection.text = compassPoints[windDirectionIndex]
                     val originalDateString = forecast[dateDown].date
 
                     val inputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a",Locale.ENGLISH)
@@ -118,11 +158,10 @@ class ForecastDetailedFragment : Fragment() {
                         Log.e("ForecastDetailedFragment", "Error formatting date: ${e.message}")
                         date.text = originalDateString
                     }
-                    windDirection.text = sharedPrefs.getString("LAST_WIND_DIRECTION", "N")
                 }
                 result?.hourlyForecast?.let { forecast ->
-                    val allHourlyForecasts: List<HourlyForecast> = forecast.map { hourlyWeather ->
-                        hourlyWeather.dayDetails[dateDown]
+                    val allHourlyForecasts: List<HourlyForecast> = forecast.flatMap { hourlyWeather ->
+                        hourlyWeather.dayDetails
                     }
                     hourlyAdapter = ForeCastHourlyAdapter(allHourlyForecasts)
                     binding.hourlyRecyclerView.adapter = hourlyAdapter
@@ -132,6 +171,7 @@ class ForecastDetailedFragment : Fragment() {
             }
         }
     }
+
 }
 
 

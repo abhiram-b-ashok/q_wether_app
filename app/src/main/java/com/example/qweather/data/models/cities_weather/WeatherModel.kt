@@ -45,7 +45,9 @@ data class DailyWeather(
     val weather_icon: String,
     val temperature_unit: String,
     val rain_unit: String,
-    val humidity_unit: String
+    val humidity_unit: String,
+    val wind_direction: Int
+
 )
 
 

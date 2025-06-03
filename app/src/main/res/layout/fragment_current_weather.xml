@@ -51,7 +51,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city_time"
-            android:src="@drawable/cloud_group" />
+            tools:src="@drawable/cloud_group" />
 
         <TextView
             android:id="@+id/city_temperature"
@@ -62,6 +62,7 @@
             tools:text="200"
             android:textColor="@color/white"
             android:textSize="50sp"
+            android:maxLength="5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city_weather_icon" />
 
@@ -105,13 +106,21 @@
             android:id="@+id/feels_lik_temp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:fontFamily="@font/poppins_light"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:maxLength="5"
             app:layout_constraintStart_toEndOf="@+id/feels_like"
             app:layout_constraintTop_toBottomOf="@+id/city_weather_condition"
             tools:text="200" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:textColor="@color/white"
+            tools:text="K"
+            android:id="@+id/tempe_Unit"
+            app:layout_constraintStart_toEndOf="@+id/feels_lik_temp"
+            app:layout_constraintTop_toBottomOf="@+id/city_weather_condition" />
 
         <ImageView
             android:id="@+id/ic_up"
@@ -132,6 +141,7 @@
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:maxLength="5"
             app:layout_constraintStart_toEndOf="@+id/ic_up"
             app:layout_constraintTop_toBottomOf="@+id/feels_like"
             tools:text="100" />
@@ -169,6 +179,7 @@
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:maxLength="5"
             app:layout_constraintEnd_toStartOf="@+id/temp_down_unit"
             app:layout_constraintStart_toEndOf="@+id/ic_down"
             app:layout_constraintTop_toBottomOf="@+id/feels_like"
@@ -275,7 +286,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
                 app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
-                tools:text = "23.2"
+                tools:text = "23.24"
+                android:maxLength="4"
                 android:textSize="18sp"
                 android:textColor="#08043D"
                 android:id="@+id/wind_speed"

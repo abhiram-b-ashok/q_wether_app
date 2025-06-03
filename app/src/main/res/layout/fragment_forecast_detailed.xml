@@ -110,17 +110,28 @@
                 android:layout_marginStart="20dp"
                 />
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#8A1538"
                 android:id="@+id/temp"
-                tools:text = "34.45°C"
+                tools:text = "34.45"
+                android:maxLength="5"
                 app:layout_constraintTop_toBottomOf="@+id/date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="20dp"
                 android:textSize="50sp"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#8A1538"
+                android:textSize="50sp"
+                android:id="@+id/tempe_unit"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+                app:layout_constraintStart_toEndOf="@+id/temp"
+                />
+
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -152,7 +163,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/cloud_group"
+                tools:src="@drawable/cloud_group"
+                android:id="@+id/cloud_icon"
                 android:layout_marginBottom="70dp"/>
             <ImageView
                 android:id="@+id/ic_up"
@@ -173,6 +185,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:maxLength="5"
                 app:layout_constraintStart_toEndOf="@+id/ic_up"
                 app:layout_constraintTop_toBottomOf="@+id/approx"
                 tools:text="100" />
@@ -210,6 +223,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:maxLength="5"
                 app:layout_constraintEnd_toStartOf="@+id/temp_down_unit"
                 app:layout_constraintStart_toEndOf="@+id/ic_down"
                 app:layout_constraintTop_toBottomOf="@+id/approx"

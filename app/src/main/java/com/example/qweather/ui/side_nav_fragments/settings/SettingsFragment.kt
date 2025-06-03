@@ -21,14 +21,13 @@ class SettingsFragment : Fragment() {
     private lateinit var list: ArrayList<DashboardSettingsModel>
 
     var selectedLanguage = 1
-    var selectedTemperature = 1
-    var selectedWind = 1
-    var selectedTide = 1
+    var selectedTemperature = "°C"
+    var selectedWind = "km/h"
+    var selectedTide = "m"
 
     private val PREF_NAME = "settingPreference"
     private val KEY_SELECTED_DASHBOARD_ITEMS = "selectedDashboardItems"
     private val KEY_ORDERED_TITLES = "dashboardOrderString"
-
 
 
     override fun onCreateView(
@@ -48,13 +47,13 @@ class SettingsFragment : Fragment() {
         selectedLanguage = sharedPreferences.getInt("selectedLanguage", 1)
         selectLanguage(selectedLanguage)
 
-        selectedTemperature = sharedPreferences.getInt("selectedTemperature", 1)
+        selectedTemperature = sharedPreferences.getString("selectedTemperature", "°C").toString()
         selectTemperature(selectedTemperature)
 
-        selectedWind = sharedPreferences.getInt("selectedWind", 1)
+        selectedWind = sharedPreferences.getString("selectedWind", "km/h").toString()
         selectWind(selectedWind)
 
-        selectedTide = sharedPreferences.getInt("selectedTide", 1)
+        selectedTide = sharedPreferences.getString("selectedTide", "m").toString()
         selectTide(selectedTide)
 
 
@@ -70,49 +69,49 @@ class SettingsFragment : Fragment() {
                 sharedPreferences.edit().putInt("selectedLanguage", selectedLanguage).apply()
             }
             celciusButton.setOnClickListener {
-                selectTemperature(1)
-                selectedTemperature = 1
-                sharedPreferences.edit().putInt("selectedTemperature", selectedTemperature).apply()
+                selectTemperature("°C")
+                selectedTemperature = "°C"
+                sharedPreferences.edit().putString("selectedTemperature", selectedTemperature).apply()
             }
             fahrenheitButton.setOnClickListener {
-                selectTemperature(2)
-                selectedTemperature = 2
-                sharedPreferences.edit().putInt("selectedTemperature", selectedTemperature).apply()
+                selectTemperature("F")
+                selectedTemperature = "F"
+                sharedPreferences.edit().putString("selectedTemperature", selectedTemperature).apply()
             }
             kelvinButton.setOnClickListener {
-                selectTemperature(3)
-                selectedTemperature = 3
-                sharedPreferences.edit().putInt("selectedTemperature", selectedTemperature).apply()
+                selectTemperature("K")
+                selectedTemperature = "K"
+                sharedPreferences.edit().putString("selectedTemperature", selectedTemperature).apply()
             }
             kmButton.setOnClickListener {
-                selectWind(1)
-                selectedWind = 1
-                sharedPreferences.edit().putInt("selectedWind", selectedWind).apply()
+                selectWind("km/h")
+                selectedWind = "km/h"
+                sharedPreferences.edit().putString("selectedWind", selectedWind).apply()
             }
             knotButton.setOnClickListener {
-                selectWind(2)
-                selectedWind = 2
-                sharedPreferences.edit().putInt("selectedWind", selectedWind).apply()
+                selectWind("kt")
+                selectedWind = "kt"
+                sharedPreferences.edit().putString("selectedWind", selectedWind).apply()
             }
             msButton.setOnClickListener {
-                selectWind(3)
-                selectedWind = 3
-                sharedPreferences.edit().putInt("selectedWind", selectedWind).apply()
+                selectWind("m/s")
+                selectedWind = "m/s"
+                sharedPreferences.edit().putString("selectedWind", selectedWind).apply()
             }
             mphButton.setOnClickListener {
-                selectWind(4)
-                selectedWind = 4
-                sharedPreferences.edit().putInt("selectedWind", selectedWind).apply()
+                selectWind("mph")
+                selectedWind = "mph"
+                sharedPreferences.edit().putString("selectedWind", selectedWind).apply()
             }
             mButton.setOnClickListener {
-                selectTide(1)
-                selectedTide = 1
-                sharedPreferences.edit().putInt("selectedTide", selectedTide).apply()
+                selectTide("m")
+                selectedTide = "m"
+                sharedPreferences.edit().putString("selectedTide", selectedTide).apply()
             }
             ftButton.setOnClickListener {
-                selectTide(2)
-                selectedTide = 2
-                sharedPreferences.edit().putInt("selectedTide", selectedTide).apply()
+                selectTide("ft")
+                selectedTide = "ft"
+                sharedPreferences.edit().putString("selectedTide", selectedTide).apply()
             }
 
 
@@ -243,16 +242,16 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun selectTemperature(temperature: Int) {
+    private fun selectTemperature(temperature: String) {
         binding.apply {
-            if (temperature == 1) {
+            if (temperature == "°C") {
                 celciusLabel.setTextColor(resources.getColor(R.color.maroon))
                 fahrenheitLabel.setTextColor(resources.getColor(R.color.white))
                 kelvinLabel.setTextColor(resources.getColor(R.color.white))
                 celciusButtonLayout.setBackgroundColor(resources.getColor(R.color.white))
                 fahrenheitButtonLayout.setBackgroundColor(resources.getColor(R.color.maroon))
                 kelvinButtonLayout.setBackgroundColor(resources.getColor(R.color.maroon))
-            } else if (temperature == 2) {
+            } else if (temperature == "F") {
                 fahrenheitLabel.setTextColor(resources.getColor(R.color.maroon))
                 celciusLabel.setTextColor(resources.getColor(R.color.white))
                 kelvinLabel.setTextColor(resources.getColor(R.color.white))
@@ -271,9 +270,9 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun selectWind(wind: Int) {
+    private fun selectWind(wind: String) {
         binding.apply {
-            if (wind == 1) {
+            if (wind == "km/h") {
                 kmLabel.setTextColor(resources.getColor(R.color.darkmaroon))
                 knotLabel.setTextColor(resources.getColor(R.color.white))
                 msLabel.setTextColor(resources.getColor(R.color.white))
@@ -282,7 +281,7 @@ class SettingsFragment : Fragment() {
                 knotButtonLayout.setBackgroundColor(resources.getColor(R.color.darkmaroon))
                 msButtonLayout.setBackgroundColor(resources.getColor(R.color.darkmaroon))
                 mphButtonLayout.setBackgroundColor(resources.getColor(R.color.darkmaroon))
-            } else if (wind == 2) {
+            } else if (wind == "kt") {
                 knotLabel.setTextColor(resources.getColor(R.color.darkmaroon))
                 kmLabel.setTextColor(resources.getColor(R.color.white))
                 msLabel.setTextColor(resources.getColor(R.color.white))
@@ -291,7 +290,7 @@ class SettingsFragment : Fragment() {
                 kmButtonLayout.setBackgroundColor(resources.getColor(R.color.darkmaroon))
                 msButtonLayout.setBackgroundColor(resources.getColor(R.color.darkmaroon))
                 mphButtonLayout.setBackgroundColor(resources.getColor(R.color.darkmaroon))
-            } else if (wind == 3) {
+            } else if (wind == "m/s") {
                 msLabel.setTextColor(resources.getColor(R.color.darkmaroon))
                 kmLabel.setTextColor(resources.getColor(R.color.white))
                 knotLabel.setTextColor(resources.getColor(R.color.white))
@@ -313,10 +312,10 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun selectTide(tide: Int) {
+    private fun selectTide(tide: String) {
 
         binding.apply {
-            if (tide == 1) {
+            if (tide == "m") {
                 mLabel.setTextColor(resources.getColor(R.color.maroon))
                 ftLabel.setTextColor(resources.getColor(R.color.white))
                 mButtonLayout.setBackgroundColor(resources.getColor(R.color.white))
@@ -330,5 +329,6 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+
 
 }

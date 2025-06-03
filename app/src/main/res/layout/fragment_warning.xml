@@ -100,13 +100,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/temp_value"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="47dp"
             android:textColor="#08043D"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@+id/warning_temp"
-            app:layout_constraintEnd_toEndOf="@+id/warning_temp"
+            app:layout_constraintEnd_toStartOf="@+id/tempe_unit"
             app:layout_constraintTop_toBottomOf="@+id/temp_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_temp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempe_unit"
+            android:textColor="#08043D"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/temp_value"
+            app:layout_constraintTop_toBottomOf="@+id/temp_label"
+            app:layout_constraintBottom_toBottomOf="@+id/warning_temp"
+            app:layout_constraintEnd_toEndOf="@+id/warning_temp"/>
 
 
         <ImageView
@@ -124,26 +134,37 @@
             android:id="@+id/wind_label"
             android:layout_marginStart="25dp"
             android:textSize="14sp"
+            android:maxLength="4"
             app:layout_constraintStart_toStartOf="@+id/warning_wind"
             app:layout_constraintTop_toTopOf="@+id/warning_wind"
             app:layout_constraintBottom_toTopOf="@+id/wind_value"
             app:layout_constraintEnd_toEndOf="@+id/warning_wind"
             android:text="WIND"
             android:textColor="#535353"
-
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/wind_value"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="45dp"
             android:textColor="#08043D"
             android:textSize="13sp"
+            android:maxLength="4"
             app:layout_constraintStart_toStartOf="@+id/warning_wind"
             app:layout_constraintTop_toBottomOf="@+id/wind_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_wind"
-            app:layout_constraintEnd_toEndOf="@+id/warning_wind"
+            app:layout_constraintEnd_toStartOf="@+id/winde_unit"
             />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/winde_unit"
+            android:textColor="#08043D"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/wind_value"
+            app:layout_constraintTop_toBottomOf="@+id/wind_label"
+            app:layout_constraintBottom_toBottomOf="@+id/warning_wind"
+            app:layout_constraintEnd_toEndOf="@+id/warning_wind"/>
 
 
         <ImageView

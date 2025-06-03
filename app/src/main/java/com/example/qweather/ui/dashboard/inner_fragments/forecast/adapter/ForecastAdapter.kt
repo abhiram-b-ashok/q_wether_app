@@ -1,12 +1,15 @@
 package com.example.qweather.ui.dashboard.inner_fragments.forecast.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.R
 import com.example.qweather.data.models.cities_weather.DailyWeather
 import com.example.qweather.databinding.CellForecastDailyItemsBinding
+import com.example.qweather.utility_funtions.temperatureConverter
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -16,7 +19,6 @@ class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         val binding = CellForecastDailyItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ForecastViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
@@ -30,7 +32,8 @@ class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapt
     class ForecastViewHolder(private val binding: CellForecastDailyItemsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DailyWeather, position: Int) {
 
-
+            val sharedPreferences = binding.root.context.getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
+            var tempUnit = sharedPreferences.getString("selectedTemperature", "°C")
             val formattedDisplayDate = try {
                 val dateStringFromApi = item.date
                 Log.d("ForecastAdapter", "Attempting to parse date: '$dateStringFromApi'")
@@ -50,13 +53,13 @@ class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapt
                 item.date
             }
             binding.day.text =formattedDisplayDate
-            binding.temperature.text = item.temperature.toString()
-            binding.temperatureUnit.text = item.temperature_unit
+            binding.temperature.text = temperatureConverter(item.temperature, tempUnit.toString()).toString()
+            binding.temperatureUnit.text = tempUnit
             binding.condition.text = item.weather_type
-            binding.minMaxTemp.text = "${item.temperature_min}/${item.temperature_max}${item.temperature_unit}"
+            binding.minMaxTemp.text = "${temperatureConverter(item.temperature_min, tempUnit.toString())}/${temperatureConverter(item.temperature_max, tempUnit.toString())}$tempUnit"
+
             if (position%2!=0) {
                 binding.layout.setBackgroundResource(R.color.lightYellow)
-
             }
 
         }
