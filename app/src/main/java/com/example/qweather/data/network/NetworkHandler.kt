@@ -42,3 +42,5 @@ sealed class NetworkResult<T>(
 
 }
 
+
+

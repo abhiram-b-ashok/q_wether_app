@@ -74,19 +74,30 @@
         tools:text="Cloudy" />
 
     <TextView
-        android:id="@+id/min_max_temp"
+        android:id="@+id/max_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/temperature"
+        app:layout_constraintEnd_toStartOf="@+id/min_temp"
+        app:layout_constraintTop_toTopOf="@+id/day"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="200" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/min_temp"
         app:layout_constraintBottom_toBottomOf="@+id/temperature"
         app:layout_constraintEnd_toStartOf="@+id/temp_unit"
         app:layout_constraintTop_toTopOf="@+id/day"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:textSize="15sp"
-        tools:text="200/300" />
+        tools:text="200" />
 
     <TextView
-        android:id="@+id/temp_unit"
+        android:id="@+id/tempe_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="K"

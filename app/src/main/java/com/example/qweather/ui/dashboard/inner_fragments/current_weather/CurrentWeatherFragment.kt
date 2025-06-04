@@ -136,9 +136,6 @@ class CurrentWeatherFragment : Fragment() {
                     } else if (current.weather_type == "Few Clouds") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.currrent_few_clouds_bg)
                         cityWeatherIcon.setImageResource(R.drawable.few_clouds_ic)
-                    } else if (current.weather_type == "Broken Clouds") {
-                        currentWeatherLayout.setBackgroundResource(R.drawable.broken_clouds_ic)
-                        cityWeatherIcon.setImageResource(R.drawable.few_clouds_ic)
                     } else {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_shower_rain_bg)
                         cityWeatherIcon.setImageResource(R.drawable.shower_rain_ic)

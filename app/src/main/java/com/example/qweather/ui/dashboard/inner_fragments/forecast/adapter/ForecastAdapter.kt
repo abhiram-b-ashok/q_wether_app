@@ -56,7 +56,9 @@ class ForecastAdapter(private val list: List<DailyWeather>) : RecyclerView.Adapt
             binding.temperature.text = temperatureConverter(item.temperature, tempUnit.toString()).toString()
             binding.temperatureUnit.text = tempUnit
             binding.condition.text = item.weather_type
-            binding.minMaxTemp.text = "${temperatureConverter(item.temperature_min, tempUnit.toString())}/${temperatureConverter(item.temperature_max, tempUnit.toString())}$tempUnit"
+            binding.maxTemp.text = "${temperatureConverter(item.temperature_min, tempUnit.toString())}/"
+            binding.minTemp.text = temperatureConverter(item.temperature_max, tempUnit.toString()).toString()
+            binding.tempeUnit.text = tempUnit
 
             if (position%2!=0) {
                 binding.layout.setBackgroundResource(R.color.lightYellow)
