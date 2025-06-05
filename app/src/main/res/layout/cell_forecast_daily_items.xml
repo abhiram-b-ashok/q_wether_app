@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/min_temp"
         app:layout_constraintBottom_toBottomOf="@+id/temperature"
-        app:layout_constraintEnd_toStartOf="@+id/temp_unit"
+        app:layout_constraintEnd_toStartOf="@+id/tempe_unit"
         app:layout_constraintTop_toTopOf="@+id/day"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
@@ -107,7 +107,7 @@
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/day"
-        android:textSize="20sp"/>
+        android:textSize="15sp"/>
 <!--    <View-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="1dp"-->

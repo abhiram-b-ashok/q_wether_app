@@ -144,3 +144,4 @@ data class TidalArea (
     var longitude: Double? = null,
     var name_ar: String? = null
 )
+

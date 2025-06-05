@@ -110,13 +110,13 @@ class ForecastDetailedFragment : Fragment() {
                     temp.text =temperatureConverter(forecast[dateDown].temperature,
                         tempUnit.toString()).toString()
                     tempeUnit.text = tempUnit
-                    tempDown.text = "${temperatureConverter(forecast[dateDown].temperature_min,
-                        tempUnit.toString())}$tempUnit"
-                    tempUp.text = "${temperatureConverter(forecast[dateDown].temperature_max,
-                        tempUnit.toString())}$tempUnit"
+                    tempDown.text = temperatureConverter(forecast[dateDown].temperature_min,
+                        tempUnit.toString()).toString()
+                    tempUp.text = temperatureConverter(forecast[dateDown].temperature_max,
+                        tempUnit.toString()).toString()
                     condition.text = forecast[dateDown].weather_type
                     approx.text = "Feels like ${temperatureConverter(forecast[dateDown].feels_like_day,
-                        tempUnit.toString())}$tempUnit"
+                        tempUnit.toString())}"
 
                     if (forecast[dateDown].weather_type == "Clear"){
                         cloudIcon.setImageResource(R.drawable.sun)
@@ -160,9 +160,10 @@ class ForecastDetailedFragment : Fragment() {
                     }
                 }
                 result?.hourlyForecast?.let { forecast ->
-                    val allHourlyForecasts: List<HourlyForecast> = forecast.flatMap { hourlyWeather ->
-                        hourlyWeather.dayDetails
+                    val allHourlyForecasts: List<HourlyForecast> = forecast.map { hourlyWeather ->
+                        hourlyWeather.dayDetails[dateDown]
                     }
+
                     hourlyAdapter = ForeCastHourlyAdapter(allHourlyForecasts)
                     binding.hourlyRecyclerView.adapter = hourlyAdapter
                     hourlyAdapter.notifyDataSetChanged()

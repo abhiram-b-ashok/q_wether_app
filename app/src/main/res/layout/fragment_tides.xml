@@ -56,9 +56,8 @@
             android:textColor="@color/black"
             android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/tide_value"
-
             app:layout_constraintTop_toBottomOf="@+id/tide_heading"
-            tools:text="m" />
+            android:text="m" />
 
         <TextView
             android:id="@+id/last_update"
@@ -73,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#1D1D1D"
+            android:id="@+id/time"
             app:layout_constraintStart_toEndOf="@+id/last_update"
             app:layout_constraintTop_toBottomOf="@+id/tide_unit"
             tools:text="09:34 AM" />
@@ -152,7 +152,7 @@
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/tide_high_value"
             app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
-            tools:text="M" />
+            android:text="m" />
 
         <TextView
             android:id="@+id/tide_low_unit"
@@ -162,7 +162,7 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toStartOf="@+id/tide_low"
             app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
-            tools:text="M" />
+            android:text="m" />
 
         <TextView
             android:id="@+id/view_details_button"
