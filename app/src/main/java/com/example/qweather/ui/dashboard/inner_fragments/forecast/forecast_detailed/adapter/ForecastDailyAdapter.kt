@@ -56,8 +56,8 @@ class ForecastDailyAdapter(private val list: List<DailyWeather>) : RecyclerView.
                 temperature.text = temperatureConverter(item.temperature, tempUnit.toString()).toString()
                 temperatureUnit.text = tempUnit.toString()
                 condition.text = item.weather_type
-                maxTemp.text = "${temperatureConverter(item.temperature_max, tempUnit.toString())} /"
-                minTemp.text = temperatureConverter(item.temperature_min, tempUnit.toString()).toString()
+                maxTemp.text = temperatureConverter(item.temperature_max, tempUnit.toString()).toString()
+                minTemp.text ="/${temperatureConverter(item.temperature_min, tempUnit.toString())}"
                 tempeUnit.text = tempUnit
                 if (position%2!=0) {
                     layout.setBackgroundResource(R.color.lightYellow)

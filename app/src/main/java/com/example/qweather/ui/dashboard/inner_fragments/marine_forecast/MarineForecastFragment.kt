@@ -23,7 +23,7 @@ class MarineForecastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.marineForecastLayOut.setOnClickListener {
-            findNavController().navigate(R.id.action_defaultDashboardFragment_to_weatherMapWebViewFragment)
+            findNavController().navigate(R.id.action_defaultDashboardFragment_to_marineForCastDeatiledFragment)
         }
 
     }

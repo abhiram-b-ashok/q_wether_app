@@ -16,8 +16,6 @@ import org.xmlpull.v1.XmlPullParserFactory
 import java.io.StringReader
 import java.util.Date
 
-
-
 class TidesFragment : Fragment() {
 
     private lateinit var binding: FragmentTidesBinding

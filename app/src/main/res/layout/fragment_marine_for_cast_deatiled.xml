@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/image_forecast_container"
+    tools:context=".ui.dashboard.inner_fragments.marine_forecast.marine_forecast_detailed.MarineForCastDeatiledFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marine Forecast"
+        android:paddingBottom="10dp"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/header_label"/>
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/image_of_marine_forecast"
+    android:scaleType="fitXY"
+    app:layout_constraintTop_toBottomOf="@+id/header_label"
+    android:src="@drawable/image_of_forecast_marine"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

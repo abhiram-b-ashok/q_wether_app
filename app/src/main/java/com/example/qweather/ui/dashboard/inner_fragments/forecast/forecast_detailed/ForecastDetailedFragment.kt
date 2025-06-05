@@ -57,7 +57,6 @@ class ForecastDetailedFragment : Fragment() {
             requireContext().getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
         var tempUnit = sharedPreferences.getString("selectedTemperature", "°C")
 
-
         val forecastRepository = WeatherRepository()
         val viewModelFactory = WeatherViewModelFactory(forecastRepository)
         weatherViewModel =

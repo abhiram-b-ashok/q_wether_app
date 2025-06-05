@@ -48,8 +48,6 @@ class CurrentWeatherFragment : Fragment() {
         var windUnit = sharedPreferences.getString("selectedWind", "km/h")
 
 
-
-
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
             result?.currentWeather?.let { current ->
                 Log.d("WeatherVM", "Current Weather: $current")

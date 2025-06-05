@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.qweather.data.models.activities.ActivityModel
 import com.example.qweather.data.network.NetworkResult
-import com.example.qweather.data.network.api_call.getActivitiesApi
 import com.example.qweather.repository.ActivityRepository
 import kotlinx.coroutines.launch
 

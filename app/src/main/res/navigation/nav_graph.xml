@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_defaultDashboardFragment_to_radarWebViewFragment"
             app:destination="@id/radarWebViewFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_marineForCastDeatiledFragment"
+            app:destination="@id/marineForCastDeatiledFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"
@@ -135,5 +138,10 @@
         android:name="com.example.qweather.ui.side_nav_fragments.rain_radar.radar_web_view.RadarWebViewFragment"
         android:label="fragment_radar_web_view"
         tools:layout="@layout/fragment_radar_web_view" />
+    <fragment
+        android:id="@+id/marineForCastDeatiledFragment"
+        android:name="com.example.qweather.ui.dashboard.inner_fragments.marine_forecast.marine_forecast_detailed.MarineForCastDeatiledFragment"
+        android:label="fragment_marine_for_cast_deatiled"
+        tools:layout="@layout/fragment_marine_for_cast_deatiled" />
 
 </navigation>

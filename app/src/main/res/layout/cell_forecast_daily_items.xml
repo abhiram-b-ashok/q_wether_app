@@ -81,6 +81,7 @@
         app:layout_constraintEnd_toStartOf="@+id/min_temp"
         app:layout_constraintTop_toTopOf="@+id/day"
         android:fontFamily="@font/poppins_regular"
+        android:maxLength="5"
         android:textColor="@color/black"
         android:textSize="15sp"
         tools:text="200" />
@@ -93,6 +94,7 @@
         app:layout_constraintTop_toTopOf="@+id/day"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
+        android:maxLength="6"
         android:textSize="15sp"
         tools:text="200" />
 

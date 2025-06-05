@@ -63,7 +63,7 @@
             android:id="@+id/last_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last updated at "
+            android:text="Last updated at: "
             android:textColor="#1D1D1D"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tide_unit" />
@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:textColor="#1D1D1D"
             android:id="@+id/time"
+            android:maxLength="16"
             app:layout_constraintStart_toEndOf="@+id/last_update"
             app:layout_constraintTop_toBottomOf="@+id/tide_unit"
             tools:text="09:34 AM" />
