@@ -34,9 +34,21 @@ class SunInfoFragment : Fragment() {
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
             result?.currentWeather?.let { currentWeather ->
                 binding.apply {
+                    val sunrise = currentWeather.sunrise
+                    val sunset = currentWeather.sunset
+                    val currentTime = System.currentTimeMillis() / 1000L
 
-                    sunriseTime.text = convertTimestampToTime(currentWeather.sunrise.toLong())
-                    sunsetTime.text = convertTimestampToTime(currentWeather.sunset.toLong())
+                    if (sunrise != null && sunset != null) {
+                        sunriseTime.text = convertTimestampToTime(sunrise)
+                        sunsetTime.text = convertTimestampToTime(sunset)
+
+                        val totalDaylight = sunset - sunrise
+                        val timeSinceSunrise = currentTime - sunrise
+
+                        val sweepPercent = (timeSinceSunrise * 100f / totalDaylight).coerceIn(0f, 100f)
+                        sunRiseView.setSweepAngleAnimator(sweepPercent)
+                    }
+
                 }
             }
         }
