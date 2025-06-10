@@ -1,5 +1,9 @@
 package com.example.qweather.utility_funtions
 
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 
 fun temperatureConverter(temperature: Double, unit: String): Double {
     return when (unit) {
@@ -43,4 +47,6 @@ val compassAngles = listOf(0, 45, 90, 135, 180, 225, 270, 315)
     }
     return closestIndex
 }
+
+
 

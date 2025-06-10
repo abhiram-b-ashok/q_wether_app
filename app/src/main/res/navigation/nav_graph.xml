@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_defaultDashboardFragment_to_marineForCastDeatiledFragment"
             app:destination="@id/marineForCastDeatiledFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_tideDetailedFragment"
+            app:destination="@id/tideDetailedFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"
@@ -143,5 +146,10 @@
         android:name="com.example.qweather.ui.dashboard.inner_fragments.marine_forecast.marine_forecast_detailed.MarineForCastDeatiledFragment"
         android:label="fragment_marine_for_cast_deatiled"
         tools:layout="@layout/fragment_marine_for_cast_deatiled" />
+    <fragment
+        android:id="@+id/tideDetailedFragment"
+        android:name="com.example.qweather.ui.dashboard.inner_fragments.tides.tide_detailed.TideDetailedFragment"
+        android:label="fragment_tide_detailed"
+        tools:layout="@layout/fragment_tide_detailed" />
 
 </navigation>

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="15dp"
     app:cardElevation="0dp"
+    android:id="@+id/layout"
     tools:cardBackgroundColor="@color/black"
     tools:context=".ui.dashboard.inner_fragments.current_weather.CurrentWeatherFragment">
 

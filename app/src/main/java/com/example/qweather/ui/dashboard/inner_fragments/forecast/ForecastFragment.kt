@@ -36,6 +36,9 @@ class ForecastFragment : Fragment() {
             findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToForecastDetailedFragment())
 
         }
+        binding.layout.setOnClickListener {
+            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToForecastDetailedFragment())
+        }
 
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
             result?.dailyForecast?.let { forecast ->

@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.databinding.FragmentTidesBinding
 import com.example.qweather.repository.TideAPI
+import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
 import com.example.qweather.utility_funtions.tideConverter
 import kotlinx.coroutines.launch
 import org.xmlpull.v1.XmlPullParserFactory
@@ -42,6 +44,9 @@ class TidesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getTides()
+        binding.viewDetailsButton.setOnClickListener {
+            findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToTideDetailedFragment())
+        }
     }
 
     private fun getTides() {
@@ -55,7 +60,6 @@ class TidesFragment : Fragment() {
                     val tidesDocument = TideXmlDocument.readXml(parser)
 
                     if (tidesDocument != null) {
-                        // FIX: Instantiate with an empty constructor and set properties individually.
                         val newTidalData = TidalViewData()
                         newTidalData.status = Status.SUCCESS
                         newTidalData.document = tidesDocument

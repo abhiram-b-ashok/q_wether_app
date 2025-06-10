@@ -28,9 +28,9 @@ class SunRiseView @JvmOverloads constructor(
     private val dashedPaint = Paint().apply {
         color = Color.parseColor("#0095DA")
         style = Paint.Style.STROKE
-        pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 0f)
+        pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 0f) // makes dashed form for the path.
         strokeWidth = 4f
-        strokeCap = Paint.Cap.ROUND
+        strokeCap = Paint.Cap.ROUND //makes rounded edge for dashed lines.
         isAntiAlias = true
     }
 
@@ -49,7 +49,7 @@ class SunRiseView @JvmOverloads constructor(
     private val dashedPath = Path()
 
     private val sunDrawable: Drawable =
-        ContextCompat.getDrawable(context, R.drawable.sun)
+        ContextCompat.getDrawable(context, R.drawable.sweep_sun_ic)
             ?: throw IllegalStateException("Drawable sun not found")
 
     override fun onDraw(canvas: Canvas) {

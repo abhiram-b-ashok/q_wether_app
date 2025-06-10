@@ -125,7 +125,7 @@ class TidalViewData {
     var document: TideXmlDocument? = null
     var dates: List<Long>? = null
     var area: TidalAreaTag? = null
-    var date: Long? = null
+    var date: Long = 0
     var values: List<TidalValueTag>? = null
 
     var currentHeightMeters: Double? = null

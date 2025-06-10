@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentCurrentWeatherBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
+import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
 import com.example.qweather.utility_funtions.compassAngles
 import com.example.qweather.utility_funtions.compassPoints
 import com.example.qweather.utility_funtions.getCompassIndex
@@ -54,6 +56,9 @@ class CurrentWeatherFragment : Fragment() {
 
 
                 binding.apply {
+                    layout.setOnClickListener {
+                        findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToForecastDetailedFragment())
+                    }
                     cityName.text = sharedPrefs.getString("LAST_SELECTED_CITY", "Qatar")
                     val timeStamp = current.time
                     cityTime.text = convertTimestampToTime(timeStamp)

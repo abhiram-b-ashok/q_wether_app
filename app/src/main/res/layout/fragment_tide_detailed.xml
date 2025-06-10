@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dashboard.inner_fragments.tides.tide_detailed.TideDetailedFragment">
+
+    <TextView
+        android:id="@+id/header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingBottom="20dp"
+        android:text="Tide"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weather_news_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/location_bottom_sheet_shape"
+            android:paddingHorizontal="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_label">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/date_change_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/prev_bt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/previous_bt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/next_bt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/next_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/date_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/date_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <TextView
+                    android:id="@+id/date_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingTop="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/date_container"
+                    app:layout_constraintEnd_toEndOf="@+id/date_container"
+                    app:layout_constraintStart_toStartOf="@+id/date_container"
+                    app:layout_constraintTop_toTopOf="@+id/date_container"
+                    tools:text="Thu, 19 May, 2025" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="15dp"
+                android:layout_marginHorizontal="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/date_change_layout"
+                android:background="@drawable/notice_frames"
+                android:paddingBottom="15dp"
+                android:id="@+id/container">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8A1538"
+                    tools:text = "Doha"
+                    android:id="@+id/city_name"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/city_name"
+                    android:textColor="#1D1D1D"
+                    tools:text ="Thu, 19 May, 11:00 AM"
+                    android:id="@+id/date"
+
+                    android:layout_marginStart="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8A1538"
+                    android:id="@+id/temp"
+                    tools:text = "34.45"
+                    android:maxLength="5"
+                    app:layout_constraintTop_toBottomOf="@+id/date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:textSize="50sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8A1538"
+                    android:textSize="50sp"
+                    android:id="@+id/tempe_unit"
+                    app:layout_constraintTop_toBottomOf="@+id/date"
+                    app:layout_constraintStart_toEndOf="@+id/temp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#1D1D1D"
+                    android:id="@+id/condition"
+                    tools:text = "Sunny"
+                    android:layout_marginStart="20dp"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toBottomOf="@+id/temp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:src="@drawable/cloud_group"
+                    android:id="@+id/cloud_icon"
+                    android:layout_marginBottom="70dp"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container2"
+                app:layout_constraintTop_toBottomOf="@+id/container"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tide_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Current Tide"
+                    android:textColor="#0095DA"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/tide_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:src="@drawable/tide_ic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_heading" />
+
+                <TextView
+                    android:id="@+id/tide_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toEndOf="@+id/tide_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_heading"
+                    tools:text="0.55" />
+
+                <TextView
+                    android:id="@+id/tide_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toEndOf="@+id/tide_value"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_heading"
+                    android:text="m" />
+
+                <TextView
+                    android:id="@+id/last_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last updated at: "
+                    android:textColor="#1D1D1D"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_unit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#1D1D1D"
+                    android:id="@+id/time"
+                    android:maxLength="16"
+                    app:layout_constraintStart_toEndOf="@+id/last_update"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_unit"
+                    tools:text="09:34 AM" />
+
+                <ImageView
+                    android:id="@+id/line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:src="@drawable/tide_line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/last_update" />
+
+                <ImageView
+                    android:id="@+id/tide_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tide_high"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                <ImageView
+                    android:id="@+id/tide_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tide_low"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                <TextView
+                    android:id="@+id/tide_high_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High"
+                    android:textColor="#8D1B3D"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/tide_high"
+                    app:layout_constraintTop_toBottomOf="@+id/line" />
+
+
+                <TextView
+                    android:id="@+id/tide_low_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Low"
+                    android:textColor="#8D1B3D"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tide_low"
+                    app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                <TextView
+                    android:id="@+id/tide_high_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2B2758"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/tide_high"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
+                    tools:text="0.005" />
+
+                <TextView
+                    android:id="@+id/tide_low_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2B2758"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tide_low_unit"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
+                    tools:text="0.005" />
+
+                <TextView
+                    android:id="@+id/tide_high_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2B2758"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/tide_high_value"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
+                    android:text="m" />
+
+                <TextView
+                    android:id="@+id/tide_low_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2B2758"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tide_low"
+                    app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
+                    android:text="m" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/hourly_tides_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Hourly Tides"
+                android:textColor="#0095DA"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container2" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
