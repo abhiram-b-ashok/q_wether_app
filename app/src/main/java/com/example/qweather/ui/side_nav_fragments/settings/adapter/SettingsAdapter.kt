@@ -47,7 +47,7 @@ class SettingsAdapter(private val items: List<DashboardSettingsModel>) : Recycle
 //                }
                 if (item.title == "Current Weather") {
                     toggleImg.setImageResource(R.drawable.default_selected_ic)
-                    toggleImg.isEnabled = false // optional: disables the click
+                    toggleImg.isEnabled = false
                 } else {
                     toggleImg.isEnabled = true
                     toggleImg.setImageResource(if (item.isSelect) R.drawable.selected_ic else R.drawable.to_select_ic)

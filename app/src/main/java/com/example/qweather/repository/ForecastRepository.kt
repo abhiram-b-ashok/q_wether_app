@@ -55,9 +55,7 @@ class ForecastRepository {
                     callback(NetworkResult.Error("HTTP error: ${response.code}"))
                 }
             }
-
         })
-
     }
 
 }

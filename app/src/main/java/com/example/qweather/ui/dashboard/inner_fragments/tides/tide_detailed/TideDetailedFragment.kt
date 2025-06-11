@@ -106,6 +106,7 @@ class TideDetailedFragment : Fragment() {
                 }
 
             }
+
             weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
                 result?.dailyForecast?.let { forecast ->
                     dailyForecastSize = (forecast.size)

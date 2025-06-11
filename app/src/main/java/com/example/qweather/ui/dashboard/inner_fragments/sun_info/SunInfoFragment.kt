@@ -32,10 +32,10 @@ class SunInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
-            result?.currentWeather?.let { currentWeather ->
+            result?.dailyForecast?.let { currentWeather ->
                 binding.apply {
-                    val sunrise = currentWeather.sunrise
-                    val sunset = currentWeather.sunset
+                    val sunrise = currentWeather[0].sunrise
+                    val sunset = currentWeather[0].sunset
                     val currentTime = System.currentTimeMillis() / 1000L
 
                     if (sunrise != null && sunset != null) {

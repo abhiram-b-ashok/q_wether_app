@@ -11,7 +11,14 @@ class TidesCustomView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+    private val linesPaint = Paint().apply {
+        color = Color.GRAY
+        strokeWidth = 2f
+        isAntiAlias = true
+    }
+    private val textPaint = Paint().apply {
 
+    }
 
 
 }

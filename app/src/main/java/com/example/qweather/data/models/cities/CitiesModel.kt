@@ -70,6 +70,7 @@ data class WorldCityData(
     val utcOffset: String,
     @Json(name = "name_ar")
     val nameAr: String
+
 )
 
 

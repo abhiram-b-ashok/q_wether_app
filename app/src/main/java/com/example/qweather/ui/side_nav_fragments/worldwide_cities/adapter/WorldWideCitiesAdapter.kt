@@ -1,5 +1,6 @@
 package com.example.qweather.ui.side_nav_fragments.worldwide_cities.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,6 @@ class FavoriteCitiesAdapter(
             binding.cityWeatherDesc.text = city.weatherType
             binding.cityCurrentTime.text = city.date
 
-            // Click to remove from favorites
             binding.cityName.setOnClickListener {
                 onRemoveClickListener?.invoke(city)
             }
@@ -46,6 +46,18 @@ class FavoriteCitiesAdapter(
 
     fun updateList(newFavorites: List<FavoriteCitiesModel>) {
         favorites = newFavorites
+        Log.i("@@@@@@FavoriteCitiesModel", "updateList: $favorites")
         notifyDataSetChanged()
     }
+
+    fun getItemAt(position: Int): FavoriteCitiesModel? {
+        return if (position >= 0 && position < favorites.size) {
+            favorites[position]
+        } else {
+            null
+        }
+    }
 }
+
+
+

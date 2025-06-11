@@ -36,7 +36,6 @@ class ForecastDetailedFragment : Fragment() {
     var dailyForecastSize = 0
 
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
@@ -75,67 +74,72 @@ class ForecastDetailedFragment : Fragment() {
                 if (dateDown > 0) {
                     dateDown--
                     weatherViewModel.loadWeather(lat, lon, isQatar)
-                }
-                else{
+                } else {
                     prevBt.isEnabled = false
-                    Log.d("ForecastDetailedFragment", "Daily Forecast: $dailyForecastSize is out of bounds")
+                    Log.d(
+                        "ForecastDetailedFragment",
+                        "Daily Forecast: $dailyForecastSize is out of bounds"
+                    )
                 }
-
-
             }
             nextBt.setOnClickListener {
-                if (dateDown < dailyForecastSize-1) {
+                if (dateDown < dailyForecastSize - 1) {
                     dateDown++
 
                     weatherViewModel.loadWeather(lat, lon, isQatar)
-                }
-                else{
+                } else {
                     nextBt.isEnabled = false
-                    Log.d("ForecastDetailedFragment", "Daily Forecast: $dailyForecastSize is out of bounds")
+                    Log.d(
+                        "ForecastDetailedFragment",
+                        "Daily Forecast: $dailyForecastSize is out of bounds"
+                    )
                 }
-
-
             }
 
             weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
                 result?.dailyForecast?.let { forecast ->
-                     dailyForecastSize = (forecast.size)
+                    dailyForecastSize = (forecast.size)
                     Log.d("ForecastDetailedFragment", "Daily Forecastsize: ${forecast.size}")
+                    Log.d("ForecastDetailedFragment", "Daily Forecast: $forecast")
                     dailyAdapter = ForecastDailyAdapter(forecast)
                     dailyRecyclerView.adapter = dailyAdapter
                     dailyAdapter.notifyDataSetChanged()
                     rainValue.text = forecast[dateDown].rain.toString()
-                    pressureValue.text =   forecast[dateDown].pressure.toString()
-                    temp.text =temperatureConverter(forecast[dateDown].temperature,
-                        tempUnit.toString()).toString()
+                    pressureValue.text = forecast[dateDown].pressure.toString()
+                    temp.text = temperatureConverter(
+                        forecast[dateDown].temperature,
+                        tempUnit.toString()
+                    ).toString()
                     tempeUnit.text = tempUnit
-                    tempDown.text = temperatureConverter(forecast[dateDown].temperature_min,
-                        tempUnit.toString()).toString()
-                    tempUp.text = temperatureConverter(forecast[dateDown].temperature_max,
-                        tempUnit.toString()).toString()
+                    tempDown.text = temperatureConverter(
+                        forecast[dateDown].temperature_min,
+                        tempUnit.toString()
+                    ).toString()
+                    tempUp.text = temperatureConverter(
+                        forecast[dateDown].temperature_max,
+                        tempUnit.toString()
+                    ).toString()
                     condition.text = forecast[dateDown].weather_type
-                    approx.text = "Feels like ${temperatureConverter(forecast[dateDown].feels_like_day,
-                        tempUnit.toString())}"
+                    approx.text = "Feels like ${
+                        temperatureConverter(
+                            forecast[dateDown].feels_like_day,
+                            tempUnit.toString()
+                        )
+                    }"
 
-                    if (forecast[dateDown].weather_type == "Clear"){
+                    if (forecast[dateDown].weather_type == "Clear") {
                         cloudIcon.setImageResource(R.drawable.sun)
-                    }
-                    else if (forecast[dateDown].weather_type == "Overcast Clouds"){
+                    } else if (forecast[dateDown].weather_type == "Overcast Clouds") {
                         cloudIcon.setImageResource(R.drawable.few_clouds_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Rain"){
+                    } else if (forecast[dateDown].weather_type == "Rain") {
                         cloudIcon.setImageResource(R.drawable.rain_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Snowy"){
+                    } else if (forecast[dateDown].weather_type == "Snowy") {
                         cloudIcon.setImageResource(R.drawable.snow_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Dusty"){
+                    } else if (forecast[dateDown].weather_type == "Dusty") {
                         cloudIcon.setImageResource(R.drawable.dust_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Mist"){
+                    } else if (forecast[dateDown].weather_type == "Mist") {
                         cloudIcon.setImageResource(R.drawable.mist_ic)
-                    }
-                    else{
+                    } else {
                         cloudIcon.setImageResource(R.drawable.cloud_group)
                     }
 
@@ -144,9 +148,10 @@ class ForecastDetailedFragment : Fragment() {
                     val windDirectionIndex = getCompassIndex(forecast[dateDown].wind_direction)
                     windDirection.text = compassPoints[windDirectionIndex]
                     val originalDateString = forecast[dateDown].date
-
-                    val inputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a",Locale.ENGLISH)
-                    val outputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy", Locale.ENGLISH)
+                    val inputFormatter =
+                        DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a", Locale.ENGLISH)
+                    val outputFormatter =
+                        DateTimeFormatter.ofPattern("EEE, MMM d, yyyy", Locale.ENGLISH)
 
                     try {
                         val dateTime1 = LocalDateTime.parse(originalDateString, inputFormatter)
@@ -159,10 +164,10 @@ class ForecastDetailedFragment : Fragment() {
                     }
                 }
                 result?.hourlyForecast?.let { forecast ->
-                    val allHourlyForecasts: List<HourlyForecast> = forecast.map { hourlyWeather ->
-                        hourlyWeather.dayDetails[dateDown]
-                    }
+                    val allHourlyForecasts: List<HourlyForecast> = forecast.flatMap { hourlyWeather ->
+                        hourlyWeather.dayDetails
 
+                    }
                     hourlyAdapter = ForeCastHourlyAdapter(allHourlyForecasts)
                     binding.hourlyRecyclerView.adapter = hourlyAdapter
                     hourlyAdapter.notifyDataSetChanged()

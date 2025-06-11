@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.R
 import com.example.qweather.data.models.cities_weather.DailyWeather
-import com.example.qweather.data.models.forecast.DailyWeatherModel
 import com.example.qweather.databinding.CellForecastDailyItemsBinding
 import com.example.qweather.utility_funtions.temperatureConverter
 import java.time.LocalDateTime
@@ -62,11 +61,7 @@ class ForecastDailyAdapter(private val list: List<DailyWeather>) : RecyclerView.
                 if (position%2!=0) {
                     layout.setBackgroundResource(R.color.lightYellow)
                 }
-
             }
-
         }
-
     }
-
 }

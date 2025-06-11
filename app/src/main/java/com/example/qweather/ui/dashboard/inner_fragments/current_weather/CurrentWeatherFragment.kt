@@ -12,7 +12,6 @@ import com.example.qweather.R
 import com.example.qweather.databinding.FragmentCurrentWeatherBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
-import com.example.qweather.utility_funtions.compassAngles
 import com.example.qweather.utility_funtions.compassPoints
 import com.example.qweather.utility_funtions.getCompassIndex
 import com.example.qweather.utility_funtions.temperatureConverter
@@ -51,8 +50,8 @@ class CurrentWeatherFragment : Fragment() {
 
 
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
-            result?.currentWeather?.let { current ->
-                Log.d("WeatherVM", "Current Weather: $current")
+            result?.dailyForecast?.let { current ->
+                Log.d("WeatherVM", "Current Weather: ${current[0]}")
 
 
                 binding.apply {
@@ -60,83 +59,84 @@ class CurrentWeatherFragment : Fragment() {
                         findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToForecastDetailedFragment())
                     }
                     cityName.text = sharedPrefs.getString("LAST_SELECTED_CITY", "Qatar")
-                    val timeStamp = current.time
-                    cityTime.text = convertTimestampToTime(timeStamp)
+                    val timeStamp = current[0].date
+                    Log.d("raw_timestamp","$timeStamp")
+                    cityTime.text = timeStamp
                     cityTemperature.text = temperatureConverter(
-                        current.temperature,
+                        current[0].temperature,
                         tempUnit.toString()
                     ).toString()
-                    cityWeatherCondition.text = current.weather_type
+                    cityWeatherCondition.text = current[0].weather_type
                     feelsLikTemp.text = temperatureConverter(
-                        current.feels_like,
+                        current[0].feels_like_day,
                         tempUnit.toString()
                     ).toString()
                     tempeUnit.text = tempUnit
-                    humiPercent.text = current.humidity.toString()
-                    val windDirectionIndex = getCompassIndex(current.wind_direction)
+                    humiPercent.text = current[0].humidity.toString()
+                    val windDirectionIndex = getCompassIndex(current[0].wind_direction)
                     windDirection.text = compassPoints[windDirectionIndex]
-                    windSpeed.text = windConverter(current.wind_power, windUnit.toString()).toString()
+                    windSpeed.text = windConverter(current[0].wind_speed, windUnit.toString()).toString()
                     windSpeedUnit.text = windUnit
                     temperatureUnit.text = tempUnit
                     tempUp.text = temperatureConverter(
-                        current.temperature_max,
+                        current[0].temperature_max,
                         tempUnit.toString()
                     ).toString()
                     tempDown.text = temperatureConverter(
-                        current.temperature_min,
+                        current[0].temperature_min,
                         tempUnit.toString()
                     ).toString()
                     with(sharedPrefs.edit()) {
                         putLong(
                             "LAST_TEMPERATURE",
-                            java.lang.Double.doubleToRawLongBits(current.temperature.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current[0].temperature.toDouble())
                         )
                         putLong(
                             "LAST_TEMP_MIN",
-                            java.lang.Double.doubleToRawLongBits(current.temperature_min.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current[0].temperature_min.toDouble())
                         )
                         putLong(
                             "LAST_TEMP_MAX",
-                            java.lang.Double.doubleToRawLongBits(current.temperature_max.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current[0].temperature_max.toDouble())
                         )
-                        putString("LAST_WEATHER_TYPE", current.weather_type)
+                        putString("LAST_WEATHER_TYPE", current[0].weather_type)
                         putLong(
                             "LAST_FEELS_LIKE",
-                            java.lang.Double.doubleToRawLongBits(current.feels_like.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current[0].feels_like_day.toDouble())
                         )
                         putLong(
                             "LAST_HUMIDITY",
-                            java.lang.Double.doubleToRawLongBits(current.humidity.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current[0].humidity.toDouble())
                         )
                         putLong(
                             "LAST_WIND_SPEED",
-                            java.lang.Double.doubleToRawLongBits(current.wind_power.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current[0].wind_speed.toDouble())
                         )
-                        putString("LAST_DATE", convertTimestampToTime(timeStamp))
+                        putString("LAST_DATE", timeStamp)
                         putString("LAST_WIND_DIRECTION", compassPoints[windDirectionIndex])
 
                         apply()
                     }
 
-                    if (current.weather_type == "Clear") {
+                    if (current[0].weather_type == "Clear") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_clear_bg)
                         cityWeatherIcon.setImageResource(R.drawable.clear_sky_ic)
-                    } else if (current.weather_type == "Dust") {
+                    } else if (current[0].weather_type == "Dust") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_dust_bg)
                         cityWeatherIcon.setImageResource(R.drawable.dust_ic)
-                    } else if (current.weather_type == "Rain") {
+                    } else if (current[0].weather_type == "Rain") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_rain_bg)
                         cityWeatherIcon.setImageResource(R.drawable.rain_ic)
-                    } else if (current.weather_type == "Stormy") {
+                    } else if (current[0].weather_type == "Stormy") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_thuder_storm_bg)
                         cityWeatherIcon.setImageResource(R.drawable.thunder_ic)
-                    } else if (current.weather_type == "Snow") {
+                    } else if (current[0].weather_type == "Snow") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_snow_bg)
                         cityWeatherIcon.setImageResource(R.drawable.snow_ic)
-                    } else if (current.weather_type == "Mist") {
+                    } else if (current[0].weather_type == "Mist") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_mist_bg)
                         cityWeatherIcon.setImageResource(R.drawable.mist_ic)
-                    } else if (current.weather_type == "Few Clouds") {
+                    } else if (current[0].weather_type == "Few Clouds") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.currrent_few_clouds_bg)
                         cityWeatherIcon.setImageResource(R.drawable.few_clouds_ic)
                     } else {
@@ -151,14 +151,5 @@ class CurrentWeatherFragment : Fragment() {
 
     }
 
-    private fun convertTimestampToTime(
-        timestamp: Long,
-        pattern: String = "dd MMMM yyyy, HH:mm a"
-    ): String {
-        val date = Date(timestamp * 1000L)
-        val format = SimpleDateFormat(pattern, Locale.ENGLISH)
-        return format.format(date)
-    }
+
 }
-
-

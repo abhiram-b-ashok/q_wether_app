@@ -37,6 +37,8 @@ data class DailyWeather(
     val temperature_max: Double,
     val feels_like_day: Double,
     val humidity: Int,
+    val sunrise: Long,
+    val sunset: Long,
     val pressure: Int,
     val rain: Double,
     val clouds: Int,

@@ -28,9 +28,9 @@ class SunRiseView @JvmOverloads constructor(
     private val dashedPaint = Paint().apply {
         color = Color.parseColor("#0095DA")
         style = Paint.Style.STROKE
-        pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 0f) // makes dashed form for the path.
+        pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 0f)
         strokeWidth = 4f
-        strokeCap = Paint.Cap.ROUND //makes rounded edge for dashed lines.
+        strokeCap = Paint.Cap.ROUND
         isAntiAlias = true
     }
 
