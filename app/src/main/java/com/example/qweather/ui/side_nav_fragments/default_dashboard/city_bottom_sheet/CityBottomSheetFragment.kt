@@ -376,6 +376,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.qweather.R
 import com.example.qweather.data.models.cities.CitiesResponse
 import com.example.qweather.data.network.NetworkResult
+import com.example.qweather.data.room_database.FavoriteCitiesModel
+import com.example.qweather.data.room_database.FavoriteCityDatabase
 import com.example.qweather.databinding.FragmentCityBottomSheetBinding
 import com.example.qweather.repository.CitiesRepository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarAdapter
@@ -393,6 +395,10 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.Locale
@@ -405,6 +411,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var locationPermissionRequest: ActivityResultLauncher<Array<String>>
     private lateinit var fused: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
+    private lateinit var db: FavoriteCityDatabase
     private val locationRequest = LocationRequest.Builder(
         Priority.PRIORITY_HIGH_ACCURACY, 10000L
     ).setMinUpdateIntervalMillis(5000L).build()
@@ -413,6 +420,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private val sharedPrefs by lazy {
         requireContext().getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -425,6 +433,9 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        db = FavoriteCityDatabase.getDatabase(requireContext())
+        val dao = db.favoriteCitiesDao()
 
         fused = LocationServices.getFusedLocationProviderClient(requireContext())
         locationCallback = object : LocationCallback() {
@@ -477,6 +488,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupAdapters() {
+
         qatarAdapter = QatarAdapter(mutableListOf()).apply {
             onItemClickListener = { city ->
                 sendSelection(city.cityName, true, city.longitude, city.latitude, city.cityId)
@@ -493,9 +505,28 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
             }
 
             onStarClickListener = { city ->
-                city.isSelected = !city.isSelected
-                // Consider using DiffUtil for more efficient adapter updates
-                notifyDataSetChanged()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val existing = dao.getFavoriteCityById(city.cityId)
+                    if (existing != null) {
+                        dao.deleteFavoriteCity(existing)
+                        city.isSelected = false
+                    } else {
+                        val favorite = FavoriteCitiesModel(
+                            cityId = city.cityId,
+                            cityName = city.cityName,
+                            temperature = "",  // fetched later
+                            weatherType = "",  // fetched later
+                            date = "",         // fetched later
+                            isSaved = true
+                        )
+                        dao.insertFavoriteCity(favorite)
+                        city.isSelected = true
+                    }
+
+                    withContext(Dispatchers.Main) {
+                        worldAdapter.notifyDataSetChanged()
+                    }
+                }
             }
         }
 

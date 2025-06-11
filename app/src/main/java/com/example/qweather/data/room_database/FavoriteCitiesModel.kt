@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 data class FavoriteCitiesModel(
     @PrimaryKey val cityId: Int = 0,
     val cityName: String,
-    val countryName: String,
     val temperature: String,
     val weatherType: String,
     val date: String,
