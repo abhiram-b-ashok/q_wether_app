@@ -18,11 +18,11 @@
             android:layout_height="wrap_content"
             android:textColor="#0095DA"
             android:text="Rain Radar"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tide_heading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/poppins_semibold"/>
+            android:fontFamily="@font/effra_trail_semi_bold"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             app:layout_constraintStart_toStartOf="parent"

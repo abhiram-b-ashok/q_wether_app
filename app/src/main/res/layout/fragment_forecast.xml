@@ -20,10 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/effra_trail_semi_bold"
             android:text="Forecast"
             android:textColor="#0095DA"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             android:text="Daily"
             android:textColor="#013B82"
-            android:textSize="20sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forecast_heading" />
 
@@ -57,13 +57,13 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="20dp"
             android:background="@drawable/add_button_shape"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/effra_trail_semi_bold"
             android:gravity="center"
             android:paddingHorizontal="5dp"
             android:paddingTop="4dp"
             android:text="View Details"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/daily_recycler_view" />

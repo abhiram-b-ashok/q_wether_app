@@ -18,10 +18,10 @@
             android:id="@+id/sun_info_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/effra_trail_semi_bold"
             android:text="Sunrise / Sunset"
             android:textColor="#0095DA"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/sunrise_label"
             android:text="Sunrise"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="#8D1B3D"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toEndOf="@+id/sunrise_ic"
             app:layout_constraintTop_toTopOf="@id/sunrise_ic"/>
         <TextView
@@ -59,7 +59,7 @@
             tools:text="4:53 am"
             android:textSize="15sp"
             android:textColor="#2B2758"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/effra_trail_regular"
             app:layout_constraintStart_toEndOf="@+id/sunrise_ic"
             app:layout_constraintBottom_toBottomOf="@+id/sunrise_ic"/>
 
@@ -76,8 +76,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/sunset_label"
             android:text="Sunset"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins_medium"
+            android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_medium"
             android:textColor="#8D1B3D"
             app:layout_constraintEnd_toStartOf="@+id/sunset_ic"
             app:layout_constraintTop_toTopOf="@id/sunset_ic"/>
@@ -88,7 +88,7 @@
             tools:text ="6:08 pm"
             android:textSize="15sp"
             android:textColor="#2B2758"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/effra_trail_regular"
             app:layout_constraintEnd_toStartOf="@+id/sunset_ic"
             app:layout_constraintBottom_toBottomOf="@+id/sunset_ic"/>
 

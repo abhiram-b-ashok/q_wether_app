@@ -520,7 +520,7 @@
                 android:textColor="#1D1D1D"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@id/tide_unit_layout"/>
-            
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

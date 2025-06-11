@@ -20,10 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Tidal information"
+            android:fontFamily="@font/effra_trail_semi_bold"
+            android:text="Tides"
             android:textColor="#0095DA"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toEndOf="@+id/tide_icon"
             app:layout_constraintTop_toBottomOf="@+id/tide_heading"
             tools:text="0.55" />
@@ -52,9 +52,9 @@
             android:id="@+id/tide_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toEndOf="@+id/tide_value"
             app:layout_constraintTop_toBottomOf="@+id/tide_heading"
             android:text="m" />
@@ -65,6 +65,7 @@
             android:layout_height="wrap_content"
             android:text="Last updated at: "
             android:textColor="#1D1D1D"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tide_unit" />
 
@@ -74,6 +75,7 @@
             android:textColor="#1D1D1D"
             android:id="@+id/time"
             android:maxLength="16"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toEndOf="@+id/last_update"
             app:layout_constraintTop_toBottomOf="@+id/tide_unit"
             tools:text="09:34 AM" />
@@ -110,7 +112,8 @@
             android:layout_height="wrap_content"
             android:text="High"
             android:textColor="#8D1B3D"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toEndOf="@+id/tide_high"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -121,7 +124,8 @@
             android:layout_height="wrap_content"
             android:text="Low"
             android:textColor="#8D1B3D"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintEnd_toStartOf="@+id/tide_low"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -131,6 +135,7 @@
             android:layout_height="wrap_content"
             android:textColor="#2B2758"
             android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_regular"
             app:layout_constraintStart_toEndOf="@+id/tide_high"
             app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
             tools:text="0.005" />
@@ -141,6 +146,7 @@
             android:layout_height="wrap_content"
             android:textColor="#2B2758"
             android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_regular"
             app:layout_constraintEnd_toStartOf="@+id/tide_low_unit"
             app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
             tools:text="0.005" />
@@ -151,6 +157,7 @@
             android:layout_height="wrap_content"
             android:textColor="#2B2758"
             android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_regular"
             app:layout_constraintStart_toEndOf="@+id/tide_high_value"
             app:layout_constraintTop_toBottomOf="@+id/tide_high_label"
             android:text="m" />
@@ -161,6 +168,7 @@
             android:layout_height="wrap_content"
             android:textColor="#2B2758"
             android:textSize="15sp"
+            android:fontFamily="@font/effra_trail_regular"
             app:layout_constraintEnd_toStartOf="@+id/tide_low"
             app:layout_constraintTop_toBottomOf="@+id/tide_low_label"
             android:text="m" />
@@ -171,13 +179,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/add_button_shape"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/effra_trail_semi_bold"
             android:gravity="center"
             android:paddingHorizontal="5dp"
             android:paddingTop="4dp"
             android:text="View Details"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tide_low_unit" />

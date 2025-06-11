@@ -21,10 +21,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/effra_trail_semi_bold"
             android:text="Warning"
             android:textColor="#0095DA"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/warning_icon"
@@ -57,12 +57,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/effra_trail_medium"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     android:textColor="#8A1538"
                     android:id="@+id/warning_value"
-                    android:textSize="20sp"
+                    android:textSize="14sp"
                     android:paddingTop="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/warning_icon"
@@ -91,6 +91,7 @@
             android:textSize="14sp"
             android:textColor="#535353"
             android:layout_marginStart="28dp"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toStartOf="@+id/warning_temp"
             app:layout_constraintEnd_toEndOf="@+id/warning_temp"
             app:layout_constraintTop_toTopOf="@+id/warning_temp"
@@ -113,6 +114,7 @@
             android:id="@+id/tempe_unit"
             android:textColor="#08043D"
             android:textSize="13sp"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toEndOf="@+id/temp_value"
             app:layout_constraintTop_toBottomOf="@+id/temp_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_temp"
@@ -140,6 +142,7 @@
             app:layout_constraintBottom_toTopOf="@+id/wind_value"
             app:layout_constraintEnd_toEndOf="@+id/warning_wind"
             android:text="WIND"
+            android:fontFamily="@font/effra_trail_medium"
             android:textColor="#535353"
             />
         <TextView
@@ -161,6 +164,7 @@
             android:id="@+id/winde_unit"
             android:textColor="#08043D"
             android:textSize="13sp"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toEndOf="@+id/wind_value"
             app:layout_constraintTop_toBottomOf="@+id/wind_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_wind"
@@ -183,6 +187,7 @@
             android:layout_marginStart="25dp"
             android:textColor="#535353"
             android:textSize="14sp"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toStartOf="@+id/warning_visible"
             app:layout_constraintTop_toTopOf="@+id/warning_visible"
             app:layout_constraintBottom_toTopOf="@+id/visible_value"
@@ -197,6 +202,7 @@
             android:textColor="#08043D"
             android:textSize="13sp"
             tools:text ="9"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toStartOf="@+id/warning_visible"
             app:layout_constraintTop_toBottomOf="@+id/visible_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_visible"
@@ -207,13 +213,13 @@
             android:layout_height="wrap_content"
             android:textSize="13sp"
             android:textColor="#08043D"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintStart_toEndOf="@+id/visible_value"
             app:layout_constraintTop_toBottomOf="@+id/visible_label"
             app:layout_constraintBottom_toBottomOf="@+id/warning_visible"
             tools:text=" km"
             android:visibility="gone"
             />
-
 
 
 
