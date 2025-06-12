@@ -4,28 +4,45 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.qweather.data.models.forecast.ForecastResult
+import com.example.qweather.data.models.forecast.SavedForecastModel
 import com.example.qweather.data.network.NetworkResult
+import com.example.qweather.data.room_database.FavoriteCitiesModel
 import com.example.qweather.repository.ForecastRepository
+import java.util.concurrent.atomic.AtomicInteger
 
-class ForecastViewModel(private val repository: ForecastRepository): ViewModel() {
+class ForecastViewModel(private val repository: ForecastRepository) : ViewModel() {
 
-    private val _forecastResult = MutableLiveData<ForecastResult?>()
-    val forecastResult: LiveData<ForecastResult?> get() = _forecastResult
+    private val _savedForecasts = MutableLiveData<List<SavedForecastModel>>()
+    val savedForecasts: LiveData<List<SavedForecastModel>> = _savedForecasts
 
-    fun getForecast(cityId: Int) {
-        repository.fetchForecastData(cityId) { result ->
-            when (result) {
-                is NetworkResult.Success -> _forecastResult.postValue(result.data)
-                is NetworkResult.Error -> Log.e(
-                    "ForecastViewModel",
-                    result.message ?: "Unknown error"
-                )
+    fun loadForecastsForSavedCities(savedCities: List<FavoriteCitiesModel>) {
+        val forecastList = mutableListOf<SavedForecastModel>()
+        val pendingCount = AtomicInteger(savedCities.size)
 
-                else -> Unit
+        for (city in savedCities) {
+            repository.fetchForecastData(city.cityId) { result ->
+                if (result is NetworkResult.Success) {
+                    val daily = result.data?.dailyForecast?.firstOrNull()
+                    Log.d("ForecastViewModel", "Forecast data: ${result.data?.dailyForecast}")
+
+                    if (daily != null) {
+                        forecastList.add(
+                            SavedForecastModel(
+                                cityId = city.cityId,
+                                cityName = city.cityName,
+                                date = daily.date,
+                                temperature = daily.temperature,
+                                temperatureUnit = daily.temperature_unit,
+                                weatherType = daily.weather_type
+                            )
+                        )
+                    }
+                }
+
+                if (pendingCount.decrementAndGet() == 0) {
+                    _savedForecasts.postValue(forecastList)
+                }
             }
-
         }
-
     }
 }

@@ -13,7 +13,6 @@ data class ForecastResponseContent(
 
 data class ForecastResult(
     @SerializedName("daily_weather") val dailyForecast: List<DailyWeatherModel>?,
-    @SerializedName("hourly_data") val hourlyForecast: List<HourlyWeatherModel>?
 )
 
 data class DailyWeatherModel(
@@ -33,21 +32,21 @@ data class DailyWeatherModel(
     val rain_unit: String,
     val humidity_unit: String
 )
-data class HourlyWeatherModel(
+
+data class SavedForecastModel(
+    val cityId: Int,
+    val cityName: String,
     val date: String,
     val temperature: Double,
-    val temperature_min: Double,
-    val temperature_max: Double,
-    val feels_like_day: Double,
-    val humidity: Int,
-    val pressure: Int,
-    val rain: Double,
-    val clouds: Int,
-    val wind_speed: Double,
-    val weather_type: String,
-    val weather_icon: String,
-    val temperature_unit: String,
-    val rain_unit: String,
-    val humidity_unit: String
+    val temperatureUnit: String,
+    val weatherType: String
+)
 
+data class FavoriteCityWeatherDisplayModel(
+    val cityId: Int,
+    val cityName: String,
+    val temperature: String,
+    val date: String,
+    val weatherType: String,
+    val weatherIcon: String
 )

@@ -549,9 +549,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                         val favorite = FavoriteCitiesModel(
                             cityId = city.cityId,
                             cityName = city.cityName,
-                            temperature = "",
-                            weatherType = "",
-                            date = "",
                             isSaved = true
                         )
                         dao.insertFavoriteCity(favorite)

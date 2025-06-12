@@ -19,9 +19,7 @@ class FavoriteCitiesAdapter(
 
         fun bind(city: FavoriteCitiesModel) {
             binding.cityName.text = city.cityName
-            binding.cityTemp.text = city.temperature
-            binding.cityWeatherDesc.text = city.weatherType
-            binding.cityCurrentTime.text = city.date
+
 
             binding.cityName.setOnClickListener {
                 onRemoveClickListener?.invoke(city)

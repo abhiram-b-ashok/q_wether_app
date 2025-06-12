@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.databinding.FragmentNotificationsBinding
 import com.example.qweather.repository.NotificationRepository
+import com.example.qweather.ui.side_nav_fragments.notifications_center.adapter.Notification
 import com.example.qweather.ui.side_nav_fragments.notifications_center.adapter.NotificationAdapter
 import com.example.qweather.view_models.notifications.NotificationViewModel
 import kotlinx.coroutines.delay
@@ -23,7 +24,10 @@ class NotificationsFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationsBinding
     private lateinit var notificationAdapter: NotificationAdapter
-    private var page =1
+    private var page = 1
+
+    private val allNotifications = mutableListOf<Notification>()
+
     private val viewModel: NotificationViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -49,28 +53,22 @@ class NotificationsFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
         }
 
-        notificationAdapter = NotificationAdapter(emptyList())
+        notificationAdapter = NotificationAdapter(mutableListOf())
         binding.notificationsRecycler.apply {
-
             layoutManager = LinearLayoutManager(requireContext())
             adapter = notificationAdapter
-
-            addOnScrollListener(object : RecyclerView.OnScrollListener(){
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
-                    if (dy>0)
-                    page++
-                }
-
-            })
         }
+        viewModel.getNotifications(page)
 
         viewModel.notificationList.observe(viewLifecycleOwner) { notificationList ->
-            notificationAdapter.updateData(notificationList)
-
+            allNotifications.addAll(notificationList)
+            notificationAdapter.updateData(allNotifications)
         }
 
-        viewModel.getNotifications(page)
+        binding.seeMore.setOnClickListener {
+            page++
+            viewModel.getNotifications(page)
+        }
     }
 }
 
