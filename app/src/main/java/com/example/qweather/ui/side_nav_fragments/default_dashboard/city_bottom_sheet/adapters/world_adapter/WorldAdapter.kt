@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.R
+import com.example.qweather.data.models.city_search.CitySearchModel
 import com.example.qweather.databinding.CellWorldCitesBinding
 
 class WorldAdapter(private var cities: MutableList<WorldCitiesModel>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
@@ -47,4 +48,6 @@ class WorldAdapter(private var cities: MutableList<WorldCitiesModel>) : Recycler
             }
         }
     }
+
+
 }
