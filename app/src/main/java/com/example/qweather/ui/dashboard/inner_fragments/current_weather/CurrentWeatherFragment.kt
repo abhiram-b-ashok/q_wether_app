@@ -17,9 +17,6 @@ import com.example.qweather.utility_funtions.getCompassIndex
 import com.example.qweather.utility_funtions.temperatureConverter
 import com.example.qweather.utility_funtions.windConverter
 import com.example.qweather.view_models.city_weather.WeatherViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class CurrentWeatherFragment : Fragment() {
     private lateinit var binding: FragmentCurrentWeatherBinding
@@ -150,6 +147,5 @@ class CurrentWeatherFragment : Fragment() {
         }
 
     }
-
 
 }

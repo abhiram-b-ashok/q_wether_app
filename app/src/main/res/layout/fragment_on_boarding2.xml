@@ -79,7 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/real_time_label"
             android:textColor="#FAA82E"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"/>
 
@@ -90,7 +90,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/effra_trail_regular"
             android:id="@+id/tv_description"
             android:textSize="18sp"
             android:textColor="@color/white"

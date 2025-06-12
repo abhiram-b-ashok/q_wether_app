@@ -9,10 +9,13 @@ import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,12 +33,16 @@ import com.example.qweather.data.room_database.FavoriteCitiesModel
 import com.example.qweather.data.room_database.FavoriteCityDatabase
 import com.example.qweather.databinding.FragmentCityBottomSheetBinding
 import com.example.qweather.repository.CitiesRepository
+import com.example.qweather.repository.CitySearchRepository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
 import com.example.qweather.view_models.cities.CityViewModel
 import com.example.qweather.view_models.cities.CityViewModelFactory
+import com.example.qweather.view_models.city_search.CitySearchViewModel
+import com.example.qweather.view_models.city_search.CitySearchViewModelFactory
+import com.example.qweather.view_models.city_weather.WeatherViewModel
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -449,6 +456,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var db: FavoriteCityDatabase
     private lateinit var dao: FavoriteCitiesDao
+    private lateinit var citySearchViewModel: CitySearchViewModel
     private val locationRequest = LocationRequest.Builder(
         Priority.PRIORITY_HIGH_ACCURACY, 10000L
     ).setMinUpdateIntervalMillis(5000L).build()
@@ -470,9 +478,15 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val citySearchRepository = CitySearchRepository()
+        val citySearchViewModelFactory = CitySearchViewModelFactory(citySearchRepository)
+        citySearchViewModel = ViewModelProvider(this, citySearchViewModelFactory).get(
+            CitySearchViewModel::class.java)
+
 
         db = FavoriteCityDatabase.getDatabase(requireContext())
         dao = db.favoriteCitiesDao()
+
 
         fused = LocationServices.getFusedLocationProviderClient(requireContext())
         locationCallback = object : LocationCallback() {
@@ -487,6 +501,14 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 }
             }
         }
+        binding.apply {
+            citySearchBarLayout.setOnClickListener {
+                citySearchBarEditText.requestFocus()
+                citySearchBarEditText.showKeyboard()
+            }
+        }
+
+
 
         locationPermissionRequest = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -517,9 +539,26 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         setupAdapters()
         setupClickListeners()
         observeViewModel()
+        observeSearchViewModel()
 
         viewModel.fetchCities()
         loadSavedCityType()
+        binding.apply {
+
+            binding.citySearchBarEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    citySearchViewModel.searchCities(s.toString())
+                }
+            })
+        }
     }
 
     private fun setupAdapters() {
@@ -549,6 +588,8 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                         val favorite = FavoriteCitiesModel(
                             cityId = city.cityId,
                             cityName = city.cityName,
+                            latitude = city.latitude,
+                            longitude = city.longitude,
                             isSaved = true
                         )
                         dao.insertFavoriteCity(favorite)
@@ -595,13 +636,40 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
+    private fun observeSearchViewModel() {
+        citySearchViewModel.citySearchResponse.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is NetworkResult.Loading -> showLoading(true)
+                is NetworkResult.Success -> {
+                    showLoading(false)
+                    result.data?.let { response ->
+                        worldAdapter.updateList(response.result?.cities?.data?.map() {
+                            WorldCitiesModel(
+                                it.name,
+                                it,
+                                it.lon,
+                                it.lat,
+                                it.cityId
+                            )
+                        } ?: emptyList() )
+                       binding.locationsRecyclerView.adapter = worldAdapter
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    showLoading(false)
+                    showError(result.message ?: getString(R.string.error_unknown))
+                }
+
+            }
+        }
+    }
+
+
     private fun updateAdapters(response: CitiesResponse) {
         response.response.result.cities.let { cities ->
             qatarAdapter.updateList(
                 cities.qatar.map { QatarCitiesModel(it.name, it, it.longitude, it.latitude, it.cityId) }
-            )
-            worldAdapter.updateList(
-                cities.world.map { WorldCitiesModel(it.name, it, it.longitude, it.latitude, it.cityId) }
             )
         }
     }
@@ -618,6 +686,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                     worldwideButtonLayout.setBackgroundColor(primaryColor)
                     locationsRecyclerView.adapter = qatarAdapter
                     locationType.text = getString(R.string.qatar_cities)
+                    citySearchBar.visibility = View.GONE
                 }
 
                 CityType.WORLD -> {
@@ -627,6 +696,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                     qatarButtonLayout.setBackgroundColor(primaryColor)
                     locationsRecyclerView.adapter = worldAdapter
                     locationType.text = getString(R.string.worldwide_cities)
+                    citySearchBar.visibility = View.VISIBLE
                 }
             }
         }
@@ -800,7 +870,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         return cityName.toString()
     }
 
-
     companion object {
         private const val LOCATION_SETTINGS_REQUEST_CODE = 1001
     }
@@ -809,4 +878,13 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
 enum class CityType {
     QATAR, WORLD
 }
+
+
+fun View.showKeyboard() {
+    this.requestFocus()
+    val inputMethodManager =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
 

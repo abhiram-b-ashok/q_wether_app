@@ -11,6 +11,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text ="Doha"
+        android:fontFamily="@font/poppins_regular"
         android:textSize="20sp"
         android:padding="10dp"
         android:textColor="@color/black"

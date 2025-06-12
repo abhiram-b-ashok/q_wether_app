@@ -47,7 +47,7 @@
             android:id="@+id/date_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             android:paddingTop="3dp"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:text="Hourly forecast"
         android:textColor="#3BA5F8"
         android:textSize="20sp"
@@ -114,7 +114,7 @@
                 android:id="@+id/warning_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/effra_trail_medium"
                 android:paddingStart="15dp"
                 android:paddingTop="2dp"
                 android:paddingEnd="15dp"
@@ -206,7 +206,7 @@
         android:textSize="14sp"
         android:id="@+id/weather_label"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         android:text="WEATHER" />
 
     <TextView
@@ -219,7 +219,7 @@
         android:textSize="14sp"
         android:id="@+id/wind_speed_label"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         android:text="WIND SPEED" />
 
     <TextView
@@ -233,7 +233,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:textSize="14sp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         android:text="WIND DIRECTION" />
 
     <TextView
@@ -246,7 +246,7 @@
         android:layout_marginTop="10dp"
         android:textSize="14sp"
         android:id="@+id/sea_state_label"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         android:text="SEA STATE" />
 
     <TextView
@@ -260,7 +260,7 @@
         android:layout_marginStart="15dp"
         android:id="@+id/current_speed_label_"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         android:text="CURRENT SPEED" />
 
     <TextView
@@ -273,7 +273,7 @@
         android:textSize="14sp"
         android:id="@+id/visibility_label"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         android:text="VISIBILITY" />
 
     <TextView
@@ -284,7 +284,7 @@
         app:layout_constraintTop_toBottomOf="@+id/weather_label"
         android:textColor="#08043D"
         android:id="@+id/weather_value"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:textSize="20sp"
         android:maxLength="5"
         tools:text = "Null"/>
@@ -296,7 +296,7 @@
         app:layout_constraintTop_toBottomOf="@+id/wind_speed_label"
         android:textColor="#08043D"
         android:id="@+id/wind_speed_value"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:textSize="20sp"
         android:maxLength="5"
         tools:text = "20"/>
@@ -308,7 +308,7 @@
         app:layout_constraintTop_toBottomOf="@+id/wind_direction_label"
         android:textColor="#08043D"
         android:id="@+id/wind_direction_value"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:textSize="20sp"
         android:maxLength="5"
         tools:text = "20"/>
@@ -321,7 +321,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sea_state_label"
         android:textColor="#08043D"
         android:id="@+id/sea_state_value"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:textSize="20sp"
         android:maxLength="5"
         tools:text = "20"/>
@@ -334,7 +334,7 @@
         app:layout_constraintTop_toBottomOf="@+id/current_speed_label_"
         android:textColor="#08043D"
         android:id="@+id/current_speed_value"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:textSize="20sp"
         android:maxLength="5"
         tools:text = "20"/>
@@ -347,7 +347,7 @@
         app:layout_constraintTop_toBottomOf="@+id/visibility_label"
         android:textColor="#08043D"
         android:id="@+id/visibilty_value"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:textSize="20sp"
         android:maxLength="5"
         tools:text = "20"/>

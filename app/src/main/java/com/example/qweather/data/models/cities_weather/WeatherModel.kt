@@ -88,3 +88,10 @@ data class HourlyForecast(
     val warning_text: String
 )
 
+data class SavedForecastModel(
+    val cityId:Int,
+    val cityName:String,
+    val date:String,
+    val temperature:Double,
+    val weatherType:String,
+)

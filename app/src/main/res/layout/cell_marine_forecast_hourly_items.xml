@@ -16,7 +16,7 @@
         tools:text = "12PM"
         android:textColor="#2B2758"
         android:padding="2dp"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/effra_trail_medium"
         android:id="@+id/time"/>
 
 

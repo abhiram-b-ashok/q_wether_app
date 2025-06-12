@@ -4,26 +4,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.qweather.data.models.cities_weather.SavedForecastModel
 import com.example.qweather.data.room_database.FavoriteCitiesModel
 import com.example.qweather.databinding.CellWorldCitiesItemBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
 
 class FavoriteCitiesAdapter(
-    private var favorites: List<FavoriteCitiesModel>
+    private var favorites: List<SavedForecastModel>
 ) : RecyclerView.Adapter<FavoriteCitiesAdapter.FavoriteViewHolder>() {
-
-    var onRemoveClickListener: ((FavoriteCitiesModel) -> Unit)? = null
 
     inner class FavoriteViewHolder(private val binding: CellWorldCitiesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(city: FavoriteCitiesModel) {
+        fun bind(city: SavedForecastModel) {
             binding.cityName.text = city.cityName
+            binding.cityTemp.text = city.temperature.toString()
+            binding.cityWeatherDesc.text = city.weatherType
+            binding.cityCurrentTime.text = city.date
 
-
-            binding.cityName.setOnClickListener {
-                onRemoveClickListener?.invoke(city)
-            }
         }
     }
 
@@ -42,13 +40,13 @@ class FavoriteCitiesAdapter(
 
     override fun getItemCount(): Int = favorites.size
 
-    fun updateList(newFavorites: List<FavoriteCitiesModel>) {
+    fun updateList(newFavorites: List<SavedForecastModel>) {
         favorites = newFavorites
         Log.i("@@@@@@FavoriteCitiesModel", "updateList: $favorites")
         notifyDataSetChanged()
     }
 
-    fun getItemAt(position: Int): FavoriteCitiesModel? {
+    fun getItemAt(position: Int): SavedForecastModel? {
         return if (position >= 0 && position < favorites.size) {
             favorites[position]
         } else {

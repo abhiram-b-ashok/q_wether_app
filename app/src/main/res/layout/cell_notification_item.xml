@@ -24,7 +24,7 @@
         android:id="@+id/notification_title"
         android:layout_marginStart="10dp"
         android:textColor="#8A1538"
-        android:fontFamily="@font/poppins_medium"/>
+        android:fontFamily="@font/effra_trail_medium"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:id="@+id/notification_description"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/effra_trail_regular"
         tools:text = "Morning cloud, then increasing fine spells. Odd afternoon shower. "
         app:layout_constraintStart_toStartOf="@+id/notification_title"
         app:layout_constraintTop_toBottomOf="@+id/info_icon"/>
@@ -48,7 +48,7 @@
         android:textColor="#535353"
         android:textSize="12sp"
         android:layout_marginEnd="20dp"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/effra_trail_light"
         android:id="@+id/notification_date"/>
     <View
         android:layout_width="match_parent"

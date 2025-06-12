@@ -27,3 +27,25 @@ class HomeFragment : Fragment() {
     }
 
 }
+
+//this is smy city bottom sheet fragment
+
+//this is world cities fragment where i will show favorite cities in recycler view
+
+//this is saved city data class
+
+//this is saved city dao
+
+//this is saved city database
+
+//this is weather repository
+
+//this is weather view model
+
+//this is weather view model factory
+
+//this is favorite/saved cities adapter
+
+//this are the data classes i have used
+
+//check this and

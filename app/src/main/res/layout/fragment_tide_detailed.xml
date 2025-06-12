@@ -10,7 +10,7 @@
         android:id="@+id/header_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/effra_trail_bold"
         android:paddingBottom="20dp"
         android:text="Tide"
         android:textColor="@color/white"
@@ -74,7 +74,7 @@
                     android:id="@+id/date_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/effra_trail_medium"
                     android:paddingTop="3dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/effra_trail_medium"
                     android:text="Current Tide"
                     android:textColor="#0095DA"
                     android:textSize="20sp"
@@ -206,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/effra_trail_medium"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintStart_toEndOf="@+id/tide_icon"
@@ -217,7 +217,7 @@
                     android:id="@+id/tide_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/effra_trail_medium"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintStart_toEndOf="@+id/tide_value"
@@ -340,13 +340,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/effra_trail_medium"
                 android:text="Hourly Tides"
                 android:textColor="#0095DA"
                 android:textSize="20sp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/container2" />
+
+            <com.example.qweather.utility_funtions.TidesCustomView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_margin="16dp"
+                android:id="@+id/sun_rise_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hourly_tides_heading"/>
 
 
 

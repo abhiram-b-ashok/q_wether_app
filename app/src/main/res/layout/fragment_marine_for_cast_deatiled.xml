@@ -12,7 +12,7 @@
         android:text="Marine Forecast"
         android:paddingBottom="10dp"
         android:textSize="25sp"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/effra_trail_bold"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

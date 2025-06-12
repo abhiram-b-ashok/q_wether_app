@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/effra_trail_bold"
         android:text="Rain Radar"
         android:paddingBottom="10dp"
         android:id="@+id/page_heading"
@@ -41,7 +41,7 @@
             android:id="@+id/radar_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/effra_trail_medium"
             android:gravity="center"
             android:paddingTop="20dp"
             android:text="25-06-2022 12:00 UTC"

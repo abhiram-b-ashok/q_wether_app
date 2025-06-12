@@ -28,6 +28,7 @@
             android:textColor="@color/white"
             android:layout_marginStart="10dp"
             android:paddingTop="2dp"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintStart_toEndOf="@+id/share_ic"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/share_text"/>

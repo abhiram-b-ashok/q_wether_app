@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.data.room_database.FavoriteCitiesDao
 import com.example.qweather.data.room_database.FavoriteCityDatabase
 import com.example.qweather.databinding.FragmentWorldWideCitiesBinding
+import com.example.qweather.repository.WeatherRepository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
 import com.example.qweather.ui.side_nav_fragments.worldwide_cities.adapter.FavoriteCitiesAdapter
+import com.example.qweather.view_models.city_weather.WeatherViewModel
+import com.example.qweather.view_models.city_weather.WeatherViewModelFactory
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +32,7 @@ class WorldWideCitiesFragment : Fragment() {
     private lateinit var adapter: FavoriteCitiesAdapter
     private lateinit var dao: FavoriteCitiesDao
     private lateinit var cityBottomSheetFragment: CityBottomSheetFragment
+    private lateinit var weatherViewModel: WeatherViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +44,11 @@ class WorldWideCitiesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val weatherRepository = WeatherRepository()
+        val viewModelFactory = WeatherViewModelFactory(weatherRepository)
+        weatherViewModel =
+            ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
+
 
         dao = FavoriteCityDatabase.getDatabase(requireContext()).favoriteCitiesDao()
 
@@ -49,6 +59,7 @@ class WorldWideCitiesFragment : Fragment() {
         binding.addLocationButton.setOnClickListener {
             cityBottomSheetFragment = CityBottomSheetFragment()
             cityBottomSheetFragment.show(childFragmentManager, "CityBottomSheetFragment")
+
         }
 
 
@@ -66,15 +77,13 @@ class WorldWideCitiesFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                // Get the city to delete from the adapter's list based on position
-                // You'll need a method in your adapter to get the item at a specific position
                 val cityToDelete =
-                    adapter.getItemAt(position) // Assuming you add this method to your adapter
+                    adapter.getItemAt(position)
 
                 cityToDelete?.let { city ->
                     lifecycleScope.launch(Dispatchers.IO) {
-                        dao.deleteFavoriteCity(city)
-                        loadFavorites() // Reload data after deletion
+//                        dao.deleteFavoriteCity(city)
+                        loadFavorites()
                     }
                 }
             }
@@ -130,7 +139,7 @@ class WorldWideCitiesFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val favorites = dao.getAllFavoriteCities()
             withContext(Dispatchers.Main) {
-                adapter.updateList(favorites)
+//                adapter.updateList(favorites)
 
             }
         }
