@@ -7,20 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.data.models.cities_weather.SavedForecastModel
 import com.example.qweather.data.room_database.FavoriteCitiesModel
 import com.example.qweather.databinding.CellWorldCitiesItemBinding
-import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
 
 class FavoriteCitiesAdapter(
-    private var favorites: List<SavedForecastModel>
+    private var favorites: List<FavoriteCitiesModel>
 ) : RecyclerView.Adapter<FavoriteCitiesAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(private val binding: CellWorldCitiesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(city: SavedForecastModel) {
+        fun bind(city: FavoriteCitiesModel) {
             binding.cityName.text = city.cityName
-            binding.cityTemp.text = city.temperature.toString()
-            binding.cityWeatherDesc.text = city.weatherType
-            binding.cityCurrentTime.text = city.date
+
 
         }
     }
@@ -40,13 +37,13 @@ class FavoriteCitiesAdapter(
 
     override fun getItemCount(): Int = favorites.size
 
-    fun updateList(newFavorites: List<SavedForecastModel>) {
+    fun updateList(newFavorites: List<FavoriteCitiesModel>) {
         favorites = newFavorites
         Log.i("@@@@@@FavoriteCitiesModel", "updateList: $favorites")
         notifyDataSetChanged()
     }
 
-    fun getItemAt(position: Int): SavedForecastModel? {
+    fun getItemAt(position: Int): FavoriteCitiesModel? {
         return if (position >= 0 && position < favorites.size) {
             favorites[position]
         } else {

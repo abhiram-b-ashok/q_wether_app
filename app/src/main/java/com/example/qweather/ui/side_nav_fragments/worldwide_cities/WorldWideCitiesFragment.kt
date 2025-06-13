@@ -26,13 +26,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 class WorldWideCitiesFragment : Fragment() {
     private lateinit var binding: FragmentWorldWideCitiesBinding
     private lateinit var adapter: FavoriteCitiesAdapter
     private lateinit var dao: FavoriteCitiesDao
     private lateinit var cityBottomSheetFragment: CityBottomSheetFragment
-    private lateinit var weatherViewModel: WeatherViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,11 +42,6 @@ class WorldWideCitiesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val weatherRepository = WeatherRepository()
-        val viewModelFactory = WeatherViewModelFactory(weatherRepository)
-        weatherViewModel =
-            ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
-
 
         dao = FavoriteCityDatabase.getDatabase(requireContext()).favoriteCitiesDao()
 
@@ -59,7 +52,6 @@ class WorldWideCitiesFragment : Fragment() {
         binding.addLocationButton.setOnClickListener {
             cityBottomSheetFragment = CityBottomSheetFragment()
             cityBottomSheetFragment.show(childFragmentManager, "CityBottomSheetFragment")
-
         }
 
 
@@ -77,13 +69,15 @@ class WorldWideCitiesFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
+                // Get the city to delete from the adapter's list based on position
+                // You'll need a method in your adapter to get the item at a specific position
                 val cityToDelete =
-                    adapter.getItemAt(position)
+                    adapter.getItemAt(position) // Assuming you add this method to your adapter
 
                 cityToDelete?.let { city ->
                     lifecycleScope.launch(Dispatchers.IO) {
-//                        dao.deleteFavoriteCity(city)
-                        loadFavorites()
+                        dao.deleteFavoriteCity(city)
+                        loadFavorites() // Reload data after deletion
                     }
                 }
             }
@@ -139,11 +133,10 @@ class WorldWideCitiesFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val favorites = dao.getAllFavoriteCities()
             withContext(Dispatchers.Main) {
-//                adapter.updateList(favorites)
+                adapter.updateList(favorites)
 
             }
         }
     }
 }
-
 

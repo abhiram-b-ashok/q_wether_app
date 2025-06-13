@@ -3,7 +3,6 @@ package com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom
 
 import android.Manifest
 import android.content.Context
-import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Geocoder
@@ -11,7 +10,6 @@ import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -44,8 +41,6 @@ import com.example.qweather.view_models.cities.CityViewModel
 import com.example.qweather.view_models.cities.CityViewModelFactory
 import com.example.qweather.view_models.city_search.CitySearchViewModel
 import com.example.qweather.view_models.city_search.CitySearchViewModelFactory
-import com.example.qweather.view_models.city_weather.WeatherViewModel
-import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -580,29 +575,6 @@ import java.util.Locale
 //                dismiss()
 //            }
 //
-////            onStarClickListener = { city ->
-////                CoroutineScope(Dispatchers.IO).launch {
-////                    val existing = dao.getFavoriteCityById(city.cityId)
-////                    if (existing != null) {
-////                        dao.deleteFavoriteCity(existing)
-////                        city.isSelected = false
-////                    } else {
-////                        val favorite = FavoriteCitiesModel(
-////                            cityId = city.cityId,
-////                            cityName = city.cityName,
-////                            latitude = city.latitude,
-////                            longitude = city.longitude,
-////                            isSaved = true
-////                        )
-////                        dao.insertFavoriteCity(favorite)
-////                        city.isSelected = true
-////                    }
-////
-////                    withContext(Dispatchers.Main) {
-////                        worldAdapter.notifyDataSetChanged()
-////                    }
-////                }
-////            }
 //
 //            onStarClickListener = { city ->
 //                CoroutineScope(Dispatchers.IO).launch {
@@ -883,28 +855,26 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 dismiss()
             }
 
-            onStarClickListener = { city ->
+                        onStarClickListener = { city ->
                 CoroutineScope(Dispatchers.IO).launch {
                     val existing = dao.getFavoriteCityById(city.cityId)
-                    val index = worldCityList.indexOfFirst { it.cityId == city.cityId }
                     if (existing != null) {
                         dao.deleteFavoriteCity(existing)
                         city.isSelected = false
                     } else {
-                        dao.insertFavoriteCity(
-                            FavoriteCitiesModel(
-                                cityId = city.cityId,
-                                cityName = city.cityName,
-                                latitude = city.latitude,
-                                longitude = city.longitude,
-                                isSaved = true
-                            )
+                        val favorite = FavoriteCitiesModel(
+                            cityId = city.cityId,
+                            cityName = city.cityName,
+                            latitude = city.latitude,
+                            longitude = city.longitude,
+                            isSaved = true
                         )
+                        dao.insertFavoriteCity(favorite)
                         city.isSelected = true
                     }
 
                     withContext(Dispatchers.Main) {
-                        if (index != -1) worldAdapter.notifyItemChanged(index)
+                        worldAdapter.notifyDataSetChanged()
                     }
                 }
             }

@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.qweather.data.models.cities_weather.SavedForecastModel
 
 
 @Dao
@@ -23,3 +24,4 @@ interface FavoriteCitiesDao {
     fun getFavoriteCityById(cityId: Int): FavoriteCitiesModel?
 
 }
+
