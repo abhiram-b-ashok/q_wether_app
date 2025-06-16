@@ -47,7 +47,6 @@ class WorldWideCitiesFragment : Fragment() {
 
         adapter = FavoriteCitiesAdapter(emptyList())
 
-        binding.worldCitiesRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.worldCitiesRecycler.adapter = adapter
         binding.addLocationButton.setOnClickListener {
             cityBottomSheetFragment = CityBottomSheetFragment()

@@ -35,6 +35,7 @@ import com.example.qweather.repository.CitiesRepository
 import com.example.qweather.repository.CitySearchRepository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.qatar_adapter.QatarCitiesModel
+import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.saved_cities.FavoriteCitiesAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldAdapter
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.adapters.world_adapter.WorldCitiesModel
 import com.example.qweather.view_models.cities.CityViewModel
@@ -738,6 +739,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCityBottomSheetBinding
     private lateinit var qatarAdapter: QatarAdapter
     private lateinit var worldAdapter: WorldAdapter
+    private lateinit var favoriteCitiesAdapter: FavoriteCitiesAdapter
     private lateinit var viewModel: CityViewModel
     private lateinit var citySearchViewModel: CitySearchViewModel
     private lateinit var fused: FusedLocationProviderClient
@@ -820,6 +822,9 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
 
         viewModel.fetchCities()
         loadSavedCityType()
+
+        favoriteCitiesAdapter = FavoriteCitiesAdapter(emptyList())
+        binding.favoritesRecyclerView.adapter = favoriteCitiesAdapter
 
         binding.citySearchBarEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -947,6 +952,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 binding.locationsRecyclerView.adapter = qatarAdapter
                 binding.locationType.text = "Qatar Cities"
                 binding.citySearchBar.visibility = View.GONE
+                binding.favoritesRecyclerView.visibility = View.GONE
             }
 
             CityType.WORLD -> {
@@ -957,6 +963,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                 binding.locationsRecyclerView.adapter = worldAdapter
                 binding.locationType.text = "Worldwide Cities"
                 binding.citySearchBar.visibility = View.VISIBLE
+                binding.favoritesRecyclerView.visibility = View.VISIBLE
             }
         }
     }

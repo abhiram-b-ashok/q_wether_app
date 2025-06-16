@@ -48,7 +48,6 @@ class SunInfoFragment : Fragment() {
                         val sweepPercent = (timeSinceSunrise * 100f / totalDaylight).coerceIn(0f, 100f)
                         sunRiseView.setSweepAngleAnimator(sweepPercent)
                     }
-
                 }
             }
         }

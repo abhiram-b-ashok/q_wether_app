@@ -360,7 +360,7 @@
                 <com.example.qweather.utility_funtions.TidesCustomView
                     android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/sun_rise_view" />
+                android:id="@+id/tide_flow" />
 
 
             </HorizontalScrollView>

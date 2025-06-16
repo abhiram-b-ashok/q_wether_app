@@ -223,6 +223,7 @@ class TideDetailedFragment : Fragment() {
             binding.tideLowUnit.text = tideUnit.toString()
             binding.tideHighUnit.text = tideUnit.toString()
 
+
         } else {
             Log.e("TidesFragment", "Failed to fetch tides data.")
         }
