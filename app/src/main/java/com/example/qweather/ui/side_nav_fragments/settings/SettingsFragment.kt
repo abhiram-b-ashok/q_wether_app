@@ -43,7 +43,6 @@ class SettingsFragment : Fragment() {
         val sharedPreferences =
             requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-
         selectedLanguage = sharedPreferences.getInt("selectedLanguage", 1)
         selectLanguage(selectedLanguage)
 

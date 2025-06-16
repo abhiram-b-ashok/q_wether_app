@@ -11,24 +11,18 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.qweather.R
-import com.example.qweather.data.models.cities_weather.HourlyForecast
 import com.example.qweather.databinding.FragmentTideDetailedBinding
 import com.example.qweather.repository.TideAPI
 import com.example.qweather.repository.WeatherRepository
-import com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.adapter.ForeCastHourlyAdapter
-import com.example.qweather.ui.dashboard.inner_fragments.forecast.forecast_detailed.adapter.ForecastDailyAdapter
 import com.example.qweather.ui.dashboard.inner_fragments.tides.Status
 import com.example.qweather.ui.dashboard.inner_fragments.tides.TidalViewData
 import com.example.qweather.ui.dashboard.inner_fragments.tides.TideXmlDocument
-import com.example.qweather.utility_funtions.compassPoints
-import com.example.qweather.utility_funtions.getCompassIndex
 import com.example.qweather.utility_funtions.temperatureConverter
 import com.example.qweather.view_models.city_weather.WeatherViewModel
 import com.example.qweather.view_models.city_weather.WeatherViewModelFactory
 import kotlinx.coroutines.launch
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.StringReader
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -44,10 +38,15 @@ class TideDetailedFragment : Fragment() {
     private lateinit var weatherViewModel: WeatherViewModel
     private var tidalData: TidalViewData? = null
     private val tideUnit: String by lazy {
-        requireContext()
-            .getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
-            .getString("selectedTide", "m") ?: "m"
+        try {
+            requireContext()
+                .getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
+                .getString("selectedTide", "m") ?: "m"
+        } catch (e: ClassCastException) {
+            "m"
+        }
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
@@ -223,7 +222,17 @@ class TideDetailedFragment : Fragment() {
             binding.tideLowUnit.text = tideUnit.toString()
             binding.tideHighUnit.text = tideUnit.toString()
 
+//            val values = tidalData?.area?.valueTags ?: return
+            val values = tidalData?.area?.valueTags?.take(24) ?: return
 
+            val hourLabels = values.map { valueTag ->
+                "${valueTag.hour.toString().padStart(2, '0')}:00"
+            }
+            val tideHeights = values.map { valueTag ->
+                valueTag.value
+            }
+            val currentHeight = tidalData!!.currentHeightMeters
+            binding.tideFlow.setTideData(hourLabels, tideHeights,currentHeight )
         } else {
             Log.e("TidesFragment", "Failed to fetch tides data.")
         }

@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.graphics.toColorInt
 
@@ -101,33 +100,37 @@ class TidesCustomView @JvmOverloads constructor(
 
     }
 
-    private val hourlyTideData = listOf(
-        "00.00",
-        "01.00",
-        "02.00",
-        "03.00",
-        "04.00",
-        "05.00",
-        "06.00",
-        "07.00",
-        "08.00",
-        "09.00",
-        "10.00",
-        "11.00",
-        "12.00",
-        "13.00",
-        "14.00",
-        "15.00",
-        "16.00",
-        "17.00",
-        "18.00",
-        "19.00",
-        "20.00",
-        "21.00",
-        "22.00",
-        "23.00"
-    )
-    private val tidesData = listOf(1.2, 2.3, 2.1, 1.8, 1.5, 1.2, 0.1, 1.1, 1.4, 1.7, 2.0, 2.3, 2.5, 2.7, 2.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5, 2.7)
+//    private val hourlyTideData = listOf(
+//        "00.00",
+//        "01.00",
+//        "02.00",
+//        "03.00",
+//        "04.00",
+//        "05.00",
+//        "06.00",
+//        "07.00",
+//        "08.00",
+//        "09.00",
+//        "10.00",
+//        "11.00",
+//        "12.00",
+//        "13.00",
+//        "14.00",
+//        "15.00",
+//        "16.00",
+//        "17.00",
+//        "18.00",
+//        "19.00",
+//        "20.00",
+//        "21.00",
+//        "22.00",
+//        "23.00"
+//    )
+//    private val tidesData = listOf(1.2, 2.3, 2.1, 1.8, 1.5, 1.2, 0.1, 1.1, 1.4, 1.7, 2.0, 2.3, 2.5, 2.7, 2.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5, 2.7)
+
+    private var hourlyTideData: List<String> = emptyList()
+    private var tidesData: List<Double> = emptyList()
+    private var currentTide: Double = 0.0
 
     private val barWidth = 50.dpToPx()
     private val barSpacing = 16.dpToPx()
@@ -255,7 +258,7 @@ class TidesCustomView @JvmOverloads constructor(
 
         currentCirclePath.addCircle(
             (timeGap * 12)+(currentCircleRadius+5f),
-            (8.5 * lineGap).toFloat() - (tidesData[12] * lineGap).toFloat(),
+            (8.5 * lineGap).toFloat() - (currentTide * lineGap).toFloat(),
             currentCircleRadius,
             Path.Direction.CW
         )
@@ -263,6 +266,17 @@ class TidesCustomView @JvmOverloads constructor(
         canvas.drawPath(currentCirclePath, currentCircleBorderPaint)
 
     }
+    fun setTideData(hours: List<String>, tideValues: List<Double>, currentHeight: Double?) {
+        this.hourlyTideData = hours
+        this.tidesData = tideValues
+        if (currentHeight != null) {
+            this.currentTide = currentHeight
+        }
+        requestLayout()
+        invalidate()
+    }
+
+
 
 }
 
