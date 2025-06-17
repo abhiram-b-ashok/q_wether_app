@@ -1,6 +1,7 @@
 package com.example.qweather.ui.dashboard.inner_fragments.tides
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,11 +18,12 @@ import kotlinx.coroutines.launch
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.StringReader
 import java.util.Date
+import androidx.core.content.edit
 
 class TidesFragment : Fragment() {
 
     private lateinit var binding: FragmentTidesBinding
-
+    private lateinit var sharedPrefs: SharedPreferences
     private var areaId: String = "1"
 
     private var tidalData: TidalViewData? = null
@@ -30,7 +32,10 @@ class TidesFragment : Fragment() {
             .getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
             .getString("selectedTide", "m") ?: "m"
     }
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
+    }
 
 
     override fun onCreateView(
@@ -111,6 +116,8 @@ class TidesFragment : Fragment() {
 
         if (tidalData?.status == Status.SUCCESS) {
             binding.tideValue.text = tidalData!!.currentHeightMeters.toString()
+            val currentTide =  tidalData!!.currentHeightMeters.toString()
+            sharedPrefs.edit { putString("LAST_TIDE_HEIGHT", currentTide) }
             binding.time.text = tidalData!!.lastUpdatedTime.toString()
             binding.tideHighValue.text = tidalData!!.maxTideHeightMeters.toString()
             binding.tideLowValue.text = tidalData!!.minTideHeightMeters.toString()

@@ -13,11 +13,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/effra_trail_medium"
-        android:textColor="#A4A4A4"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:paddingTop="10dp"
+        android:textColor="#A4A4A4"
+
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/city_temp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Thu, 19 May, 11:00 AM" />
 
@@ -26,10 +27,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/effra_trail_semi_bold"
+        android:paddingTop="4dp"
         android:textColor="@color/black"
         android:textSize="22sp"
-        android:paddingTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/city_weather_desc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/city_current_time"
         tools:text="Kuwait City" />

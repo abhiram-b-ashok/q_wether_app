@@ -1,5 +1,8 @@
 package com.example.qweather.utility_funtions
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -48,5 +51,14 @@ val compassAngles = listOf(0, 45, 90, 135, 180, 225, 270, 315)
     return closestIndex
 }
 
-
+fun View.showKeyboard() {
+    this.requestFocus()
+    val inputMethodManager =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+fun View.hideKeyboard() {
+    val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputManager.hideSoftInputFromWindow(windowToken, 0)
+}
 

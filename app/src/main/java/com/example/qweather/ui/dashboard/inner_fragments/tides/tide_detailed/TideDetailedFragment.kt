@@ -34,7 +34,7 @@ class TideDetailedFragment : Fragment() {
     var dateDown = 0
     var dailyForecastSize = 0
     private lateinit var sharedPrefs: SharedPreferences
-    private var areaId: String = "1"
+    private var areaId: Int = 1
     private lateinit var weatherViewModel: WeatherViewModel
     private var tidalData: TidalViewData? = null
     private val tideUnit: String by lazy {
@@ -86,6 +86,8 @@ class TideDetailedFragment : Fragment() {
                 if (dateDown > 0) {
                     dateDown--
                     weatherViewModel.loadWeather(lat, lon, isQatar)
+                    areaId--
+                    getTides()
                 }
                 else{
                     prevBt.isEnabled = false
@@ -96,8 +98,9 @@ class TideDetailedFragment : Fragment() {
             nextBt.setOnClickListener {
                 if (dateDown < dailyForecastSize-1) {
                     dateDown++
-
                     weatherViewModel.loadWeather(lat, lon, isQatar)
+                    areaId++
+                    getTides()
                 }
                 else{
                     nextBt.isEnabled = false
@@ -169,7 +172,7 @@ class TideDetailedFragment : Fragment() {
                         val newTidalData = TidalViewData()
                         newTidalData.status = Status.SUCCESS
                         newTidalData.document = tidesDocument
-                        newTidalData.area = tidesDocument.areaTags?.firstOrNull { it.id == areaId }
+                        newTidalData.area = tidesDocument.areaTags?.firstOrNull { it.id == areaId.toString() }
 
                         if (newTidalData.area?.valueTags != null) {
                             val values = newTidalData.area!!.valueTags!!
@@ -214,7 +217,8 @@ class TideDetailedFragment : Fragment() {
 
     private fun setData() {
         if (tidalData?.status == Status.SUCCESS) {
-            binding.tideValue.text = tidalData!!.currentHeightMeters.toString()
+//            binding.tideValue.text = tidalData!!.currentHeightMeters.toString()
+            binding.tideValue.text = sharedPrefs.getString("LAST_TIDE_HEIGHT", "0.0").toString()
             binding.time.text = tidalData!!.lastUpdatedTime.toString()
             binding.tideHighValue.text = tidalData!!.maxTideHeightMeters.toString()
             binding.tideLowValue.text = tidalData!!.minTideHeightMeters.toString()
@@ -225,14 +229,15 @@ class TideDetailedFragment : Fragment() {
 //            val values = tidalData?.area?.valueTags ?: return
             val values = tidalData?.area?.valueTags?.take(24) ?: return
 
-            val hourLabels = values.map { valueTag ->
-                "${valueTag.hour.toString().padStart(2, '0')}:00"
-            }
             val tideHeights = values.map { valueTag ->
                 valueTag.value
             }
+            if (areaId != 1){
+                binding.tideFlow.setTideData(tideHeights,0.0)
+                return
+            }
             val currentHeight = tidalData!!.currentHeightMeters
-            binding.tideFlow.setTideData(hourLabels, tideHeights,currentHeight )
+            binding.tideFlow.setTideData(tideHeights,currentHeight )
         } else {
             Log.e("TidesFragment", "Failed to fetch tides data.")
         }

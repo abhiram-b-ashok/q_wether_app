@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_defaultDashboardFragment_to_tideDetailedFragment"
             app:destination="@id/tideDetailedFragment" />
+        <action
+            android:id="@+id/action_defaultDashboardFragment_to_worldWideCitiesFragment"
+            app:destination="@id/worldWideCitiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherNewsFragment"

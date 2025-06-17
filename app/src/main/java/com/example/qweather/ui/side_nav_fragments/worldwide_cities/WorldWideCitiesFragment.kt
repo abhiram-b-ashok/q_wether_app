@@ -19,6 +19,7 @@ import com.example.qweather.databinding.FragmentWorldWideCitiesBinding
 import com.example.qweather.repository.WeatherRepository
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.city_bottom_sheet.CityBottomSheetFragment
 import com.example.qweather.ui.side_nav_fragments.worldwide_cities.adapter.FavoriteCitiesAdapter
+import com.example.qweather.ui.side_nav_fragments.worldwide_cities.adapter.WorldFavoriteCitiesAdapter
 import com.example.qweather.view_models.city_weather.WeatherViewModel
 import com.example.qweather.view_models.city_weather.WeatherViewModelFactory
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
@@ -31,6 +32,7 @@ class WorldWideCitiesFragment : Fragment() {
     private lateinit var adapter: FavoriteCitiesAdapter
     private lateinit var dao: FavoriteCitiesDao
     private lateinit var cityBottomSheetFragment: CityBottomSheetFragment
+    private lateinit var savedCitiesAdapter: WorldFavoriteCitiesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +54,6 @@ class WorldWideCitiesFragment : Fragment() {
             cityBottomSheetFragment = CityBottomSheetFragment()
             cityBottomSheetFragment.show(childFragmentManager, "CityBottomSheetFragment")
         }
-
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             0,
@@ -76,7 +77,7 @@ class WorldWideCitiesFragment : Fragment() {
                 cityToDelete?.let { city ->
                     lifecycleScope.launch(Dispatchers.IO) {
                         dao.deleteFavoriteCity(city)
-                        loadFavorites() // Reload data after deletion
+                        loadFavorites()
                     }
                 }
             }
@@ -128,12 +129,10 @@ class WorldWideCitiesFragment : Fragment() {
     }
 
     private fun loadFavorites() {
-
         lifecycleScope.launch(Dispatchers.IO) {
             val favorites = dao.getAllFavoriteCities()
             withContext(Dispatchers.Main) {
                 adapter.updateList(favorites)
-
             }
         }
     }

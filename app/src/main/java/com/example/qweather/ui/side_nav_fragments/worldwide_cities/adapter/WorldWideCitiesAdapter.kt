@@ -18,7 +18,6 @@ class FavoriteCitiesAdapter(
         fun bind(city: FavoriteCitiesModel) {
             binding.cityName.text = city.cityName
 
-
         }
     }
 

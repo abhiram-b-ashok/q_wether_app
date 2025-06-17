@@ -128,19 +128,23 @@ class ForecastDetailedFragment : Fragment() {
                     }"
 
                     if (forecast[dateDown].weather_type == "Clear") {
-                        cloudIcon.setImageResource(R.drawable.sun)
+                        cloudIcon.setImageResource(R.drawable.clear_white_cloud_ic)
                     } else if (forecast[dateDown].weather_type == "Overcast Clouds") {
-                        cloudIcon.setImageResource(R.drawable.few_clouds_ic)
+                        cloudIcon.setImageResource(R.drawable.few_clouds_white_ic)
                     } else if (forecast[dateDown].weather_type == "Rain") {
-                        cloudIcon.setImageResource(R.drawable.rain_ic)
+                        cloudIcon.setImageResource(R.drawable.rain_white_ic)
                     } else if (forecast[dateDown].weather_type == "Snowy") {
-                        cloudIcon.setImageResource(R.drawable.snow_ic)
+                        cloudIcon.setImageResource(R.drawable.snow_white_ic)
                     } else if (forecast[dateDown].weather_type == "Dusty") {
-                        cloudIcon.setImageResource(R.drawable.dust_ic)
+                        cloudIcon.setImageResource(R.drawable.dust_white_ic)
                     } else if (forecast[dateDown].weather_type == "Mist") {
                         cloudIcon.setImageResource(R.drawable.mist_ic)
-                    } else {
+                    }else if (forecast[dateDown].weather_type == "Thunderstorm") {
+                        cloudIcon.setImageResource(R.drawable.thuder_storm_white_ic)
+                    } else if (forecast[dateDown].weather_type == "Fine") {
                         cloudIcon.setImageResource(R.drawable.cloud_group)
+                    } else {
+                        cloudIcon.setImageResource(R.drawable.cloud_ic)
                     }
 
                     humiPercent.text = forecast[dateDown].humidity.toString()
@@ -164,10 +168,11 @@ class ForecastDetailedFragment : Fragment() {
                     }
                 }
                 result?.hourlyForecast?.let { forecast ->
-                    val allHourlyForecasts: List<HourlyForecast> = forecast.flatMap { hourlyWeather ->
-                        hourlyWeather.dayDetails
+                    val allHourlyForecasts: List<HourlyForecast> =
+                        forecast.flatMap { hourlyWeather ->
+                            hourlyWeather.dayDetails
 
-                    }
+                        }
                     hourlyAdapter = ForeCastHourlyAdapter(allHourlyForecasts)
                     binding.hourlyRecyclerView.adapter = hourlyAdapter
                     hourlyAdapter.notifyDataSetChanged()

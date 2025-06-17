@@ -138,7 +138,7 @@ class CurrentWeatherFragment : Fragment() {
                         cityWeatherIcon.setImageResource(R.drawable.few_clouds_ic)
                     } else {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_shower_rain_bg)
-                        cityWeatherIcon.setImageResource(R.drawable.shower_rain_ic)
+                        cityWeatherIcon.setImageResource(R.drawable.cloud_ic)
                     }
 
                 }
