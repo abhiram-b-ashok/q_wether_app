@@ -32,7 +32,6 @@ class WorldWideCitiesFragment : Fragment() {
     private lateinit var adapter: FavoriteCitiesAdapter
     private lateinit var dao: FavoriteCitiesDao
     private lateinit var cityBottomSheetFragment: CityBottomSheetFragment
-    private lateinit var savedCitiesAdapter: WorldFavoriteCitiesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +39,6 @@ class WorldWideCitiesFragment : Fragment() {
         binding = FragmentWorldWideCitiesBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

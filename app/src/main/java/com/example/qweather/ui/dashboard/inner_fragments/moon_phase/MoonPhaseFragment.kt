@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.qweather.data.network.NetworkResult
 import com.example.qweather.databinding.FragmentMoonPhaseBinding
 import com.example.qweather.repository.MoonPhaseRepository
+import com.example.qweather.utility_funtions.convertTimestampToTime
 import com.example.qweather.view_models.moon_phase.MoonPhaseViewModel
 import com.example.qweather.view_models.moon_phase.MoonPhaseViewModelFactory
 import java.text.SimpleDateFormat
@@ -42,7 +43,6 @@ class MoonPhaseFragment : Fragment() {
         val repository = MoonPhaseRepository()
         viewModel = ViewModelProvider(this, MoonPhaseViewModelFactory(repository))[MoonPhaseViewModel::class.java]
 
-
         observeViewModel()
 
         val cityId = arguments?.getInt("CITY_ID") ?: 0
@@ -72,12 +72,4 @@ class MoonPhaseFragment : Fragment() {
             }
         }
     }
-    private fun convertTimestampToTime(timestamp: Long, pattern: String =  "HH:mm a"): String {
-        val date = Date(timestamp *1000L)
-        val format = SimpleDateFormat(pattern, Locale.ENGLISH)
-        return format.format(date)
-    }
-
-
-
 }

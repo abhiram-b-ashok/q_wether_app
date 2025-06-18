@@ -38,7 +38,6 @@ class ForecastViewModel(private val repository: ForecastRepository) : ViewModel(
                         )
                     }
                 }
-
                 if (pendingCount.decrementAndGet() == 0) {
                     _savedForecasts.postValue(forecastList)
                 }

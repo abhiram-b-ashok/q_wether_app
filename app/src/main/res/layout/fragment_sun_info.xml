@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.canvasapplication.SunRiseView
+        <com.example.canvasapplication.SunRiseCustomView
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_margin="16dp"

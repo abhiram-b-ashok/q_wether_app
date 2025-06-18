@@ -62,3 +62,13 @@ fun View.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
+ fun convertTimestampToTime(timestamp: Long, pattern: String =  "HH:mm a"): String {
+    val date = Date(timestamp *1000L)
+    val format = SimpleDateFormat(pattern, Locale.ENGLISH)
+    return format.format(date)
+}
+fun convertTimestampToDateAndTime(timestamp: Long, pattern: String = "EEEE, dd MMMM yyyy HH:mm a"): String {
+    val date = Date(timestamp *1000L)
+    val format = SimpleDateFormat(pattern, Locale.ENGLISH)
+    return format.format(date)
+}

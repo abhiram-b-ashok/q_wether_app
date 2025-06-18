@@ -34,8 +34,6 @@ class FavoriteCitiesAdapter(private var list : List<FavoriteCitiesModel>): Recyc
             binding.selectionIcon.setOnClickListener {
                 onDeleteClickListener?.invoke(city)
             }
-
-
         }
 
     }

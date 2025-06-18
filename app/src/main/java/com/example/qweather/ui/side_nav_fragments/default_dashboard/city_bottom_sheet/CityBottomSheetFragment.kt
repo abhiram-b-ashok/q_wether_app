@@ -68,7 +68,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var worldAdapter: WorldAdapter
     private lateinit var favoriteCitiesAdapter: FavoriteCitiesAdapter
     private lateinit var viewModel: CityViewModel
-    private lateinit var forecastViewModel: ForecastViewModel
     private lateinit var citySearchViewModel: CitySearchViewModel
     private lateinit var fused: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
@@ -98,11 +97,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val forecastRepository = ForecastRepository()
-        forecastViewModel = ForecastViewModel(forecastRepository)
-        forecastViewModel.loadForecastsForSavedCities(emptyList())
-
-
         db = FavoriteCityDatabase.getDatabase(requireContext())
         dao = db.favoriteCitiesDao()
 
@@ -120,9 +114,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         binding.citySearchBarLayout.setOnClickListener {
             binding.citySearchBarEditText.requestFocus()
             binding.citySearchBarEditText.showKeyboard()
-        }
-        binding.favoritesHeading.setOnClickListener {
-            findNavController().navigate(R.id.action_defaultDashboardFragment_to_worldWideCitiesFragment)
         }
 
         locationPermissionRequest = registerForActivityResult(
@@ -162,6 +153,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
         favoriteCitiesAdapter = FavoriteCitiesAdapter(emptyList())
         binding.favoritesRecyclerView.adapter = favoriteCitiesAdapter
         favoriteCitiesAdapter.onItemClickListener ={
+            sendSelection(it.cityName, false, it.latitude, it.longitude, it.cityId)
             dismiss()
         }
 
@@ -209,9 +201,6 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                             cityName = city.cityName,
                             latitude = city.latitude,
                             longitude = city.longitude,
-                            temperature = 0.0,
-                            weatherType = "",
-                            currentTimestamp = System.currentTimeMillis(),
                             isSaved = true
                         )
                         dao.insertFavoriteCity(favorite)
@@ -253,7 +242,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun observeSearchViewModel() {
-        citySearchViewModel.citySearchResponse.observe(viewLifecycleOwner) { result ->
+        citySearchViewModel.citySearchResponse.observe(viewLifecycleOwner) {  result ->
             if (result is NetworkResult.Success) {
                 lifecycleScope.launch {
                     val favoriteIds = getFavoriteCityIds()

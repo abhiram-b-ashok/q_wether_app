@@ -42,11 +42,3 @@ data class SavedForecastModel(
     val weatherType: String
 )
 
-data class FavoriteCityWeatherDisplayModel(
-    val cityId: Int,
-    val cityName: String,
-    val temperature: String,
-    val date: String,
-    val weatherType: String,
-    val weatherIcon: String
-)

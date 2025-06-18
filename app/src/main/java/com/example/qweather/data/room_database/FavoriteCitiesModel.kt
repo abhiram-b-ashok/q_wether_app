@@ -9,8 +9,5 @@ data class FavoriteCitiesModel(
     val cityName: String,
     val longitude: Double,
     val latitude: Double,
-    val temperature: Double,
-    val weatherType: String,
-    val currentTimestamp: Long,
     var isSaved: Boolean = false
 )

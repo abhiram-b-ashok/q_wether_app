@@ -168,17 +168,13 @@ class SettingsFragment : Fragment() {
             val currentSelectedTitles = list.filter { it.isSelect }.map { it.title }.toSet()
             sharedPreferences.edit().putStringSet(KEY_SELECTED_DASHBOARD_ITEMS, currentSelectedTitles).apply()
 
-
-
-
             settingsAdapter = SettingsAdapter(list)
             binding.recyclerForSettings.adapter = settingsAdapter
 
             settingsAdapter.onItemSelect = { selectedModel ->
                 // Prevent unselecting "Current Weather"
+
                 if (selectedModel.title != "Current Weather") {
-
-
                     selectedModel.isSelect = !selectedModel.isSelect
                     selectedModel.toggleImage =
                         if (selectedModel.isSelect) R.drawable.selected_ic else R.drawable.to_select_ic

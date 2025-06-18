@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import com.example.qweather.R
 import kotlin.math.cos
 
-class SunRiseView @JvmOverloads constructor(
+class SunRiseCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -107,7 +107,7 @@ class SunRiseView @JvmOverloads constructor(
     fun setSweepAngleAnimator(sweep: Float) {
         val targetSweep = sweep.coerceIn(0f, 100f)
         sweepAnim = ValueAnimator.ofFloat(0f, targetSweep).apply {
-            duration = 3000
+            duration = 1000
             addUpdateListener {
                 sweepPercent = it.animatedValue as Float
                 invalidate()
@@ -115,4 +115,6 @@ class SunRiseView @JvmOverloads constructor(
             start()
         }
     }
+
 }
+

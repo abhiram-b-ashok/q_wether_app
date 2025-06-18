@@ -16,6 +16,7 @@ class TidesCustomView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+    private var showCurrentTide: Boolean = true
 
     val lineGap = 150f
     val timeGap = 200f
@@ -250,23 +251,63 @@ class TidesCustomView @JvmOverloads constructor(
         canvas.drawPath(linesPath, linesPaint)
 
 
-        currentCirclePath.reset()
-        currentCirclePath.addCircle(
-            (timeGap * 12)+(currentCircleRadius)+20f,
-            ((8.5 * lineGap).toFloat() - (currentTide * lineGap).toFloat())+10f,
-            currentCircleRadius,
-            Path.Direction.CW
-        )
-        canvas.drawPath(currentCirclePath, currentCirclePaint)
-        canvas.drawPath(currentCirclePath, currentCircleBorderPaint)
-        canvas.drawText("Current Tide: $currentTide", (timeGap * 12)-85f, ((8.5 * lineGap).toFloat() - (currentTide * lineGap).toFloat())-35f, textPaint)
+        if (showCurrentTide) {
+            currentCirclePath.reset()
+
+            val currentTideHourIndex = 12
+
+            if (currentTideHourIndex < hourlyTideData.size && currentTideHourIndex >= 0) {
+                val currentCircleX = (timeGap * currentTideHourIndex) + (currentCircleRadius) + 20f
+                val currentCircleY = ((8.5 * lineGap) - (currentTide * lineGap)) + 10f // Added +10f as per your original
+
+                currentCirclePath.addCircle(
+                    currentCircleX,
+                    currentCircleY.toFloat(),
+                    currentCircleRadius,
+                    Path.Direction.CW
+                )
+                canvas.drawPath(currentCirclePath, currentCirclePaint)
+                canvas.drawPath(currentCirclePath, currentCircleBorderPaint)
+
+                canvas.drawText(
+                    "Current Tide: $currentTide",
+                    currentCircleX - (hourTextPaint.measureText("Current Tide: $currentTide") / 2), // Center text roughly
+                    (currentCircleY - currentCircleRadius - 15f).toFloat(), // Position text above the circle
+                    textPaint
+                )
+            } else if (tidesData.isNotEmpty()) { // Fallback if index is bad but data exists
+                // Fallback positioning, e.g., middle of the view or based on available data
+                val fallbackX = width / 2f
+                val fallbackY = ((8.5 * lineGap) - (currentTide * lineGap)) + 10f
+                currentCirclePath.addCircle(
+                    fallbackX,
+                    fallbackY.toFloat(),
+                    currentCircleRadius,
+                    Path.Direction.CW
+                )
+                canvas.drawPath(currentCirclePath, currentCirclePaint)
+                canvas.drawPath(currentCirclePath, currentCircleBorderPaint)
+                canvas.drawText(
+                    "Current Tide: $currentTide",
+                    fallbackX - (hourTextPaint.measureText("Current Tide: $currentTide") / 2),
+                    (fallbackY - currentCircleRadius - 15f).toFloat(),
+                    textPaint
+                )
+                Log.w("TidesCustomView", "currentTideHourIndex out of bounds, using fallback position.")
+            } else {
+                Log.w("TidesCustomView", "Cannot draw current tide indicator: No tide data or invalid index.")
+            }
+        }
 
     }
-    fun setTideData(tideValues: List<Double>, currentHeight: Double?) {
+
+    fun setTideData(tideValues: List<Double>, currentHeight: Double?, displayCurrentTide: Boolean) {
         this.tidesData = tideValues
         if (currentHeight != null) {
             this.currentTide = currentHeight
         }
+        this.showCurrentTide = displayCurrentTide
+
         requestLayout()
         invalidate()
     }

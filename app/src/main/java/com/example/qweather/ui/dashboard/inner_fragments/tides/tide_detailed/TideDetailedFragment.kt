@@ -232,12 +232,14 @@ class TideDetailedFragment : Fragment() {
             val tideHeights = values.map { valueTag ->
                 valueTag.value
             }
+
             if (areaId != 1){
-                binding.tideFlow.setTideData(tideHeights,0.0)
+                binding.tideFlow.setTideData(tideHeights,0.0, false)
                 return
             }
+
             val currentHeight = tidalData!!.currentHeightMeters
-            binding.tideFlow.setTideData(tideHeights,currentHeight )
+            binding.tideFlow.setTideData(tideHeights,currentHeight,true )
         } else {
             Log.e("TidesFragment", "Failed to fetch tides data.")
         }

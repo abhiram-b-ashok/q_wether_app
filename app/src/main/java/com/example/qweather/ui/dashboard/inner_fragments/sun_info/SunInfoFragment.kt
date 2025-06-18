@@ -1,6 +1,7 @@
 package com.example.qweather.ui.dashboard.inner_fragments.sun_info
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,11 +33,14 @@ class SunInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
-            result?.dailyForecast?.let { currentWeather ->
+            result?.currentWeather?.let { currentWeather ->
                 binding.apply {
-                    val sunrise = currentWeather[0].sunrise
-                    val sunset = currentWeather[0].sunset
-                    val currentTime = System.currentTimeMillis() / 1000L
+                    val sunrise = currentWeather.sunrise
+                    val sunset = currentWeather.sunset
+                    val currentTime = currentWeather.time
+
+                    Log.d("SunInfoFragment", "Sunrise: $sunrise, Sunset: $sunset, Current Time: $currentTime")
+
 
                     if (sunrise != null && sunset != null) {
                         sunriseTime.text = convertTimestampToTime(sunrise)
@@ -48,7 +52,9 @@ class SunInfoFragment : Fragment() {
                         val sweepPercent = (timeSinceSunrise * 100f / totalDaylight).coerceIn(0f, 100f)
                         sunRiseView.setSweepAngleAnimator(sweepPercent)
                     }
+
                 }
+
             }
         }
     }

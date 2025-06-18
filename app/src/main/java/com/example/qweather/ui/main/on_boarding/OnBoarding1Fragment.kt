@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.qweather.R
 import com.example.qweather.databinding.FragmentOnBoarding1Binding
+import com.example.qweather.utility_funtions.convertTimestampToDateAndTime
 
 
 class OnBoarding1Fragment : Fragment() {
@@ -46,7 +47,8 @@ class OnBoarding1Fragment : Fragment() {
                 approx.text = "Feels like ${Double.fromBits(sharedPrefs.getLong("LAST_FEELS_LIKE", 0L))}°C"
                 precipPercent.text = Double.fromBits(sharedPrefs.getLong("LAST_HUMIDITY", 0L)).toString()
                 windSpeed.text = Double.fromBits(sharedPrefs.getLong("LAST_WIND_SPEED", 0L)).toString()
-                date.text = sharedPrefs.getString("LAST_DATE", "0.0")
+                date.text = convertTimestampToDateAndTime((sharedPrefs.getString("LAST_DATE", "0.0"))?.toLong()
+                    ?: 1234567890L)
 
             }
     }

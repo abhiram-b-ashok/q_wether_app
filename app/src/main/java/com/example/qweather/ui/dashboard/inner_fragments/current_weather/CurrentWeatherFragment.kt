@@ -13,6 +13,7 @@ import com.example.qweather.databinding.FragmentCurrentWeatherBinding
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragment
 import com.example.qweather.ui.side_nav_fragments.default_dashboard.DefaultDashboardFragmentDirections
 import com.example.qweather.utility_funtions.compassPoints
+import com.example.qweather.utility_funtions.convertTimestampToDateAndTime
 import com.example.qweather.utility_funtions.getCompassIndex
 import com.example.qweather.utility_funtions.temperatureConverter
 import com.example.qweather.utility_funtions.windConverter
@@ -47,8 +48,8 @@ class CurrentWeatherFragment : Fragment() {
 
 
         weatherViewModel.weatherResult.observe(viewLifecycleOwner) { result ->
-            result?.dailyForecast?.let { current ->
-                Log.d("WeatherVM", "Current Weather: ${current[0]}")
+            result?.currentWeather?.let { current ->
+                Log.d("WeatherVM", "Current Weather: ${current}")
 
 
                 binding.apply {
@@ -56,84 +57,84 @@ class CurrentWeatherFragment : Fragment() {
                         findNavController().navigate(DefaultDashboardFragmentDirections.actionDefaultDashboardFragmentToForecastDetailedFragment())
                     }
                     cityName.text = sharedPrefs.getString("LAST_SELECTED_CITY", "Qatar")
-                    val timeStamp = current[0].date
+                    val timeStamp = current.time
                     Log.d("raw_timestamp","$timeStamp")
-                    cityTime.text = timeStamp
+                    cityTime.text = convertTimestampToDateAndTime(timeStamp)
                     cityTemperature.text = temperatureConverter(
-                        current[0].temperature,
+                        current.temperature,
                         tempUnit.toString()
                     ).toString()
-                    cityWeatherCondition.text = current[0].weather_type
+                    cityWeatherCondition.text = current.weather_type
                     feelsLikTemp.text = temperatureConverter(
-                        current[0].feels_like_day,
+                        current.feels_like,
                         tempUnit.toString()
                     ).toString()
                     tempeUnit.text = tempUnit
-                    humiPercent.text = current[0].humidity.toString()
-                    val windDirectionIndex = getCompassIndex(current[0].wind_direction)
+                    humiPercent.text = current.humidity.toString()
+                    val windDirectionIndex = getCompassIndex(current.wind_direction)
                     windDirection.text = compassPoints[windDirectionIndex]
-                    windSpeed.text = windConverter(current[0].wind_speed, windUnit.toString()).toString()
+                    windSpeed.text = windConverter(current.wind_power, windUnit.toString()).toString()
                     windSpeedUnit.text = windUnit
                     temperatureUnit.text = tempUnit
                     tempUp.text = temperatureConverter(
-                        current[0].temperature_max,
+                        current.temperature_max,
                         tempUnit.toString()
                     ).toString()
                     tempDown.text = temperatureConverter(
-                        current[0].temperature_min,
+                        current.temperature_min,
                         tempUnit.toString()
                     ).toString()
                     with(sharedPrefs.edit()) {
                         putLong(
                             "LAST_TEMPERATURE",
-                            java.lang.Double.doubleToRawLongBits(current[0].temperature.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current.temperature.toDouble())
                         )
                         putLong(
                             "LAST_TEMP_MIN",
-                            java.lang.Double.doubleToRawLongBits(current[0].temperature_min.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current.temperature_min.toDouble())
                         )
                         putLong(
                             "LAST_TEMP_MAX",
-                            java.lang.Double.doubleToRawLongBits(current[0].temperature_max.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current.temperature_max.toDouble())
                         )
-                        putString("LAST_WEATHER_TYPE", current[0].weather_type)
+                        putString("LAST_WEATHER_TYPE", current.weather_type)
                         putLong(
                             "LAST_FEELS_LIKE",
-                            java.lang.Double.doubleToRawLongBits(current[0].feels_like_day.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current.feels_like.toDouble())
                         )
                         putLong(
                             "LAST_HUMIDITY",
-                            java.lang.Double.doubleToRawLongBits(current[0].humidity.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current.humidity.toDouble())
                         )
                         putLong(
                             "LAST_WIND_SPEED",
-                            java.lang.Double.doubleToRawLongBits(current[0].wind_speed.toDouble())
+                            java.lang.Double.doubleToRawLongBits(current.wind_power.toDouble())
                         )
-                        putString("LAST_DATE", timeStamp)
+                        putString("LAST_DATE", timeStamp.toString())
                         putString("LAST_WIND_DIRECTION", compassPoints[windDirectionIndex])
 
                         apply()
                     }
 
-                    if (current[0].weather_type == "Clear") {
+                    if (current.weather_type == "Clear") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_clear_bg)
                         cityWeatherIcon.setImageResource(R.drawable.clear_sky_ic)
-                    } else if (current[0].weather_type == "Dust") {
+                    } else if (current.weather_type == "Dusty") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_dust_bg)
                         cityWeatherIcon.setImageResource(R.drawable.dust_ic)
-                    } else if (current[0].weather_type == "Rain") {
+                    } else if (current.weather_type == "Rain") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_rain_bg)
                         cityWeatherIcon.setImageResource(R.drawable.rain_ic)
-                    } else if (current[0].weather_type == "Stormy") {
+                    } else if (current.weather_type == "Stormy") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_thuder_storm_bg)
                         cityWeatherIcon.setImageResource(R.drawable.thunder_ic)
-                    } else if (current[0].weather_type == "Snow") {
+                    } else if (current.weather_type == "Snow") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_snow_bg)
                         cityWeatherIcon.setImageResource(R.drawable.snow_ic)
-                    } else if (current[0].weather_type == "Mist") {
+                    } else if (current.weather_type == "Mist") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.current_mist_bg)
                         cityWeatherIcon.setImageResource(R.drawable.mist_ic)
-                    } else if (current[0].weather_type == "Few Clouds") {
+                    } else if (current.weather_type == "Few Clouds") {
                         currentWeatherLayout.setBackgroundResource(R.drawable.currrent_few_clouds_bg)
                         cityWeatherIcon.setImageResource(R.drawable.few_clouds_ic)
                     } else {
