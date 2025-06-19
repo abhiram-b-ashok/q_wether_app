@@ -7,505 +7,536 @@
     tools:context=".ui.side_nav_fragments.weather_news.WeatherNewsFragment">
 
     <TextView
+        android:id="@+id/header_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forecast Details"
-        android:paddingBottom="10dp"
-        android:textSize="25sp"
-        android:fontFamily="@font/effra_trail_bold"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="10dp"
+        android:fontFamily="@font/effra_trail_bold"
+        android:paddingBottom="10dp"
+        android:text="Forecast Details"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/header_label"/>
-    <androidx.core.widget.NestedScrollView
-        app:layout_constraintTop_toBottomOf="@+id/header_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:background="@drawable/location_bottom_sheet_shape"
         app:layout_constraintTop_toBottomOf="@+id/header_label">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/prev_bt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/previous_bt"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/next_bt"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/next_button"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/date_bg"
-            android:id="@+id/date_container"
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/date_container"
-            app:layout_constraintEnd_toEndOf="@+id/date_container"
-            app:layout_constraintTop_toTopOf="@+id/date_container"
-            app:layout_constraintBottom_toBottomOf="@+id/date_container"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:fontFamily="@font/effra_trail_medium"
-            tools:text="Thu, 19 May, 2025"
-            android:paddingTop="3dp"
-            android:id="@+id/date_main"
-            />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginVertical="15dp"
-            android:layout_marginHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/date_container"
-            android:background="@drawable/notice_frames"
-            android:paddingBottom="15dp"
-            android:id="@+id/container">
+            android:background="@drawable/location_bottom_sheet_shape"
+            android:paddingTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/header_label">
+
+            <ImageView
+                android:id="@+id/prev_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/previous_bt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/next_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/next_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/firstBarrier"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="prev_bt" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/secondBarrier"
+                app:barrierDirection="start"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:constraint_referenced_ids="next_bt" />
+
+            <ImageView
+                android:id="@+id/date_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/date_bg"
+                app:layout_constraintEnd_toEndOf="@+id/secondBarrier"
+                app:layout_constraintStart_toStartOf="@+id/firstBarrier"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/date_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/effra_trail_medium"
+                android:paddingTop="3dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/date_container"
+                app:layout_constraintEnd_toEndOf="@+id/date_container"
+                app:layout_constraintStart_toStartOf="@+id/date_container"
+                app:layout_constraintTop_toTopOf="@+id/date_container"
+                tools:text="Thu, 19 May, 2025" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/notice_frames"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date_container">
+
+                <TextView
+                    android:id="@+id/city_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#8A1538"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Doha" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#1D1D1D"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/city_name"
+
+                    tools:text="Thu, 19 May, 11:00 AM" />
+
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:maxLength="5"
+                    android:textColor="#8A1538"
+                    android:textSize="50sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/date"
+                    tools:text="34.45" />
+
+                <TextView
+                    android:id="@+id/tempe_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8A1538"
+                    android:textSize="50sp"
+                    app:layout_constraintStart_toEndOf="@+id/temp"
+                    app:layout_constraintTop_toBottomOf="@+id/date" />
+
+
+                <TextView
+                    android:id="@+id/condition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#1D1D1D"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/temp"
+                    tools:text="Sunny" />
+
+                <TextView
+                    android:id="@+id/approx"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#08043D"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/condition"
+                    tools:text="Feels like 38°" />
+
+
+                <ImageView
+                    android:id="@+id/cloud_icon"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="70dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/cloud_group" />
+
+                <ImageView
+                    android:id="@+id/ic_up"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/temp_up_grey_ic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/approx" />
+
+                <TextView
+                    android:id="@+id/temp_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/effra_trail_medium"
+                    android:maxLength="5"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/ic_up"
+                    app:layout_constraintTop_toBottomOf="@+id/approx"
+                    tools:text="100" />
+
+                <TextView
+                    android:id="@+id/temp_up_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/effra_trail_medium"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/ic_down"
+                    app:layout_constraintStart_toEndOf="@id/temp_up"
+                    app:layout_constraintTop_toBottomOf="@+id/approx"
+                    tools:text="°" />
+
+                <ImageView
+                    android:id="@+id/ic_down"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/temp_down_grey_ic"
+                    app:layout_constraintEnd_toStartOf="@+id/temp_down"
+                    app:layout_constraintStart_toEndOf="@+id/temp_up_unit"
+                    app:layout_constraintTop_toBottomOf="@+id/approx" />
+
+                <TextView
+                    android:id="@+id/temp_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/effra_trail_medium"
+                    android:maxLength="5"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/temp_down_unit"
+                    app:layout_constraintStart_toEndOf="@+id/ic_down"
+                    app:layout_constraintTop_toBottomOf="@+id/approx"
+                    tools:text="100" />
+
+                <TextView
+                    android:id="@+id/temp_down_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/effra_trail_medium"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@id/temp_down"
+                    app:layout_constraintTop_toBottomOf="@+id/approx"
+                    tools:text="°" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingVertical="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container">
+
+                <ImageView
+                    android:id="@+id/humi_lo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/humi_lo"
+                    app:layout_constraintEnd_toStartOf="@+id/wind_lo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/humi_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="HUMI"
+                    android:textColor="@color/grey"
+                    app:layout_constraintBottom_toTopOf="@+id/humi_percent"
+                    app:layout_constraintEnd_toEndOf="@id/humi_lo"
+                    app:layout_constraintStart_toStartOf="@+id/humi_lo"
+                    app:layout_constraintTop_toTopOf="@id/humi_lo" />
+
+                <TextView
+                    android:id="@+id/humi_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#08043D"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
+                    app:layout_constraintEnd_toEndOf="@+id/humi_lo"
+                    app:layout_constraintStart_toStartOf="@+id/humi_lo"
+                    app:layout_constraintTop_toBottomOf="@+id/humi_label"
+                    tools:text="3" />
+
+                <TextView
+                    android:id="@+id/humi_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="%"
+                    android:textColor="#08043D"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
+                    app:layout_constraintStart_toEndOf="@+id/humi_percent"
+                    app:layout_constraintTop_toBottomOf="@+id/humi_label" />
+
+                <ImageView
+                    android:id="@+id/wind_lo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wind_lo"
+                    app:layout_constraintEnd_toStartOf="@+id/swoosh_lo"
+                    app:layout_constraintStart_toEndOf="@+id/humi_lo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/wind_direction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#08043D"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/wind_lo"
+                    app:layout_constraintEnd_toEndOf="@id/wind_lo"
+                    app:layout_constraintStart_toStartOf="@+id/wind_lo"
+                    app:layout_constraintTop_toTopOf="@id/wind_lo"
+                    tools:text="NE" />
+
+
+                <ImageView
+                    android:id="@+id/swoosh_lo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/swoosh_lo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/wind_lo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#08043D"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@id/wind_speed_unit"
+                    app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
+                    app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
+                    app:layout_constraintTop_toTopOf="@+id/swoosh_lo"
+                    tools:text="23.2" />
+
+                <TextView
+                    android:id="@+id/wind_speed_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="km/h"
+                    android:textColor="#08043D"
+                    app:layout_constraintBottom_toBottomOf="@+id/swoosh_lo"
+                    app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
+                    app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
+                    app:layout_constraintTop_toBottomOf="@+id/wind_speed" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/container3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/container2">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rain_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/small_rain_ic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/rain_rate_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/effra_trail_medium"
+                        android:text="Rain"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@+id/rain_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/rain_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/effra_trail_medium"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/pressure_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/small_pressure_ic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pressure_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/effra_trail_medium"
+                        android:text="Pressure"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@+id/pressure_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pressure_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/effra_trail_medium"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="1016hpa" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/hourly_heading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#8A1538"
-                tools:text = "Doha"
-                android:id="@+id/city_name"
-                android:textSize="30sp"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/city_name"
-                android:textColor="#1D1D1D"
-                android:fontFamily="@font/poppins_medium"
-                tools:text ="Thu, 19 May, 11:00 AM"
-                android:id="@+id/date"
-
-                android:layout_marginStart="20dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#8A1538"
-                android:id="@+id/temp"
-                tools:text = "34.45"
-                android:maxLength="5"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintTop_toBottomOf="@+id/date"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="20dp"
-                android:textSize="50sp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#8A1538"
-                android:textSize="50sp"
-                android:id="@+id/tempe_unit"
-                app:layout_constraintTop_toBottomOf="@+id/date"
-                app:layout_constraintStart_toEndOf="@+id/temp"
-                />
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="#1D1D1D"
-                android:id="@+id/condition"
-                tools:text = "Sunny"
-                android:layout_marginStart="20dp"
+                android:fontFamily="@font/effra_trail_medium"
+                android:text="Hourly forecast"
+                android:textColor="#3BA5F8"
                 android:textSize="20sp"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintTop_toBottomOf="@+id/temp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/container3" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hourly_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hourly_heading" />
+
             <TextView
+                android:id="@+id/daily_heading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#08043D"
-                android:id="@+id/approx"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/condition"
-                tools:text = "Feels like 38°"
-                android:layout_marginStart="20dp"
-                android:textSize="15sp"
-                />
-
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:src="@drawable/cloud_group"
-                android:id="@+id/cloud_icon"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="70dp"/>
-            <ImageView
-                android:id="@+id/ic_up"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/temp_up_grey_ic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/approx" />
-
-            <TextView
-                android:id="@+id/temp_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/effra_trail_medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:maxLength="5"
-                app:layout_constraintStart_toEndOf="@+id/ic_up"
-                app:layout_constraintTop_toBottomOf="@+id/approx"
-                tools:text="100" />
-
-            <TextView
-                android:id="@+id/temp_up_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:fontFamily="@font/effra_trail_medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/ic_down"
-                app:layout_constraintStart_toEndOf="@id/temp_up"
-                app:layout_constraintTop_toBottomOf="@+id/approx"
-                tools:text="°" />
-
-            <ImageView
-                android:id="@+id/ic_down"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/temp_down_grey_ic"
-                app:layout_constraintEnd_toStartOf="@+id/temp_down"
-                app:layout_constraintStart_toEndOf="@+id/temp_up_unit"
-                app:layout_constraintTop_toBottomOf="@+id/approx" />
-
-            <TextView
-                android:id="@+id/temp_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/effra_trail_medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:maxLength="5"
-                app:layout_constraintEnd_toStartOf="@+id/temp_down_unit"
-                app:layout_constraintStart_toEndOf="@+id/ic_down"
-                app:layout_constraintTop_toBottomOf="@+id/approx"
-                tools:text="100" />
+                android:text="Daily forecast"
+                android:textColor="#3BA5F8"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hourly_recycler_view" />
 
-            <TextView
-                android:id="@+id/temp_down_unit"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_recycler_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:fontFamily="@font/effra_trail_medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/temp_down"
-                app:layout_constraintTop_toBottomOf="@+id/approx"
-                tools:text="°" />
+                android:orientation="vertical"
+                android:paddingBottom="50dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daily_heading" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/container2"
-            android:background="@color/white"
-            android:paddingVertical="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container">
-
-            <ImageView
-                android:id="@+id/humi_lo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/humi_lo"
-                app:layout_constraintEnd_toStartOf="@+id/wind_lo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/humi_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="HUMI"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/grey"
-                app:layout_constraintBottom_toTopOf="@+id/humi_percent"
-                app:layout_constraintEnd_toEndOf="@id/humi_lo"
-                app:layout_constraintStart_toStartOf="@+id/humi_lo"
-                app:layout_constraintTop_toTopOf="@id/humi_lo" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/humi_lo"
-                app:layout_constraintStart_toStartOf="@+id/humi_lo"
-                tools:text="3"
-                android:textSize="18sp"
-                android:textColor="#08043D"
-                android:fontFamily="@font/poppins_medium"
-                android:id="@+id/humi_percent"
-                app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
-                app:layout_constraintTop_toBottomOf="@+id/humi_label"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/humi_percent"
-                app:layout_constraintBottom_toBottomOf="@+id/humi_lo"
-                android:text="%"
-                android:textColor="#08043D"
-                android:fontFamily="@font/poppins_medium"
-                android:textSize="18sp"
-                android:id="@+id/humi_unit"
-                app:layout_constraintTop_toBottomOf="@+id/humi_label" />
-
-            <ImageView
-                android:id="@+id/wind_lo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wind_lo"
-                app:layout_constraintEnd_toStartOf="@+id/swoosh_lo"
-                app:layout_constraintStart_toEndOf="@+id/humi_lo"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="NE"
-                android:textSize="18sp"
-                android:layout_marginStart="25sp"
-                android:textColor="#08043D"
-                android:id="@+id/wind_direction"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintStart_toStartOf="@+id/wind_lo"
-                app:layout_constraintEnd_toEndOf="@id/wind_lo"
-                app:layout_constraintTop_toTopOf="@id/wind_lo"
-                app:layout_constraintBottom_toBottomOf="@+id/wind_lo"/>
-
-
-            <ImageView
-                android:id="@+id/swoosh_lo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/swoosh_lo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/wind_lo"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
-                app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
-                tools:text = "23.2"
-                android:textSize="18sp"
-                android:textColor="#08043D"
-                android:id="@+id/wind_speed"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_marginStart="17sp"
-                app:layout_constraintTop_toTopOf="@+id/swoosh_lo"
-                app:layout_constraintBottom_toTopOf="@id/wind_speed_unit" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/wind_speed_unit"
-                android:textColor="#08043D"
-                app:layout_constraintStart_toStartOf="@+id/swoosh_lo"
-                app:layout_constraintEnd_toEndOf="@+id/swoosh_lo"
-                android:text ="km/h"
-                android:layout_marginStart="17sp"
-                android:fontFamily="@font/poppins_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/swoosh_lo"
-                app:layout_constraintTop_toBottomOf="@+id/wind_speed"/>
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/container3"
-            app:layout_constraintTop_toBottomOf="@+id/container2"
-            >
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/grey"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rain_icon"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/small_rain_ic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/rain_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Rain"
-                    android:layout_marginStart="15dp"
-                    android:textColor="@color/black"
-                    android:id="@+id/rain_rate_label"
-                    android:fontFamily="@font/effra_trail_medium"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text = "0"
-                    android:id="@+id/rain_value"
-                    android:textColor="@color/black"
-                    android:layout_marginEnd="15dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:fontFamily="@font/effra_trail_medium"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/grey"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pressure_icon"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/small_pressure_ic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/pressure_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Pressure"
-                    android:layout_marginStart="15dp"
-                    android:textColor="@color/black"
-                    android:id="@+id/pressure_label"
-                    android:fontFamily="@font/effra_trail_medium"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text = "1016hpa"
-                    android:textColor="@color/black"
-                    android:layout_marginEnd="15dp"
-                    android:id="@+id/pressure_value"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:fontFamily="@font/effra_trail_medium"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/grey"/>
-
-
-
-        </LinearLayout>
-        <TextView
-            android:id="@+id/hourly_heading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/effra_trail_medium"
-            android:text="Hourly forecast"
-            android:textColor="#3BA5F8"
-            android:textSize="20sp"
-            android:layout_marginStart="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container3"  />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:id="@+id/hourly_recycler_view"
-            app:layout_constraintTop_toBottomOf="@+id/hourly_heading" />
-        <TextView
-            android:id="@+id/daily_heading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/effra_trail_medium"
-            android:text="Daily forecast"
-            android:textColor="#3BA5F8"
-            android:textSize="20sp"
-            android:layout_marginStart="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hourly_recycler_view"  />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:id="@+id/daily_recycler_view"
-            android:paddingBottom="50dp"
-            app:layout_constraintTop_toBottomOf="@+id/daily_heading" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

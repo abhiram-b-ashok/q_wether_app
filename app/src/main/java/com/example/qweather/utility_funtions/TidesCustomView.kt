@@ -10,16 +10,19 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.core.graphics.toColorInt
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class TidesCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    private var showCurrentTide: Boolean = true
 
+    private var showCurrentTide: Boolean = true
     val lineGap = 150f
     val timeGap = 200f
+    val tideExtraHeight = 250f
 
     private val linesPaint = Paint().apply {
         isAntiAlias = true
@@ -158,16 +161,16 @@ class TidesCustomView @JvmOverloads constructor(
         canvas.drawColor(Color.WHITE)
 
         bottomLinePath.reset()
-        bottomLinePath.moveTo(0f, (8.5 * lineGap).toFloat())
-        bottomLinePath.lineTo(width.toFloat(), (8.5 * lineGap).toFloat())
+        bottomLinePath.moveTo(0f, (6.5 * lineGap).toFloat())
+        bottomLinePath.lineTo(width.toFloat(), (6.5 * lineGap).toFloat())
         canvas.drawPath(bottomLinePath, bottomLinePaint)
 
         timeTextPath.reset()
 
         for (i in hourlyTideData.indices) {
-            timeTextPath.moveTo(timeGap * i, (8.8 * lineGap).toFloat())
-            timeTextPath.lineTo(width.toFloat(), (8.8 * lineGap).toFloat())
-            canvas.drawText(hourlyTideData[i], timeGap * i, (8.8 * lineGap).toFloat(), textPaint)
+            timeTextPath.moveTo(timeGap * i, (6.8 * lineGap).toFloat())
+            timeTextPath.lineTo(width.toFloat(), (6.8 * lineGap).toFloat())
+            canvas.drawText(hourlyTideData[i], timeGap * i, (6.8 * lineGap).toFloat(), textPaint)
         }
 
         tidePath.reset()
@@ -177,59 +180,70 @@ class TidesCustomView @JvmOverloads constructor(
         var previousY = 0f
         var endingX = 0f
         var endingY =0f
-        tideBackgroundPath.moveTo(0f+(circleRadius+5f)+20f, (8.5 * lineGap).toFloat() )
+        tideBackgroundPath.moveTo(0f, (6.5 * lineGap).toFloat() )
 
         for (i in tidesData.indices) {
 
             circlePath.addCircle(
                 ((timeGap * i)+(circleRadius+5f))+20f,
-                (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat(),
+                (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-tideExtraHeight ,
                 circleRadius,
                 Path.Direction.CW
             )
-            if(i==0){
-                tideBackgroundPath.lineTo((timeGap * i)+(circleRadius+5f)+20f, (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat())
 
+            if(i==0){
+                tideBackgroundPath.lineTo(0f, (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-tideExtraHeight)
                 previousX = ((timeGap * i)+(circleRadius+5f))+20f
-                previousY = (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()
+                previousY = (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat() -tideExtraHeight
                 canvas.drawPath(circlePath, circlePaint)
                 canvas.drawPath(circlePath, circleBorderPaint)
-                canvas.drawText(tidesData[i].toString(), (timeGap * i)+20f, (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-35f, textPaint)
+                canvas.drawText(tidesData[i].toString(), (timeGap * i)+20f, (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-35f-tideExtraHeight, textPaint)
                 continue
             }
+
             if(i==tidesData.size-1){
-                endingX = ((timeGap * i)+(circleRadius+5f))+20f
-                endingY = (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()
+                endingX = ((timeGap * i)+(circleRadius+5f))+100f
+                endingY = (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat() -tideExtraHeight
             }
 
-            tideBackgroundPath.lineTo((timeGap * i)+(circleRadius+5f)+20f, (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat())
+            if(tidesData[i]>3.5){
+                tidePath.moveTo(previousX, previousY)
+                tidePath.lineTo((timeGap * i)+(circleRadius+5f)+20f, lineGap-35f)
+                tideBackgroundPath.lineTo((timeGap * i)+(circleRadius+5f)+20f,lineGap-35f)
+                circlePath.addCircle(
+                    ((timeGap * i)+(circleRadius+5f))+20f,
+                    lineGap-35f ,
+                    circleRadius,
+                    Path.Direction.CW
+                )
+                canvas.drawText(tidesData[i].toString(), (timeGap * i), lineGap-65f, textPaint)
+                previousX = ((timeGap * i)+(circleRadius+5f))+20f
+                previousY = lineGap-35f
+
+            }
+
+            tideBackgroundPath.lineTo((timeGap * i)+(circleRadius+5f)+20f, (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-tideExtraHeight)
             tidePath.moveTo(previousX, previousY)
-            tidePath.lineTo((timeGap * i)+(circleRadius+5f)+20f, (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat())
+            tidePath.lineTo((timeGap * i)+(circleRadius+5f)+20f, (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-tideExtraHeight)
             tidePath.close()
             canvas.drawPath(tidePath, tidePathPaint)
-            canvas.drawText(tidesData[i].toString(), (timeGap * i), (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-35f, textPaint)
-
-            circlePath.addCircle(
-                (timeGap * i)+(circleRadius+5f)+20f,
-                (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat(),
-                circleRadius,
-                Path.Direction.CW
-            )
+            canvas.drawText(tidesData[i].toString(), (timeGap * i), (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-35f-tideExtraHeight, textPaint)
 
             previousX = (timeGap * i)+(circleRadius+5f)+20f
-            previousY = (8.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()
+            previousY = (6.5 * lineGap).toFloat() - (tidesData[i] * lineGap).toFloat()-tideExtraHeight
 
         }
-        tideBackgroundPath.lineTo(endingX, (8.5 * lineGap).toFloat())
+        tideBackgroundPath.lineTo(endingX, previousY)
+        tideBackgroundPath.lineTo(endingX, (6.5 * lineGap).toFloat())
         tideBackgroundPath.close()
         canvas.drawPath(tideBackgroundPath, tideBackgroundPaint)
         canvas.drawPath(circlePath, circlePaint)
         canvas.drawPath(circlePath, circleBorderPaint)
 
         hoursTextPath.reset()
-        hoursTextPath.moveTo(0f, (8.4 * lineGap).toFloat())
-        hoursTextPath.lineTo(width.toFloat(), (8.4 * lineGap).toFloat())
-        canvas.drawText("Hours", 0f, (8.4 * lineGap).toFloat(), hourTextPaint)
+        hoursTextPath.moveTo(0f, (6.4 * lineGap).toFloat())
+        hoursTextPath.lineTo(width.toFloat(), (6.4 * lineGap).toFloat())
+        canvas.drawText("Hours", 0f, (6.4 * lineGap).toFloat(), hourTextPaint)
 
         linesPath.reset()
         linesPath.moveTo(0f, lineGap)
@@ -244,10 +258,6 @@ class TidesCustomView @JvmOverloads constructor(
         linesPath.lineTo(width.toFloat(), 5 * lineGap)
         linesPath.moveTo(0f, 6 * lineGap)
         linesPath.lineTo(width.toFloat(), 6 * lineGap)
-        linesPath.moveTo(0f, 7 * lineGap)
-        linesPath.lineTo(width.toFloat(), 7 * lineGap)
-        linesPath.moveTo(0f, 8 * lineGap)
-        linesPath.lineTo(width.toFloat(), 8 * lineGap)
         canvas.drawPath(linesPath, linesPaint)
 
 
@@ -258,7 +268,7 @@ class TidesCustomView @JvmOverloads constructor(
 
             if (currentTideHourIndex < hourlyTideData.size && currentTideHourIndex >= 0) {
                 val currentCircleX = (timeGap * currentTideHourIndex) + (currentCircleRadius) + 20f
-                val currentCircleY = ((8.5 * lineGap) - (currentTide * lineGap)) + 10f // Added +10f as per your original
+                val currentCircleY = ((6.5 * lineGap) - (currentTide * lineGap)) + 10f  -tideExtraHeight
 
                 currentCirclePath.addCircle(
                     currentCircleX,
@@ -271,17 +281,19 @@ class TidesCustomView @JvmOverloads constructor(
 
                 canvas.drawText(
                     "Current Tide: $currentTide",
-                    currentCircleX - (hourTextPaint.measureText("Current Tide: $currentTide") / 2), // Center text roughly
-                    (currentCircleY - currentCircleRadius - 15f).toFloat(), // Position text above the circle
+                    currentCircleX - (hourTextPaint.measureText("Current Tide: $currentTide") / 2),
+                    (currentCircleY - currentCircleRadius - 15f).toFloat(),
                     textPaint
                 )
-            } else if (tidesData.isNotEmpty()) { // Fallback if index is bad but data exists
+            }
+            //hiding current tide indicator if the index is not 0
+            else if (tidesData.isNotEmpty()) { // Fallback if index is bad but data exists
                 // Fallback positioning, e.g., middle of the view or based on available data
                 val fallbackX = width / 2f
-                val fallbackY = ((8.5 * lineGap) - (currentTide * lineGap)) + 10f
+                val fallbackY = ((6.5 * lineGap) - (currentTide * lineGap)) + 10f
                 currentCirclePath.addCircle(
                     fallbackX,
-                    fallbackY.toFloat(),
+                    fallbackY.toFloat() ,
                     currentCircleRadius,
                     Path.Direction.CW
                 )
@@ -306,6 +318,7 @@ class TidesCustomView @JvmOverloads constructor(
         if (currentHeight != null) {
             this.currentTide = currentHeight
         }
+        
         this.showCurrentTide = displayCurrentTide
 
         requestLayout()
@@ -313,4 +326,5 @@ class TidesCustomView @JvmOverloads constructor(
     }
 
 }
+
 

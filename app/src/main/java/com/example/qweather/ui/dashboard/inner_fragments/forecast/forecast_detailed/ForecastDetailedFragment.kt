@@ -70,12 +70,13 @@ class ForecastDetailedFragment : Fragment() {
             cityName.text = sharedPrefs.getString("LAST_SELECTED_CITY", "Qatar")
 
             prevBt.setOnClickListener {
-
+                Log.d("@@getdown1", "$dateDown: ")
                 if (dateDown > 0) {
                     dateDown--
                     weatherViewModel.loadWeather(lat, lon, isQatar)
                 } else {
-                    prevBt.isEnabled = false
+                    dateDown = 0
+//                    prevBt.isEnabled = false
                     Log.d(
                         "ForecastDetailedFragment",
                         "Daily Forecast: $dailyForecastSize is out of bounds"
@@ -83,12 +84,12 @@ class ForecastDetailedFragment : Fragment() {
                 }
             }
             nextBt.setOnClickListener {
+                Log.d("@@getdown2", "$dateDown: \n $dailyForecastSize")
                 if (dateDown < dailyForecastSize - 1) {
                     dateDown++
-
                     weatherViewModel.loadWeather(lat, lon, isQatar)
                 } else {
-                    nextBt.isEnabled = false
+//                    nextBt.isEnabled = false
                     Log.d(
                         "ForecastDetailedFragment",
                         "Daily Forecast: $dailyForecastSize is out of bounds"

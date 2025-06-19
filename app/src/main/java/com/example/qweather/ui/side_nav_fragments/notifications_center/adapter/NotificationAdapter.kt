@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.qweather.databinding.CellNotificationDateBinding
 import com.example.qweather.databinding.CellNotificationItemBinding
 
-class NotificationAdapter(private var list: List<Notification>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NotificationAdapter(private var list: MutableList<Notification>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int = list[position].provideType()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -39,10 +39,14 @@ class NotificationAdapter(private var list: List<Notification>) : RecyclerView.A
             binding.date.text = "${date.month} ${date.year}"
         }
     }
-    fun updateData(newList: List<Notification>) {
-        list = newList
-        notifyDataSetChanged()
+
+    fun addData(newNotifications: List<Notification>) {
+        val startPosition = list.size
+        list.addAll(newNotifications)
+        notifyItemRangeInserted(startPosition, newNotifications.size)
     }
+
+
 }
 
 

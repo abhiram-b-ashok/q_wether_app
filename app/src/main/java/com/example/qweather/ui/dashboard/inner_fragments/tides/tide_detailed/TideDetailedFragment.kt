@@ -56,7 +56,7 @@ class TideDetailedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       binding = FragmentTideDetailedBinding.inflate(inflater, container, false)
+        binding = FragmentTideDetailedBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -88,23 +88,29 @@ class TideDetailedFragment : Fragment() {
                     weatherViewModel.loadWeather(lat, lon, isQatar)
                     areaId--
                     getTides()
-                }
-                else{
-                    prevBt.isEnabled = false
-                    Log.d("ForecastDetailedFragment", "Daily Forecast: $dailyForecastSize is out of bounds")
+                } else {
+//                    prevBt.isEnabled = false
+                    dateDown=0
+                    areaId=1
+                    Log.d(
+                        "ForecastDetailedFragment",
+                        "Daily Forecast: $dailyForecastSize is out of bounds"
+                    )
                 }
 
             }
             nextBt.setOnClickListener {
-                if (dateDown < dailyForecastSize-1) {
+                if (dateDown < dailyForecastSize - 1) {
                     dateDown++
                     weatherViewModel.loadWeather(lat, lon, isQatar)
                     areaId++
                     getTides()
-                }
-                else{
-                    nextBt.isEnabled = false
-                    Log.d("ForecastDetailedFragment", "Daily Forecast: $dailyForecastSize is out of bounds")
+                } else {
+//                    nextBt.isEnabled = false
+                    Log.d(
+                        "ForecastDetailedFragment",
+                        "Daily Forecast: $dailyForecastSize is out of bounds"
+                    )
                 }
 
             }
@@ -113,36 +119,34 @@ class TideDetailedFragment : Fragment() {
                 result?.dailyForecast?.let { forecast ->
                     dailyForecastSize = (forecast.size)
                     Log.d("ForecastDetailedFragment", "Daily Forecastsize: ${forecast.size}")
-                    temp.text =temperatureConverter(forecast[dateDown].temperature,
-                        tempUnit.toString()).toString()
+                    temp.text = temperatureConverter(
+                        forecast[dateDown].temperature,
+                        tempUnit.toString()
+                    ).toString()
                     tempeUnit.text = tempUnit
                     condition.text = forecast[dateDown].weather_type
 
-                    if (forecast[dateDown].weather_type == "Clear"){
+                    if (forecast[dateDown].weather_type == "Clear") {
                         cloudIcon.setImageResource(R.drawable.sun)
-                    }
-                    else if (forecast[dateDown].weather_type == "Overcast Clouds"){
+                    } else if (forecast[dateDown].weather_type == "Overcast Clouds") {
                         cloudIcon.setImageResource(R.drawable.few_clouds_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Rain"){
+                    } else if (forecast[dateDown].weather_type == "Rain") {
                         cloudIcon.setImageResource(R.drawable.rain_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Snowy"){
+                    } else if (forecast[dateDown].weather_type == "Snowy") {
                         cloudIcon.setImageResource(R.drawable.snow_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Dusty"){
+                    } else if (forecast[dateDown].weather_type == "Dusty") {
                         cloudIcon.setImageResource(R.drawable.dust_ic)
-                    }
-                    else if (forecast[dateDown].weather_type == "Mist"){
+                    } else if (forecast[dateDown].weather_type == "Mist") {
                         cloudIcon.setImageResource(R.drawable.mist_ic)
-                    }
-                    else{
+                    } else {
                         cloudIcon.setImageResource(R.drawable.cloud_group)
                     }
 
                     val originalDateString = forecast[dateDown].date
-                    val inputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a",Locale.ENGLISH)
-                    val outputFormatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy", Locale.ENGLISH)
+                    val inputFormatter =
+                        DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a", Locale.ENGLISH)
+                    val outputFormatter =
+                        DateTimeFormatter.ofPattern("EEE, MMM d, yyyy", Locale.ENGLISH)
 
                     try {
                         val dateTime1 = LocalDateTime.parse(originalDateString, inputFormatter)
@@ -172,7 +176,8 @@ class TideDetailedFragment : Fragment() {
                         val newTidalData = TidalViewData()
                         newTidalData.status = Status.SUCCESS
                         newTidalData.document = tidesDocument
-                        newTidalData.area = tidesDocument.areaTags?.firstOrNull { it.id == areaId.toString() }
+                        newTidalData.area =
+                            tidesDocument.areaTags?.firstOrNull { it.id == areaId.toString() }
 
                         if (newTidalData.area?.valueTags != null) {
                             val values = newTidalData.area!!.valueTags!!
@@ -233,13 +238,13 @@ class TideDetailedFragment : Fragment() {
                 valueTag.value
             }
 
-            if (areaId != 1){
-                binding.tideFlow.setTideData(tideHeights,0.0, false)
+            if (areaId != 1) {
+                binding.tideFlow.setTideData(tideHeights, 0.0, false)
                 return
             }
 
             val currentHeight = tidalData!!.currentHeightMeters
-            binding.tideFlow.setTideData(tideHeights,currentHeight,true )
+            binding.tideFlow.setTideData(tideHeights, currentHeight, true)
         } else {
             Log.e("TidesFragment", "Failed to fetch tides data.")
         }
