@@ -191,7 +191,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                         onStarClickListener = { city ->
                 CoroutineScope(Dispatchers.IO).launch {
                     val existing = dao.getFavoriteCityById(city.cityId)
-
+                    city.isSelected = !city.isSelected
                     if (existing != null) {
                         dao.deleteFavoriteCity(existing)
                         city.isSelected = false
@@ -201,7 +201,7 @@ class CityBottomSheetFragment : BottomSheetDialogFragment() {
                             cityName = city.cityName,
                             latitude = city.latitude,
                             longitude = city.longitude,
-                            isSaved = true
+                            isSaved = city.isSelected
                         )
                         dao.insertFavoriteCity(favorite)
                         city.isSelected = true

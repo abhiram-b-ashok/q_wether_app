@@ -25,6 +25,7 @@ class DefaultDashboardFragment : Fragment() {
     internal lateinit var weatherViewModel: WeatherViewModel
 
     private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var visibilityPreferences: SharedPreferences
 
     private val defaultFragmentContainers = setOf(
         R.id.current_weather_fragment_container,
@@ -83,7 +84,9 @@ class DefaultDashboardFragment : Fragment() {
 
         view.post {
             applyFragmentContainerVisibility()
+            hideFragment()
         }
+
 
         val lat = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LATITUDE", 0L))
         val lon = Double.fromBits(sharedPrefs.getLong("LAST_CITY_LONGITUDE", 0L))
@@ -115,6 +118,7 @@ class DefaultDashboardFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPrefs = context.getSharedPreferences("CityPrefs", Context.MODE_PRIVATE)
+
     }
 
 
@@ -203,6 +207,8 @@ class DefaultDashboardFragment : Fragment() {
         }
     }
 
+
+
     private fun reorderDashboardFragments() {
         val containerParent = binding.root.findViewById<LinearLayout>(R.id.dashboard_container_layout)
         val prefs = requireContext().getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
@@ -229,5 +235,35 @@ class DefaultDashboardFragment : Fragment() {
     }
 
 
+    private fun hideFragment() {
+        visibilityPreferences = requireContext().getSharedPreferences("settingPreference", Context.MODE_PRIVATE)
+        val visibleTitles = visibilityPreferences.getStringSet("selectedDashboardItems", null)
+        if (visibleTitles == null) {
+            Log.w("DefaultDashboardFragment", "No visibility preferences found. All dashboard items might remain visible by default.")
+            return
+        }
+
+        for (containerId in allFragmentContainerIds) {
+            val containerView = binding.root.findViewById<View>(containerId)
+            containerView?.let { view ->
+                val titleForThisContainer = titleToContainerId.entries.find { it.value == containerId }?.key
+
+                if (titleForThisContainer != null) {
+                    if (!visibleTitles.contains(titleForThisContainer)) {
+                        view.visibility = View.GONE
+                        Log.d("DefaultDashboardFragment", "Hiding: $titleForThisContainer (ID: $containerId)")
+                    } else {
+                        view.visibility = View.VISIBLE
+                        Log.d("DefaultDashboardFragment", "Showing: $titleForThisContainer (ID: $containerId)")
+                    }
+                } else {
+                    Log.w("DefaultDashboardFragment", "No title mapping found for container ID: $containerId")
+                }
+            }
+        }
+    }
 
 }
+
+
+

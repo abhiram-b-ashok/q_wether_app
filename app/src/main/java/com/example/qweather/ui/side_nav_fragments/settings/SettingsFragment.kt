@@ -172,8 +172,8 @@ class SettingsFragment : Fragment() {
             binding.recyclerForSettings.adapter = settingsAdapter
 
             settingsAdapter.onItemSelect = { selectedModel ->
-                // Prevent unselecting "Current Weather"
 
+                // Prevent unselecting "Current Weather"
                 if (selectedModel.title != "Current Weather") {
                     selectedModel.isSelect = !selectedModel.isSelect
                     selectedModel.toggleImage =
@@ -187,6 +187,7 @@ class SettingsFragment : Fragment() {
                         .putStringSet(KEY_SELECTED_DASHBOARD_ITEMS, selectedTitles).apply()
                 }
             }
+
 
 
             val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
